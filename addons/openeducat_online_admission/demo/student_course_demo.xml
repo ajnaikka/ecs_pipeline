@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="op_student_course_32" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_1"/>
+            <field name="course_id" ref="op_course_24"/>
+            <field name="batch_id" ref="op_batch_7"/>
+            <field name="roll_number">589700342</field>
+        </record>
+
+        <record id="op_student_course_33" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_2"/>
+            <field name="course_id" ref="op_course_24"/>
+            <field name="batch_id" ref="op_batch_7"/>
+            <field name="roll_number">202012321</field>
+        </record>
+        <record id="op_student_course_34" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_3"/>
+            <field name="course_id" ref="op_course_24"/>
+            <field name="batch_id" ref="op_batch_7"/>
+            <field name="roll_number">202139024</field>
+        </record>
+        <record id="op_student_course_35" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_4"/>
+            <field name="course_id" ref="op_course_24"/>
+            <field name="batch_id" ref="op_batch_7"/>
+            <field name="roll_number">202013003</field>
+        </record>
+
+
+        <record id="op_student_course_36" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_5"/>
+            <field name="course_id" ref="op_course_25"/>
+            <field name="batch_id" ref="op_batch_8"/>
+            <field name="roll_number">202400289</field>
+        </record>
+
+
+        <record id="op_student_course_37" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_6"/>
+            <field name="course_id" ref="op_course_25"/>
+            <field name="batch_id" ref="op_batch_8"/>
+            <field name="roll_number">2020125</field>
+        </record>
+        <record id="op_student_course_38" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_7"/>
+            <field name="course_id" ref="op_course_25"/>
+            <field name="batch_id" ref="op_batch_8"/>
+            <field name="roll_number">20187933406</field>
+        </record>
+        <record id="op_student_course_39" model="op.student.course">
+            <field name="student_id" ref="openeducat_core.op_student_8"/>
+            <field name="course_id" ref="op_course_25"/>
+            <field name="batch_id" ref="op_batch_8"/>
+            <field name="roll_number">202079147</field>
+        </record>
+    </data>
+</odoo>

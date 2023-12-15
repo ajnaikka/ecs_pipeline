@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="op_specialization_form_inherits" model="ir.ui.view">
+            <field name="name">op.specialization.form.inherit</field>
+            <field name="model">op.specialization</field>
+            <field name="inherit_id" ref="openeducat_custom.specialization_form_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[1]" position="after">
+                     <group colspan="4">
+                         <field name="is_show_in_main_sheet"/>
+                         <field name="is_show_in_mark_sheet"/>
+                         <field name="is_show_in_consolidate_sheet"/>
+                     </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="course_frame_slide_channel_form_inherits" model="ir.ui.view">
+            <field name="name">course.frame.slide.channel.form.inherit</field>
+            <field name="model">slide.channel</field>
+            <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='options']//group[@name='course']" position="inside">
+                     <field name="course_frame_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="course_frame_op_course_form_inherits" model="ir.ui.view">
+            <field name="name">course.frame.op.course.form.inherit</field>
+            <field name="model">op.course</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_course_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='main']/field[@name='evaluation_type']" position="after">
+                     <field name="course_frame_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="link_to_customer_crm_lead_form_view" model="ir.ui.view">
+            <field name="name">crm.lead.link.customer</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(crm_link_customer.action_crm_link_customer)d"
+                            string="Link To Customer"
+                            type="action" class="oe_highlight" data-hotkey="v"
+                            attrs="{'invisible': ['|', ('partner_portal_user', '!=', False), ('type', '=', 'lead')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

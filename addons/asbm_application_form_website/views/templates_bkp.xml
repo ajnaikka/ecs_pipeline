@@ -1,0 +1,1322 @@
+<odoo>
+<template id="token_expire_msg">
+  <t t-call="website.layout">
+    <t t-set="title">Access denied</t>
+    <div class="oe_structure">
+      <div class="container">
+        <span><strong>The page you are trying to acces has been expired.<br/>
+      Please contact the organization for the access.</strong></span>
+      </div>
+    </div>
+  </t>
+</template>
+    <template id="application_form">
+<!--          <xpath expr="." position="inside">-->
+<!--          <script src="/static/src/js/asbm_web.js" type="text/javascript" />-->
+<!--        </xpath>-->
+        <t t-call="website.layout">
+            <t t-set="title">Application Form</t>
+            <div class="oe_structure">
+                <div class="container">
+                        <!-- <p>Hello world</p> -->
+                        <form action="/submit_form" class="s_website_form" method="POST" style="height:100%;float:center; width:80%;" enctype="multipart/form-data">
+                 <!-- <style>
+                     body {
+                           }
+                     input {
+                          border-top-style: hidden;
+                          border-right-style: hidden;
+                          border-left-style: hidden;
+                          border-bottom-style: groove;
+                          background-color:#f1f4ff;
+                           }
+                      .input-without-border {
+                          border-top-style: hidden;
+                          border-right-style: hidden;
+                          border-left-style: hidden;
+                          border-bottom-style: hidden;
+
+                           }
+                     .input-with-border {
+                          border-top-style: groove;
+                          border-right-style: groove;
+                          border-left-style: groove;
+                          border-bottom-style: groove;
+
+                           }
+                    .border-td {
+                         border: 1px solid ;
+                         border-collapse: collapse;
+                         border-color: #c21408;
+                           }
+
+
+      .no-outline:focus {
+        outline: none;
+      }
+    </style> -->
+                            <div style=" height:100%;width:100%;">
+                              <input type="hidden" name="lead_id" id="lead_id" t-att-value="lead_id.id"/>
+                                <div>
+<!--                                 Batch Code:<input type="text" name="batch_code" id="student_name"/>-->
+                                <br/>
+
+                                     <div class="row" style="margin-left:2%;padding-top:10px;width:100%;">
+
+
+                                     <table  style="margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;float:left;">
+                                        <tbody>
+                                       <!-- <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Batch No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input style="border-bottom-style: dotted;" type="text" name="batch_code" id="batch_code"
+                                             t-att-value="lead_id.batch_code" class="form-control s_website_form_input"/>
+                                      </span></td></tr> -->
+
+                                        </tbody>
+                                     </table>
+
+                                          <table  style="margin-left:30%;border:none;border: 0;font-size: 16px;text-weight:bold; width:150px;float:right;">
+                                        <tbody>
+                                       <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+
+                                      <td style="width:200px;"><span >
+                                            <div t-if="lead_id.course_type.code=='aste'">
+                                               <img src="/asbm_application_form_website/static/src/img/aste_logo.png" width="150px;" height="110px;"/>
+                                          </div>
+                                           <div t-if="lead_id.course_type.code=='asbm'">
+                                          <img src="/asbm_application_form_website/static/src/img/logo_web.png" width="150px;" height="110px;"/>
+                                           </div>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                 <div class="row" style="width:100%;">
+                                      <div  style="float:center;text-align:center; font-size : 20px; width:100%;">
+                                         <span ><b style="color:#c21408;font-size : 26px;"> APPLICATION FORM </b> </span>
+                                      </div>
+                                  </div>
+
+                                <div class="row" style="width:100%;float:center;">
+
+
+
+                                     <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:60%;">
+                                        <tbody>
+                                          <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                         <td style="width:30%;"><span>Batch No</span> </td>
+                                         <td style="width:2%;"><span >:</span></td>
+                                         <td style="width:40%;"><span >
+                                              <input style="border-bottom-style: dotted;" type="text" name="batch_code" id="batch_code"
+                                                t-att-value="lead_id.batch_code" class="form-control s_website_form_input"/>
+                                         </span></td></tr>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:47%;"><span>1.Name of Counselor</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                      <input type="text" name="name_counselor"
+                                        id="name_counselor" t-att-value="lead_id.user_id.name" readonly="1"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="float:right; border:none;border: 0;font-size: 16px;text-weight:bold; width:25%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:58%;"><span>Branch</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                      <input type="text" name="branch" id="branch"
+                                        readonly="1" t-att-value="lead_id.branch"/>
+                                      </span></td></tr>
+
+
+                                        </tbody>
+                                     </table>
+
+                                </div>
+
+                                       <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+
+                                     <table  style="float:left;margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:32%;"><span>2. Application for Admission</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:68%;"><span >
+<!--                                          <select class="form-control"  name="application_for_admission" id="application_for_admission" >-->
+<!--                                              <option selected="1"> - select an option - </option>-->
+<!--                                                <t t-foreach="courses" t-as="course">-->
+<!--                                                    <option t-att-value="course.id" t-esc="course.name"></option>-->
+<!--                                                 </t>-->
+<!--                                          </select>-->
+                                          <select class="form-control"  name="application_for_admission" id="application_for_admission" >
+                                            <t t-if="lead_id.application_for_admission.id">
+                                            <t t-set="course_selected" t-value="false"/>
+                                          </t>
+                                          <t t-else="">
+                                            <t t-set="course_selected" t-value="true"/>
+                                          </t>
+                                              <option value="None" t-attf-selected="#{course_selected}"> -- select an option -- </option>
+                                                <t t-foreach="courses" t-as="course">
+                                                   <option t-att-value="course.id" t-esc="course.name" t-att-selected="course.id == lead_id.application_for_admission.id"></option>
+                                                 </t>
+                                          </select>
+
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                      <div t-if="lead_id.course_type.code=='asbm'" name="specialization_part1" class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:62%;">
+                                        <tbody>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:51%;"><span>3. Specialization in</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                        <td style="width:2%;"><span >(1)</span></td>
+                                      <td style="width:45%;"><span >
+
+                                           <select class="form-control"  name="specializations1" id="specializations1" >
+                                            <t t-if="lead_id.specialization1.id">
+                                            <t t-set="specializations1_selected" t-value="false"/>
+                                          </t>
+                                          <t t-else="">
+                                            <t t-set="specializations1_selected" t-value="true"/>
+                                          </t>
+                                              <option value="None" t-attf-selected="#{specializations1_selected}"> -- select an option -- </option>
+                                                <t t-foreach="specializations" t-as="specialization">
+                                                   <option t-att-value="specialization.id" t-esc="specialization.name" t-att-selected="specialization.id == lead_id.specialization1.id"></option>
+                                                 </t>
+                                          </select>
+
+
+
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="float:right; border:none;border: 0;font-size: 16px;text-weight:bold; width:32%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span>(2)</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:95%;"><span >
+                                     <select class="form-control"  name="specializations2" id="specializations2" >
+<!--                                            <t t-if="lead_id.specialization2.id">-->
+<!--                                            <t t-set="specializations2_selected" t-value="false"/>-->
+<!--                                          </t>-->
+                                          <t t-else="">
+                                            <t t-set="specializations2_selected" t-value="true"/>
+                                          </t>
+                                              <option value="None" t-attf-selected="#{specializations2_selected}"> -- select an option -- </option>
+<!--                                                <t t-foreach="specializations" t-as="specialization">-->
+<!--                                                   <option t-att-value="specialization.id" t-esc="specialization.name" t-att-selected="specialization.id == lead_id.specialization2.id"></option>-->
+<!--                                                 </t>-->
+                                          </select>
+                                      </span></td></tr>
+
+
+                                        </tbody>
+                                     </table>
+
+                                </div>
+
+                                     <div t-if="lead_id.course_type.code=='asbm'" name="specialization_part2" class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:62%;">
+                                        <tbody>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:51%;"><span></span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                        <td style="width:2%;"><span >(3)</span></td>
+                                      <td style="width:45%;"><span >
+                                      <select class="form-control"  name="specializations3" id="specializations3" >
+                                            <t t-if="lead_id.specialization3.id">
+                                            <t t-set="specializations3_selected" t-value="false"/>
+                                          </t>
+                                          <t t-else="">
+                                            <t t-set="specializations3_selected" t-value="true"/>
+                                          </t>
+                                              <option value="None" t-attf-selected="#{specializations3_selected}"> -- select an option -- </option>
+                                                <t t-foreach="specializations" t-as="specialization">
+                                                   <option t-att-value="specialization.id" t-esc="specialization.name" t-att-selected="specialization.id == lead_id.specialization3.id"></option>
+                                                 </t>
+                                          </select>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="float:right; border:none;border: 0;font-size: 16px;text-weight:bold; width:32%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span>(4)</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;"><span >
+                                      <select class="form-control"  name="specializations4" id="specializations4" >
+                                            <t t-if="lead_id.specialization4.id">
+                                            <t t-set="specializations4_selected" t-value="false"/>
+                                          </t>
+                                          <t t-else="">
+                                            <t t-set="specializations4_selected" t-value="true"/>
+                                          </t>
+                                              <option value="None" t-attf-selected="#{specializations4_selected}"> -- select an option -- </option>
+                                                <t t-foreach="specializations" t-as="specialization">
+                                                   <option t-att-value="specialization.id" t-esc="specialization.name" t-att-selected="specialization.id == lead_id.specialization4.id"></option>
+                                                 </t>
+                                          </select>
+                                      </span></td></tr>
+
+
+                                        </tbody>
+                                     </table>
+
+                                </div>
+
+                                     <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:32%;"><span>4. Full Name in Block Letters</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:72%;"><span >
+                                           <input type="text" name="student_name" style="width:100%;"
+                                        id="student_name" t-att-value="lead_id.partner_id.name"  class="form-control s_website_form_input"/>
+
+
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                     <div class="en-font" style="margin-left:2%;margin-top:1%;width:100%;float:left;">
+
+                               <table  style="margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+
+                                    <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:29%;"><span>5. Date of Birth (DD/MM/YYYY)</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;"><span >
+                                          <span >
+                                               <input type="date" style="width:40%;" name="dob" id="dob" required="true" t-att-value="lead_id.dob"/>
+                                          </span>
+
+                                      </span></td></tr>
+
+                              </tbody>
+                               </table>
+
+                             </div>
+
+                                    <div class="en-font" style="margin-left:2%;margin-top:1%;width:100%;float:left;">
+
+                               <table  style="margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+
+                                    <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:29%;"><span>6. Gender</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;">
+                                          <span style="margin-left:5%;">
+                                            <label for="male" >Male</label>
+                                            <input type="radio"  style="width:12%;" name="gender" id="gender" value="male" t-att-checked="'checked' if lead_id.gender == 'male' else None" />
+                                            <label for="female" >Female</label>
+                                            <input type="radio"  style="width:10%;" name="gender" id="gender" value="female" t-att-checked="'checked' if lead_id.gender == 'female' else None"  />
+                                      </span>
+
+
+                                      </td>
+                                    </tr>
+
+
+
+                              </tbody>
+                               </table>
+
+                             </div>
+
+                                     <div class="en-font" style="margin-left:2%;margin-top:1%;width:100%;float:left;">
+
+                               <table  style="margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+
+
+
+                                    <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:29%;"><span>7. Marital Status</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;">
+                                          <span style="margin-left:5%;">
+                                                <label for="male" >Single</label>
+                                          <input type="radio" name="marital_status"  style="width:10%;" id="marital_status" value="single" t-att-checked="'checked' if lead_id.marital_status == 'single' else None"  />
+
+                                          <label for="male" >Married</label>
+                                         <input type="radio" name="marital_status"  style="width:10%;" id="marital_status"  value="married"  t-att-checked="'checked' if lead_id.marital_status == 'married' else None" />
+                                      </span>
+                                      </td>
+                                    </tr>
+
+
+
+
+
+                              </tbody>
+                               </table>
+
+                             </div>
+
+                                      <div class="en-font" style="margin-left:2%;margin-top:1%;width:100%;float:left;">
+
+                               <table  style="margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+
+
+                                    <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:29%;"><span>8. Nationality</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;"><span >
+                                           <select class="form-control"  name="nationality" id="nationality" >
+                                            <t t-if="lead_id.nationality.id">
+                                            <t t-set="nationality_selected" t-value="false"/>
+                                          </t>
+                                          <t t-else="">
+                                            <t t-set="nationality_selected" t-value="true"/>
+                                          </t>
+                                              <option value="None" t-attf-selected="#{nationality_selected}"> -- select an option -- </option>
+                                                <t t-foreach="nationality" t-as="nationality">
+                                                   <option t-att-value="nationality.id" t-esc="nationality.name" t-att-selected="nationality.id == lead_id.nationality.id"></option>
+                                                 </t>
+                                          </select>
+
+                                      </span></td>
+                                    </tr>
+
+                              </tbody>
+                               </table>
+
+                             </div>
+
+                                    <div class="en-font" style="margin-left:2%;margin-top:1%;width:100%;float:left;">
+
+                               <table  style="margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+                                    <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:29%;"><span>9. Father’s / Husband’s Name</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;"><span >
+                                          <input type="text" name="fath_or_hus_name" id="fath_or_hus_name"  t-att-value="lead_id.fath_or_hus_name"  style="width:50%;" />
+                                      </span></td>
+                                    </tr>
+                              </tbody>
+                               </table>
+
+                             </div>
+
+                                </div>
+
+
+
+                                <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:left;">
+
+                                 <table  style="margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:58%;"><span>10. Correspondence Address</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="margin-left:6%;border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>House No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="house_no_1" id="house_no_1" t-att-value="lead_id.house_no"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Street or Road</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="street1_1" id="street1_1" t-att-value="lead_id.street"/>
+                                      </span></td></tr>
+
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Place</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="street2_1" id="street2_1"  t-att-value="lead_id.street2"/>
+                                      </span></td></tr>
+
+                                              <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>State</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="state_1" id="state_1" />
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="float:right; border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>House Name</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="house_name_1" id="house_name_1"  t-att-value="lead_id.house_name"/>
+                                      </span></td></tr>
+
+                                              <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Landmark</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="land_mark_1" id="land_mark_1"  t-att-value="lead_id.landmark"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>District</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="city_1" id="city_1"  t-att-value="lead_id.city"/>
+                                      </span></td></tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Pincode</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="zip_1" id="zip_1"  t-att-value="lead_id.zip"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                 <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:left;">
+
+                                 <table  style="margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:58%;"><span>11. Permanent Address</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="margin-left:6%;border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>House No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="house_no_2" id="house_no_2"  t-att-value="lead_id.house_no_1"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Street or Road</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="street1_2" id="street1_2" t-att-value="lead_id.street_or_road"/>
+                                      </span></td></tr>
+
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Place</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="street2_2" id="street2_2" t-att-value="lead_id.place_1"/>
+                                      </span></td></tr>
+
+                                              <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>State</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="state_2" id="state_2"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="float:right; border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>House Name</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="house_name_2" id="house_name_2" t-att-value="lead_id.house_name_1"/>
+                                      </span></td></tr>
+
+                                              <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Landmark</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="land_mark_2" id="land_mark_2" t-att-value="lead_id.landmark_1"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>District</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="city_2" id="city_2" t-att-value="lead_id.city_1"/>
+                                      </span></td></tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Pincode</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="zip_2" id="zip_2" t-att-value="lead_id.zip_1"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                       <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+                                 <table  style="margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:58%;"><span>12. Telephone No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="margin-left:6%;border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Residential No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="residential_no" id="residential_no" t-att-value="lead_id.residential_no"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Office No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="office_no" id="office_no" t-att-value="lead_id.phone"/>
+                                      </span></td></tr>
+
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Mobile No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="mobile_no" id="mobile_no" t-att-value="lead_id.mobile"/>
+                                      </span></td></tr>
+
+
+
+                                        </tbody>
+                                     </table>
+
+                                </div>
+
+                                     <div class="row" style="margin-left:2%;padding-top:10px;width:60%;float:left;">
+
+                                 <table  style="margin-left:3%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:39%;"><span>13. E-Mail ID</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:50%;"><span >
+                                            <input type="email" name="email" id="email" t-att-value="lead_id.email_from"  style="width:100%;"/>
+
+                                      </span></td></tr>
+
+                                 <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:39%;"><span>14. Facebook ID</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:50%;"><span >
+                                            <input type="text" name="facebook_id" id="facebook_id" t-att-value="lead_id.facebook_id" style="width:100%;"/>
+
+                                      </span></td></tr>
+
+                                        <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:39%;"><span>15. Whatsapp ID</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:50%;"><span >
+                                            <input type="text" name="whatsapp_id" id="whatsapp_id" t-att-value="lead_id.whatsapp_id" style="width:100%;"/>
+
+                                      </span></td></tr>
+
+
+                                        </tbody>
+                                     </table>
+
+                                </div>
+
+                                     <div class="row" style="padding-top:10px;width:100%;float:left;">
+
+                                 <table  style="border:none;background-color: #c21408;color:white; border: 0;font-size: 16px;text-weight:bold; width:40%;height:35px;">
+                                        <tbody>
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                  <td style="width:20%;"><span> </span> </td>
+                                                  <td style="width:58%;"><span> For office use only</span> </td>
+                                             </tr>
+
+                                        </tbody>
+                                     </table>
+
+                                          <table  style="border:none;background-color: #c21408;color:white; border: 0;font-size: 16px;text-weight:bold; width:60%;height:10px;">
+                                        <tbody>
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                  <td style="width:20%;"><span> </span> </td>
+                                                  <td style="width:58%;"><span> </span> </td>
+                                             </tr>
+
+                                        </tbody>
+                                     </table>
+
+                                </div>
+
+                                     <div class="row" style="padding-top:10px;width:100%;float:center;">
+
+
+
+                                     <table  style="float:right;margin-left:60%;border:none;border: 0;font-size: 16px;text-weight:bold; width:45%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Reference No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="reference_no" id="reference_no" readonly="1"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Batch No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="batch_no" id="batch_no" readonly="1"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                             <table  style="float:left;margin-left:6%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:27%;"><span>CEP Code No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:70%;"><span >
+                                           <input type="text" name="house_no" id="house_no" readonly="1"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                              <table  style="float:left;margin-left:6%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:27%;"><span>Admission Approved By</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:70%;"><span >
+                                           <input type="text" style="width:100%;" name="admission_approved_by" id="admission_approved_by" readonly="1"/>
+                                      </span></td></tr>
+
+
+
+                                        </tbody>
+                                     </table>
+
+
+                                          <div class="row" style="padding-top:10px;width:100%;float:center;">
+
+
+                                 <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:58%;"><span>16. Academic Details</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                     <table  style="margin-left:6%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:100%;"><span>Examination taken (Please list in chronological order including examinations with result pending.)</span> </td>
+                                      </tr>
+
+                                        </tbody>
+                                     </table>
+
+                                  <table style="margin-left:6%;font-size: 14px;border: 1px;width:100%;border: 1px solid ;border-collapse: collapse;border-color: #c21408;">
+                                      <thead>
+                                          <tr>
+                                              <th class="border-td" rawspan="2" style="text-align:center;">Degree</th>
+                                                <th rawspan="2" class="border-td" style="text-align:center;"> NameofSchool/Institute/College</th>
+                                                <th colspan="2" class="border-td" style="text-align:center;">Exam Date</th>
+                                                <th rawspan="2" class="border-td" style="text-align:center;">Subjects / Specializations</th>
+                                                <th rawspan="2" class="border-td" style="text-align:center;"> Results / Grades / Percentage</th>
+                                          </tr>
+                                           <tr>
+                                              <td class="border-td"></td>
+                                                <td class="border-td"></td>
+                                                <td class="border-td" style="text-align:center;">Month</td>
+                                                <td class="border-td" style="text-align:center;">Year</td>
+                                                <td class="border-td"></td>
+                                               <td class="border-td"></td>
+                                          </tr>
+
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                             <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="degree1" id="degree1"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="name_of_school1" id="name_of_school1"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="exam_month1" id="exam_month1"/></span> </td>
+                                               <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="exam_year1" id="exam_year1"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="subject1" id="subject1"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="result1" id="result1"/></span> </td>
+                                          </tr>
+                                          <tr>
+                                             <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="degree2" id="degree2"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="name_of_school2" id="name_of_school2"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="exam_month2" id="exam_month2"/></span> </td>
+                                               <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="exam_year2" id="exam_year2"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="subject2" id="subject2"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="result2" id="result2"/></span> </td>
+                                          </tr>
+                                          <tr>
+                                             <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="degree3" id="degree3"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="name_of_school3" id="name_of_school3"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="exam_month3" id="exam_month3"/></span> </td>
+                                               <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="exam_year3" id="exam_year3"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="subject3" id="subject3"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="result3" id="result3"/></span> </td>
+                                          </tr>
+
+                                      </tbody>
+                                  </table>
+
+                                </div>
+
+                                         <div class="row" style="padding-top:10px;width:100%;float:center;">
+                                              <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:58%;"><span>17. Work Experience (Starting with most recent one):</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                              <table style="margin-left:6%;font-size: 14px;border: 1px;width:100%;border: 1px solid ;border-collapse: collapse;border-color: #c21408;">
+                                      <thead>
+                                          <tr class="border-td">
+                                              <th class="border-td" style="text-align:center;">Name of The Company</th>
+                                                <th  class="border-td" style="text-align:center;"> Designations</th>
+                                                <th  class="border-td" style="text-align:center;">No of Years</th>
+                                          </tr>
+
+                                      </thead>
+                                      <tbody>
+                                          <tr >
+                                              <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="company_name1" id="company_name1"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="designation1" id="designation1"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="no_of_years1" id="no_of_years1"/></span> </td>
+
+                                          </tr>
+                                          <tr>
+                                              <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="company_name2" id="company_name2"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="designation2" id="designation2"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="no_of_years2" id="no_of_years2"/></span> </td>
+
+                                          </tr>
+                                          <tr>
+                                              <td class="border-td" style="text-align:center;">
+                                                 <span class="input-without-border"><input class="input-without-border" type="text" name="company_name3" id="company_name3"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="designation3" id="designation3"/></span> </td>
+                                                <td class="border-td" style="text-align:center;">
+                                                    <span class="input-without-border"><input class="input-without-border" type="text" name="no_of_years3" id="no_of_years3"/></span> </td>
+
+                                          </tr>
+
+                                      </tbody>
+                                  </table>
+
+
+                                         </div>
+
+                                          <div class="row" style="padding-top:10px;width:100%;float:center;">
+                                              <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:15%;"><span>18. Exam Option</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                               <table  style="margin-left:140px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+
+                                      <td>
+                                            <span style="margin-left:5%;">
+                                                <label for="home" >Home</label>
+<!--                                                 <input type="radio" name="exam_option"  style="width:10%;" id="exam_option" value="home" t-att-checked="'checked' if lead_id.exam_option == 'home' else None"  />-->
+                                                   <input type="radio" name="exam_option"  style="width:10%;" id="exam_option" value="home"  />
+
+                                                 <label for="study_center" >Study Center</label>
+<!--                                                 <input type="radio" name="exam_option"  style="width:10%;" id="exam_option"  value="study_center"  t-att-checked="'checked' if lead_id.exam_option == 'study_center' else None" />-->
+                                                 <input type="radio" name="exam_option"  style="width:10%;" id="exam_option"  value="study_center"   />
+
+                                                 <label for="online" >Online</label>
+<!--                                                 <input type="radio" name="exam_option"  style="width:10%;" id="exam_option"  value="online"  t-att-checked="'checked' if lead_id.exam_option == 'online' else None" />-->
+                                                 <input type="radio" name="exam_option"  style="width:10%;" id="exam_option"  value="online" />
+
+                                             </span>
+
+                                      </td>
+
+
+                                    </tr>
+                                        </tbody>
+                                     </table>
+
+
+
+
+
+
+
+                                         </div>
+
+                                           <div class="row" style="padding-top:10px;width:100%;float:center;">
+                                              <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:15%;"><span>19. Mode of Payment</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                               <table  style="margin-left:140px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+
+                                      <td>
+                                           <label for="by_cash" >By Cash</label>
+                                           <input type="radio" name="mode_of_payment"  style="width:10%;" id="mode_of_payment" value="by_cash"  />
+
+                                           <label for="by_cheque" >By Cheque / DD</label>
+                                           <input type="radio" name="mode_of_payment"  style="width:10%;" id="mode_of_payment" value="by_cheque"  />
+
+                                           <label for="online_transfer" >Online Transfer</label>
+                                           <input type="radio" name="mode_of_payment"  style="width:10%;" id="mode_of_payment" value="online_transfer"  />
+
+                                      </td>
+
+
+
+
+                                    </tr>
+                                        </tbody>
+                                     </table>
+
+                                         </div>
+
+                                         <div class="row" style="margin-left:2%;padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:15%;"><span>20. Bank Name</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                      <input  style="width:100%;"  type="text" name="bank_name" id="bank_name"/>
+                                      </span></td>
+
+                                        <td style="width:15%;"><span>Fees Paid</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                      <input  style="width:100%;"  type="text" name="fees_paid" id="fees_paid"/>
+                                      </span></td>
+
+
+                                   </tr>
+
+                                        </tbody>
+                                     </table>
+
+<!--                                     <table  style="float:right; border:none;border: 0;font-size: 16px;text-weight:bold; width:25%;">-->
+<!--                                        <tbody>-->
+<!--                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">-->
+<!--                                      <td style="width:35%;"><span>Fees Paid</span> </td>-->
+<!--                                      <td style="width:2%;"><span >:</span></td>-->
+<!--                                      <td style="width:40%;"><span >-->
+<!--                                      <input  type="text" name="name_counselor" id="name_counselor"/>-->
+<!--                                      </span></td></tr>-->
+
+
+<!--                                        </tbody>-->
+<!--                                     </table>-->
+
+                                </div>
+
+                                          <div class="row" style="padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:7%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                        <td style="width:10%;"><span>PDC First</span> </td>
+                                      <td style="width:10%;"><span>Cheque No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="text" name="pdc_first_cheque_no" id="pdc_first_cheque_no"/>
+                                      </span></td>
+
+                                        <td style="width:5%;"><span>Date</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;" type="date" name="pdc_first_cheque_date" id="pdc_first_cheque_date"/>
+                                      </span></td>
+
+                                          <td style="width:5%;"><span>Amount</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="text" name="pdc_first_cheque_amount" id="pdc_first_cheque_amount"/>
+                                      </span></td>
+
+
+                                   </tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                          <div class="row" style="padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:7%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                        <td style="width:10%;"><span>PDC Second</span> </td>
+                                      <td style="width:10%;"><span>Cheque No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="text" name="pdc_second_cheque_no" id="pdc_second_cheque_no"/>
+                                      </span></td>
+
+                                        <td style="width:5%;"><span>Date</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="date" name="pdc_second_cheque_date" id="pdc_second_cheque_date"/>
+                                      </span></td>
+
+                                          <td style="width:5%;"><span>Amount</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="text" name="pdc_second_cheque_amount" id="pdc_second_cheque_amount"/>
+                                      </span></td>
+
+
+                                   </tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                          <div class="row" style="padding-top:10px;width:100%;float:center;">
+
+                                     <table  style="float:left;margin-left:7%;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                        <td style="width:10%;"><span>PDC Third</span> </td>
+                                      <td style="width:10%;"><span>Cheque No</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="text" name="pdc_third_cheque_no" id="pdc_third_cheque_no"/>
+                                      </span></td>
+
+                                        <td style="width:5%;"><span>Date</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;" type="date" name="pdc_third_cheque_date" id="pdc_third_cheque_date"/>
+                                      </span></td>
+
+                                          <td style="width:5%;"><span>Amount</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:15%;"><span >
+                                      <input  style="width:100%;"  type="text" name="pdc_third_cheque_amount" id="pdc_third_cheque_amount"/>
+                                      </span></td>
+
+
+                                   </tr>
+
+                                        </tbody>
+                                     </table>
+
+
+                                </div>
+
+                                           <div class="row" style="padding-top:10px;width:100%;float:center;">
+                                              <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:15%;"><span><b>21. Terms &amp; Condition</b></span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                               <table  style="margin-left:40px;border:none;border: 0;font-size: 12px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>Xerox copies of age proof, address proof, Mark sheets, certificates in proof of all examinations, work experience
+Certificates, two passport size photographs should be attached to this application form.</span> </td>
+                                    </tr>
+                                            <tr><td></td></tr>   <tr><td></td></tr>
+                                       <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>Fees should be paid either by cheque,DD or cash. Cheque / DD favoring "Albedo School of Business Management"
+payable at Cochin, Kerala State, India.</span> </td>
+                                    </tr>
+                                            <tr><td></td></tr>   <tr><td></td></tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>Fees once paid will not be refunded under any circumstances.</span> </td>
+                                    </tr>
+                                              <tr><td></td></tr>   <tr><td></td></tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>All diploma courses / Certificates offered / issued by this institute has no government university accreditation or recognition
+and is only a private autonomous body program / certification.</span> </td>
+                                    </tr>
+                                              <tr><td></td></tr>   <tr><td></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>All courses offered by ASBM analyzes only the theoretical knowledge &amp; abilities of the student, while assuming that
+practical &amp; technical expertise have been acquired by the student him self, through his work experience and exposure to
+respective field over a period of time.</span> </td>
+                                    </tr>
+                                              <tr><td></td></tr>   <tr><td></td></tr>
+
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>Please keep a Xerox copy of this application form for your record and reference.</span> </td>
+                                    </tr>
+                                              <tr><td></td></tr>   <tr><td></td></tr>
+
+                                             <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:2%;"><span><b>*</b></span> </td>
+                                       <td style="width:95%;"><span>All legal complaints regarding this institute and courses provided by it falls under jurisdiction of Ernamkulam District, Kerala
+State.</span> </td>
+                                    </tr>
+
+
+
+                                        </tbody>
+                                     </table>
+
+
+
+
+
+
+
+                                         </div>
+
+                                          <div class="row" style="padding-top:10px;width:100%;float:center;">
+                                              <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:25%;"><span><b>22. Declaration By The Candidate</b></span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+
+                                      </span></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                               <table  style="margin-left:40px;border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+
+                                       <td style="width:95%;"><span>I certify that all in formation provided on this application Performa is complete and accurate.I agree to
+familiarize myself with all the rules and regulations of the program set forth by ASBM and abide by
+them. I would uphold the standards and respect the principles of ASBM as an organization of higher
+learning.</span> </td>
+                                    </tr>
+
+                                        </tbody>
+                                     </table>
+
+                                         </div>
+
+                                         <br/>
+
+
+                                          <div class="row" style="margin-left:3%;;padding-top:10px;width:100%;float:center;">
+
+                                               <table  style="float:right;margin-left:55%;margin-top:2%;border:none;border: 0;font-size: 16px;text-weight:bold; width:35%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Date</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="date" name="submission_date" id="submission_date"/>
+                                      </span></td></tr>
+
+                                               <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:30%;"><span>Place</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:40%;"><span >
+                                           <input type="text" name="place" id="place"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                               <table  style="float:left;margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:50%;">
+                                        <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                      <td style="width:20%;"><span>Signature</span> </td>
+                                      <td style="width:2%;"><span >:</span></td>
+                                      <td style="width:60%;"><span >
+                                           <input type="text" name="house_no" id="house_no"/>
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+                                          </div>
+                                         <br/><br/>
+                                         <div class="row" style="margin-left:2%;padding-top:10px;width:100%;">
+
+                                          <table  style="margin-left:1%;border:none;border: 0;font-size: 16px;text-weight:bold; width:150px;float:left;">
+                                        <tbody>
+                                       <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+
+                                      <td style="width:200px;"><span >
+                                          <div t-if="lead_id.course_type.code=='asbm'">
+                                               <img src="/asbm_application_form_website/static/src/img/logo_web.png" width="150px;" height="110px;"/>
+                                          </div>
+                                          <div t-if="lead_id.course_type.code=='aste'">
+                                               <img src="/asbm_application_form_website/static/src/img/aste_logo.png" width="150px;" height="110px;"/>
+                                          </div>
+
+                                      </span></td></tr>
+
+                                        </tbody>
+                                     </table>
+
+
+
+                                </div>
+                                           <div class="row" style="margin-left:2%;padding-top:10px;width:100%;">
+
+                                               <input type="file" name="attachment" id="attachment" multiple="true"
+                                                                   accept="pdf/*,application/image/*"/>
+                                          </div>
+
+
+
+
+                                </div>
+
+
+                             <br/>
+                                 <div class="row" style="padding-top:50px;width:100%;float:center;">
+                                  <button style="margin-left:70%;float:right;" type="submit" class="btn btn-primary">Save Form</button>
+                              <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+<!--                                      <button style="margin-left:10%;float:left;" type="reset" class="btn btn-primary">Reset</button>-->
+                                 </div>
+
+                                    <br/><br/>
+
+
+
+                            </div>
+
+
+                            </div>
+
+
+                        </form>
+                </div>
+            </div>
+
+
+        </t>
+    </template>
+
+
+
+</odoo>

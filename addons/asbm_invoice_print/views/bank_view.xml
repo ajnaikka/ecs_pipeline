@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="partner_arabic_partner_inherit_form">
+            <field name="name">res_bank_arabic.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='banks']//field[@name='bank_ids']//field[@name='acc_number']"
+                       position="after">
+                    <field name="bring_in_invoice_print"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!--      Inherit Bank -->
+
+        <record model="ir.ui.view" id="res_bank_config_arabic_form">
+            <field name="name">res_bank_bank_config_arabic.form</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='bank_details']//field[@name='bic']" position="after">
+                    <field name="bank_ifsc"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

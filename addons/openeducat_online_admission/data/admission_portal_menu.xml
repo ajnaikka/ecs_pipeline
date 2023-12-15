@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="poratl_menu_adminssion_registration" model="openeducat.portal.menu">
+        <field name="name">Admission Registration</field>
+        <field name="link">/student/registration/info/</field>
+        <field name="active">True</field>
+        <field name="sequence" type="int">55</field>
+        <field name="background_color">#E959AD</field>
+        <field name="icon_image" type="base64"
+               file="openeducat_online_admission/static/img/admission_registration.png"/>
+    </record>
+</odoo>

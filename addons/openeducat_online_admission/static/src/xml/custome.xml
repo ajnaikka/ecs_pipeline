@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+
+    <t t-name="GetStudentData">
+        <div class="row">
+            <input type="hidden" name="student_id" t-att-value="students.id"/>
+            <input type="hidden" name="partner_id" t-att-value="students.partner_id[0]"/>
+        </div>
+
+        <div class="col-md-12 row hi others" id="student_registration" style="padding-right: 15px;">
+            <div class="form-group col-md-4">
+                 <label for="name">First Name</label>
+                <input type="text" name="first_name" class="form-control students_f_name" id="first_name"
+                       t-att-value="students.first_name" required="1" readonly="1"/>
+            </div>
+            <div class="form-group col-md-4 ">
+                 <label for="name">Middle Name</label>
+                <input type="text" class="form-control students_m_name" id="middle_name"
+                       name="middle_name" t-att-value="students.middle_name or []" required="1"/>
+            </div>
+            <div class="form-group col-md-4 ">
+                 <label for="name">Last Name</label>
+                <input type="text" class="form-control students_l_name" id="last_name"
+                       name="last_name" t-att-value="students.last_name or []" required="1" readonly="1"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="gender">Gender</label>
+                <br/>
+                <label class="radio-inline pr-3">
+                        <input type="radio" name="gender" id="male"
+                               required="1" t-att-value="students.gender" checked="students.gender == 'm'"
+                               style="margin-top:2px; margin-right:5px; vertical-align:text-top;">
+                            Male
+                        </input>
+                </label>
+                <label class="radio-inline pr-3">
+                        <input type="radio" name="gender" id="female"
+                               required="1" t-att-value="students.gender" checked="students.gender == 'f'"
+                               style="margin-top:2px; margin-right:5px; vertical-align:text-top;">
+                        Female
+                        </input>
+                </label>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="name">Date of Birth</label>
+                <input type="Date" t-attf-class="form-control a fa-calendar:before"
+                       id="birthdate"
+                       name="birth_date" t-att-value="students.birth_date"
+                       required="1" readonly="1"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                       t-att-value="students.email" required="1"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="phone">Mobile Number</label>
+                <input type="text" class="form-control" id="phone" name="phone"
+                       t-att-value="students.phone or []" required="1"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="street">Street</label>
+                <input type="text" name="street" class="form-control"
+                       t-att-value="students.street or []" required="1"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label" for="city">City</label>
+                <input type="text" name="city" class="form-control"
+                       t-att-value="students.city or []"
+                       required="1"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label label-optional" for="zip">Zip / Postal
+                    Code
+                </label>
+                <input type="text" name="zip" class="form-control"
+                       t-att-value="students.zip or []" required="1"/>
+            </div>
+            <div class="from-group col-md-6">
+                <label class="control-label" for="country_id">Country</label>
+                <select name="country_id" class="form-control" required="1">
+                    <option value="">Country...</option>
+                    <div if="students.country_id[0]">
+                        <option t-att-value="students.country_id[0]" t-att-selected="students.country_id[0]">
+                         <t t-esc="students.country_id[1] or []"/>
+                        </option>
+                    </div>
+
+                    <div if="not students.country_id[0] ">
+                        <div t-foreach="country" t-as="country_data">
+                            <option t-att-value="country_data.id">
+                                <t t-esc="country_data.name or []"/>
+                            </option>
+                        </div>
+                    </div>
+                </select>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="GetOthersData">
+         <div class="form-group col-md-4 " id="name">
+             <label for="name">First Name</label>
+             <input type="text" class="form-control"
+                    id="student_registration"
+                    name="first_name" placeholder="First Nname"
+                    required="1"/>
+         </div>
+        <div class="form-group col-md-4 " id="name">
+             <label for="name">Middle Name</label>
+            <input type="text" class="form-control" id="student_registration"
+                   name="middle_name" placeholder="Middle Name" required="1"/>
+         </div>
+        <div class="form-group col-md-4 " id="student_registration">
+             <label for="name">Last Name</label>
+            <input type="text" class="form-control" name='last_name'
+                   id="student_registration"
+                   placeholder="Last Name" required="1"/>
+         </div>
+        <div class="form-group col-md-6">
+             <label for="gender">Gender</label>
+            <br/>
+            <label class="radio-inline pr-3">
+                 <input type="radio" name="gender" id="male" value="m"
+                        required="1" style="margin-top:2px; margin-right:5px; vertical-align:text-top;">
+                     Male
+                 </input>
+             </label>
+            <label class="radio-inline pr-3">
+                 <input type="radio" name="gender" id="female" value="f"
+                        required="1" style="margin-top:2px; margin-right:5px; vertical-align:text-top;">
+                     Female
+                 </input>
+             </label>
+         </div>
+        <div class="form-group col-md-6">
+             <label for="name">Date of Birth</label>
+            <input type="text" t-attf-class="form-control a fa-calendar:before"
+                   id="birthdate" data-date-format="MM/DD/YYYY"
+                   name="birth_date" placeholder="MM/DD/YYYY"
+                   required="1"/>
+            <script>
+                  $(function() {
+                         $( "#birthdate" ).datepicker({maxDate:0});
+                     });
+             </script>
+         </div>
+        <div class="form-group col-md-6">
+             <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   placeholder="Email" required="1"/>
+         </div>
+        <div class="form-group col-md-6">
+             <label for="phone">Mobile Number</label>
+            <input type="text" class="form-control" id="phone" name="phone"
+                   placeholder="Mobile Number" required="1"/>
+         </div>
+        <div class="form-group col-md-6">
+             <label for="street">Street</label>
+            <input type="text" name="street" class="form-control"
+                   placeholder="Street" required="1"/>
+         </div>
+        <div class="form-group col-md-6">
+             <label class="control-label" for="city">City</label>
+            <input type="text" name="city" class="form-control"
+                   placeholder="City" required="1"/>
+         </div>
+        <div class="form-group col-md-6">
+             <label class="control-label label-optional" for="zip">
+                 Zip / Postal Code
+             </label>
+            <input type="text" name="zip" class="form-control"
+                   placeholder="Zip / Postal Code" required="1"/>
+         </div>
+        <div class="from-group col-md-6">
+             <label class="control-label" for="country_id">Country</label>
+            <select name="country_id" class="form-control" required="1">
+                 <option value="">Country...</option>
+                <t t-foreach="others" t-as="country">
+                     <option t-att-value="country.id">
+                         <t t-esc="country.name"/>
+                     </option>
+                 </t>
+             </select>
+         </div>
+     </t>
+</template>

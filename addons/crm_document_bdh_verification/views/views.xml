@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+<!--        <record model="ir.ui.view" id="bdh_verification_crm_lead_form">-->
+<!--            <field name="name">student.document.bdh.verification.crm.lead.form</field>-->
+<!--            <field name="model">crm.lead</field>-->
+<!--            <field name="inherit_id" ref="asbm_application_form_website.custom_openeducat_crm_lead_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//header" position="inside">-->
+<!--                    <button name="%(crm_document_bdh_verification.action_crm_bdh_document_verification)d"-->
+<!--                            string="BDH Verification"-->
+<!--                            type="action" class="oe_highlight" data-hotkey="v"-->
+<!--                            attrs="{'invisible': ['|', '|', ('bdh_verified','=',True), ('type', '=', 'lead'), ('op_admission_id','=',False)]}"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//page/field[@name='attachments_details_line']" position="after">-->
+<!--                    <group>-->
+<!--                        <field name="bdh_verified" invisible="1"/>-->
+<!--                        <field name="bdh_verified_date" readonly="1" force_save="1"/>-->
+<!--                    </group>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//page/field[@name='attachments_details_line']/tree/field[@name='lead_id']"-->
+<!--                       position="after">-->
+<!--                    <field name="bdh_verify" invisible="1"/>-->
+<!--                    <button string="BDH" attrs="{'invisible':[('bdh_verify','=',True)]}"-->
+<!--                            type="object" name="verify_document_by_bdh"-->
+<!--                            groups="crm_document_bdh_verification.group_data_verify_bdh"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+        <record model="ir.ui.view" id="bdh_verification_extended_document_form">
+            <field name="name">bdh.verification.document.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(crm_document_bdh_verification.action_crm_bdh_document_verification)d"
+                            string="Backend Verification"
+                            type="action" class="oe_highlight" data-hotkey="v"
+                            attrs="{'invisible': ['|', '|', ('bdh_verified','=',True), ('type', '=', 'lead'), ('op_admission_id','=',False)]}"/>
+                </xpath>
+                <xpath expr="//page[@name='attachment_details']/group" position="inside">
+                    <field name="bdh_verified" invisible="1"/>
+                    <field name="bdh_verified_date" readonly="1" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bdh_verification_extended_document_line_form">
+            <field name="name">bdh.verification.document.line.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="asbm_application_form_website.custom_openeducat_crm_lead_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page/field[@name='attachments_details_line']/tree/field[@name='lead_id']" position="after">
+                    <field name="bdh_verification_status" readonly="1" force_save="1"/>
+                    <field name="bdh_decline_reason" readonly="1" force_save="1"/>
+                    <button string="Verification" attrs="{'invisible':['|', ('bdh_verification_status','!=', False), ('parent.op_admission_id','=',False)]}"
+                            type="action" name="%(crm_document_bdh_verification.action_lead_documents_bdh_verification)d"
+                            groups="crm_document_bdh_verification.group_data_verify_bdh"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

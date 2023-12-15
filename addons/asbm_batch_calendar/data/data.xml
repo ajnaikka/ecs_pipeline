@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="op.exam.type" id="data_exam_type_online">
+            <field name="name">Online</field>
+            <field name="code">ONLINE</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,149 @@
+<odoo>
+    <data>
+        <record id="asbm_account_invoice_print_menu" model="ir.actions.report">
+            <field name="name">ASBM Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">asbm_invoice_print.invoice_print_template</field>
+            <field name="report_file">asbm_invoice_print.invoice_print_template</field>
+            <field name="print_report_name">(('ASBM Invoice '+ object.name or 'Print').replace('/',''))</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="asbm_account_sp_invoice_print_menu" model="ir.actions.report">
+            <field name="name">ASBM SP Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">asbm_invoice_print.sp_invoice_print_template</field>
+            <field name="report_file">asbm_invoice_print.sp_invoice_print_template</field>
+            <field name="print_report_name">(('ASBM Invoice '+ object.name or 'Print').replace('/',''))</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="invoice_print_layout_header">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <div style="width:100%" class="header">
+
+                <style type="text/css">
+                    <!--                        .Row {-->
+                    <!--                        display: table;-->
+                    <!--                        width: 100%; /*Optional*/-->
+                    <!--                        }-->
+
+
+                    @font-face {
+                    font-family: 'calibri';
+                    src: local('calibri'), local('calibri'),
+                    src: url('/asbm_invoice_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                    }
+
+                    @font-face {
+                    font-family: 'Countryside';
+                    src: local('Countryside'), local('Countryside'),
+                    src:
+                    url('/asbm_invoice_print/static/src/fonts/countryside-font/CountrysideTwo-r9WO.ttf')
+                    format('truetype');
+                    }
+
+                    @font-face {
+                    font-family: 'Arial';
+                    src: local('Arial'), local('Arial'),
+                    src: url(/asbm_invoice_print/static/src/fonts/arial.ttf') format('truetype');
+                    }
+                    @font-face {
+                    font-family: 'Verdana';
+                    src: url(/asbm_invoice_print/static/src/fonts/verdana.ttf') format('truetype');
+                    }
+
+                    .arabic-font {
+                    font-family: arial;
+                    }
+
+                    .en-font {
+                    font-family: arial;
+                    }
+                    tr,th, td {
+                    padding-left: 3px;
+                    padding-left: 3px;
+                    }
+                    <!--                        th, td {-->
+                    <!--                        padding: 3px;-->
+                    <!--                        }-->
+                    <!--                        tr{-->
+                    <!--                        page-break-inside: avoid;-->
+                    <!--                        }-->
+                    table {
+                    width: 100%;
+                    }
+                </style>
+
+
+                <div class="row">
+                    <div class="col-12" style="font-weight:bold;">
+
+                        <div class="en-font"
+                             style="text-align:center;font-size : 22px; font-weight: bold;background-color: #FFA500 !important;">
+                            <b>INVOICE</b>
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+                    <table style="table-layout:fixed;font-size: 12px;width:100%;">
+                        <tr>
+                            <td class="en-font" width="45%">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"
+                                     style="max-height: 150px;vertical-align: top;display: table-cell;"/>
+
+                            </td>
+                            <td class="en-font" width="10%"></td>
+                            <td class="en-font" width="45%" style="vertical-align: middle;">
+                                <div style="text-align:center;font-weight:bold;color:#000000;font-size: 16px;background-color: #FF7518 !important;">
+                                    INVOICE
+                                    <t t-if="o.name">
+                                        <t t-esc="o.name"/>
+                                    </t>
+                                    <br/>
+                                </div>
+
+                                <div style="text-align:center;font-weight:bold;color:#000000;font-size: 16px;background-color: #FFA500 !important;">
+                                    <t t-if="o.invoice_date">
+                                        Date:
+                                        <t t-esc="o.invoice_date"/>
+                                    </t>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <!--                      <div class="footer">-->
+            <!--                <div t-if="report_type == 'pdf'"  style="text-align:center;vertical-align:middle;font-size:14px;">-->
+            <!--                    Page <span class="page"/> of <span class="topage"/>-->
+            <!--                </div>-->
+
+            <!--            </div>-->
+
+
+        </template>
+
+        <template id="asbm_invoice_print_external_layout">
+            <div class="article">
+                <t t-call="asbm_invoice_print.invoice_print_layout_header"/>
+                <t t-raw="0"/>
+            </div>
+        </template>
+
+    </data>
+</odoo>

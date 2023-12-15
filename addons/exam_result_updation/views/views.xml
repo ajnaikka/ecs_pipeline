@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <record id="op_result_template_student_form_view" model="ir.ui.view">
+            <field name="name">op.result.template.student.form.view</field>
+            <field name="model">op.result.template</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_result_template_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='evaluation_type']" position="after">
+                    <field name="student_id"/>
+                    <field name="created_from_exam_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="grade_op_exam_form_view" model="ir.ui.view">
+            <field name="name">grade.op.exam.form.view</field>
+            <field name="model">op.exam</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_exam_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='min_marks']" position="after">
+                    <field name="evaluation_type" invisible="1"/>
+                    <field name="grade_ids"
+                           attrs="{'invisible':[('evaluation_type','!=','grade')],'required':[('evaluation_type','=','grade')]}" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="op_marksheet_register_result_form_view" model="ir.ui.view">
+            <field name="name">op.marksheet.register.result.form.view</field>
+            <field name="model">op.marksheet.register</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_marksheet_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='total_failed']" position="after">
+                    <field name="exam_result_status"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="op_marksheet_register_result_list_view" model="ir.ui.view">
+            <field name="name">op.marksheet.register.result.list.view</field>
+            <field name="model">op.marksheet.register</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_marksheet_register_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='total_failed']" position="after">
+                    <field name="exam_result_status"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

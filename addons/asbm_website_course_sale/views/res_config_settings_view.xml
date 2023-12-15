@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="res_config_settings_form" model="ir.ui.view">
+            <field name="name">res.config.settings.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='account']//div[@id='pay_invoice_online_setting_container']"
+                       position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box">
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="module_account_payment"/>-->
+<!--                        </div>-->
+                        <div class="o_setting_right_pane">
+                            <div class="content-group">
+                                <label for="payment_notification_users"/>
+                                <div class="mt16">
+                                    <field name="payment_notification_users" class="o_light_label" widget="many2many_tags"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                    <div class="col-12 col-lg-6 o_setting_box">-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <div class="content-group">-->
+<!--                                <label for="proposal_exceed_users"/>-->
+<!--                                <div class="mt16">-->
+<!--                                    <field name="proposal_exceed_users" class="o_light_label" widget="many2many_tags"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

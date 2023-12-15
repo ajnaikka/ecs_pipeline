@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_batch_exam_month_tree" model="ir.ui.view">
+            <field name="name">batch.exam.month.tree</field>
+            <field name="model">batch.exam.month</field>
+            <field name="arch" type="xml">
+                <tree string="Month Masters">
+                    <field name="name" string="Name"/>
+                    <field name="month"/>
+                    <field name="year" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_batch_exam_month_form" model="ir.ui.view">
+            <field name="name">batch.exam.month.form</field>
+            <field name="model">batch.exam.month</field>
+            <field name="arch" type="xml">
+                <form string="Months Master">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <div class="oe_title mb24">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name"/>
+
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="month" widget="selection"/>
+                            </group>
+                            <group>
+                                <field name="year" widget="selection"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_exam_months_master" model="ir.actions.act_window">
+            <field name="name">Exam Months</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">batch.exam.month</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Batch Month
+                </p>
+                <p>
+                    Odoo helps you track all activities related to your batches.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_batch_month_exam"
+                  name="Batch Months"
+                  parent="openeducat_core.menu_op_school_config_course"
+                  action="action_exam_months_master" sequence="17"/>
+
+        <menuitem name="Batch Months" id="batch_calendar_batch_month_menu" parent="asbm_batch_calendar.menu_batch_calendar_config"
+                  action="action_exam_months_master"
+                  sequence="20"/>
+    </data>
+</odoo>

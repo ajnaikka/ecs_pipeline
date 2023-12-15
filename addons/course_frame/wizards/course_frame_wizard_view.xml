@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_course_frame_wizards_form">
+            <field name="name">course.frame.wizard.form</field>
+            <field name="model">course.frame.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="course_frame_id" readonly="1"/>
+                                <field name="user_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="is_create_course"/>
+                                <field name="is_create_lms"/>
+                                <field name="is_course_created" invisible="1"/>
+                                <field name="is_lms_created" invisible="1"/>
+                            </group>
+                        </group>
+                        <div role="alert" class="alert alert-info"
+                             attrs="{'invisible': [('is_course_created', '=', False)]}">
+                            <p>
+                                <b>Course created once. No need to create again.</b>
+                            </p>
+                        </div>
+                        <div role="alert" class="alert alert-info"
+                             attrs="{'invisible': [('is_lms_created', '=', False)]}">
+                            <p>
+                                <b>LMS created once. No need to create again.</b>
+                            </p>
+                        </div>
+
+                        <footer>
+                            <button name="action_create_course" string="Create" type="object" class="btn-primary"/>
+                            <button special="cancel" string="Close"/>
+                        </footer>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_course_frame_wizards">
+            <field name="name">Course Frame Wizard</field>
+            <field name="res_model">course.frame.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

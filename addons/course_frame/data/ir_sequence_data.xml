@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="seq_media_request" model="ir.sequence">
+        <field name="name">Media request</field>
+        <field name="code">media.request</field>
+        <field name="prefix">MR-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_content_development" model="ir.sequence">
+        <field name="name">Content Development</field>
+        <field name="code">content.development</field>
+        <field name="prefix">CD-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_flip_book" model="ir.sequence">
+        <field name="name">Flip Book Development</field>
+        <field name="code">flip.book</field>
+        <field name="prefix">FB-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>

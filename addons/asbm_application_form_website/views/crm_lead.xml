@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="custom_openeducat_crm_lead_form">
+            <field name="name">openeducat.crm.lead.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+
+                <!--             <xpath expr="//page[@name='student_employment_details']" position="after">-->
+                <!--           <page name="attachment_details" string="Document Attachments">-->
+                <!--               <group>-->
+                <!--                   <group name="attachments">-->
+                <!--                       <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>-->
+                <!--                       </group>-->
+                <!--               </group>-->
+
+                <!--           </page>-->
+                <!--          </xpath>-->
+
+<!--                <xpath expr="//page[@name='student_employment_details']" position="after">-->
+                <xpath expr="//page[1]" position="after">
+                    <page name="attachment_details" string="Document Attachments">
+                        <field name="attachments_details_line">
+                            <tree editable="bottom">
+                                <field name="name" filename="name"/>
+                                <field name="datas"/>
+                                <field name="lead_id"/>
+                                <!--                      <field name="res_model"/>-->
+                            </tree>
+
+                        </field>
+                    </page>
+                    <page groups="base.group_no_one" string="Signature" name="customer_signature"
+                          attrs="{'invisible': [('signed_by', '=', False), ('signature', '=', False), ('signed_on', '=', False)]}">
+                        <group>
+                            <field name="signed_by"/>
+                            <field name="signed_on"/>
+                            <field name="signature" widget="image"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

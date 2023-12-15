@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="crm_duplicate_check_wizard_view" model="ir.ui.view">
+            <field name="name">crm.duplicate.check.wizard</field>
+            <field name="model">crm.duplicate.check</field>
+            <field name="arch" type="xml">
+                <form string="Lead Duplication">
+                    <field name="message" attrs="{'invisible':[('duplication', '=', True)]}" readonly="1" nolabel="1"/>
+                    <group>
+                        <field name="duplicate_lead_ids" options="{'no_open': True, 'no_create': True}"
+                               widget="many2many_tags" attrs="{'invisible':[('duplication', '=', False)]}"/>
+                        <field name="duplicated_opportunity_ids" options="{'no_open': True, 'no_create': True}"
+                               widget="many2many_tags" attrs="{'invisible':[('duplication', '=', False)]}" readonly="1" force_save="1"/>
+
+
+                        <field name="duplication" invisible="1"/>
+
+                    </group>
+                    <footer>
+                        <button name="action_delete_leads" type="object" string="Delete Duplicate Leads"
+                                class="btn-primary" data-hotkey="q" attrs="{'invisible':[('duplication', '=', False)]}"/>
+                        <button name="action_convert_to_opportunity" type="object" string="Convert to Duplicate Opportunity"
+                                class="btn-primary" data-hotkey="q" attrs="{'invisible':[('duplication', '=', False)]}"/>
+                        <button class="btn-secondary" special="cancel" data-hotkey="z" string="Cancel" attrs="{'invisible':[('duplication', '=', False)]}"/>
+                        <button class="btn-secondary" special="cancel" data-hotkey="z" string="OK" attrs="{'invisible':[('duplication', '=', True)]}"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_crm_duplicate_check" model="ir.actions.act_window">
+            <field name="name">Lead Duplication</field>
+            <field name="res_model">crm.duplicate.check</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="crm_duplicate_check_wizard_view"/>
+        </record>
+    </data>
+</odoo>

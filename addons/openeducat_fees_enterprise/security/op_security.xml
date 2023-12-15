@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.rule" id="fees_term_multi_comp_rule">
+            <field name="name">fees terms multi-company</field>
+            <field name="model_id" ref="openeducat_fees.model_op_fees_terms"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">
+                ['|','|',('company_id','=',False),('company_id','child_of',[user.company_id.id]),('company_id','in',user.company_ids.ids),('company_id', 'in',
+                        company_ids)]
+            </field>
+        </record>
+
+        <record model="ir.rule" id="fees_term_line_multi_comp_rule">
+            <field name="name">fees terms line multi-company</field>
+            <field name="model_id" ref="openeducat_fees.model_op_fees_terms_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">
+                ['|','|',('company_id','=',False),('company_id','child_of',[user.company_id.id]),('company_id','in',user.company_ids.ids)]
+            </field>
+        </record>
+
+        <record model="ir.rule" id="fees_template_line_multi_comp_rule">
+            <field name="name">fees template line multi-company</field>
+            <field name="model_id" ref="openeducat_fees_enterprise.model_op_fees_template_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">
+                ['|','|',('company_id','=',False),('company_id','child_of',[user.company_id.id]),('company_id','in',user.company_ids.ids)]
+            </field>
+        </record>
+
+        <record model="ir.rule" id="fees_element_multi_comp_rule">
+            <field name="name">fees element multi-company</field>
+            <field name="model_id" ref="openeducat_fees.model_op_fees_element"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">
+                ['|','|',('company_id','=',False),('company_id','child_of',[user.company_id.id]),('company_id','in',user.company_ids.ids)]
+            </field>
+        </record>
+
+    </data>
+</odoo>

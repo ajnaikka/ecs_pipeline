@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_fees_term_reminder_form" model="ir.ui.view">
+            <field name="name">op.fees.terms.form</field>
+            <field name="model">op.fees.terms</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="openeducat_fees.view_fees_terms_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/form" position="inside">
+                    <separator string="Fees Reminder Lines" colspan="4"/>
+                    <field name="line_ids">
+                        <tree string="Fees Reminder Details" editable="top">
+                            <field name="duration_type" required="1"/>
+                            <field name="days" required="1"/>
+                            <field name="template_id" required="1"/>
+                        </tree>
+                    </field>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_op_fees_term_inherited_tree_view" model="ir.ui.view">
+            <field name="name">op.fees.terms.tree.view</field>
+            <field name="model">op.fees.terms</field>
+            <field name="inherit_id" ref="openeducat_fees.view_fees_terms_tree"/>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

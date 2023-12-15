@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="exam_moderation_wizard_view" model="ir.ui.view">
+            <field name="name">exam.moderation.wizard.view</field>
+            <field name="model">exam.moderation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Moderation">
+                    <group>
+                        <field name="marks"/>
+                    </group>
+                    <footer>
+                        <button name="action_moderate_exam" type="object" string="Moderate" class="btn-primary" data-hotkey="q"/>
+                        <button class="btn-secondary" special="cancel" data-hotkey="z" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_exam_moderation_wizard" model="ir.actions.act_window">
+            <field name="name">Moderation</field>
+            <field name="res_model">exam.moderation.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="exam_moderation_wizard_view"/>
+        </record>
+    </data>
+</odoo>

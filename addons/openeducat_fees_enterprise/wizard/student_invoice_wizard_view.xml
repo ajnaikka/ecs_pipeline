@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_student_invoice_wizard" model="ir.ui.view">
+            <field name="name">view.student.invoice.wizard</field>
+            <field name="model">op.student.invoice.wizard</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="2">
+                            <field name="fees_selection_type"/>
+                            <field name="course_id" 
+                                attrs="{'invisible':[('fees_selection_type', '!=', 'course_wise')]}"/>
+                            <field name="batch_id" 
+                                attrs="{'invisible':[('fees_selection_type', '!=', 'batch_wise')]}"/>
+                            <field name="student_ids" widget="many2many_tags"/>
+                        </group>
+                        <footer groups="base.group_user">
+                            <button string="Create Invoice" type="object" name="create_student_invoice_wizard" class="oe_highlight"/>
+                            <button special="cancel" string="Close" type="object"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_op_student_invoice_view" model="ir.actions.act_window">
+            <field name="name">Student Invocie View</field>
+            <field name="res_model">op.student.invoice.wizard</field>
+            <field name="binding_model_id" ref="model_op_student_invoice_wizard"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_view_types">list</field>
+        </record>
+
+<!--        <act_window id="action_op_student_invoice_view"-->
+<!--                    name="Student Invocie View"-->
+<!--                    res_model="op.student.invoice.wizard"-->
+<!--                    binding_model="op.student.invoice.wizard"-->
+<!--                    view_mode="form"-->
+<!--                    target="new"-->
+<!--                    binding_views="list"/>-->
+    </data>
+</odoo>

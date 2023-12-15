@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="op_course_23" model="op.course">
+            <field name="code">bca</field>
+            <field name="name">Bachelor of Computer Applications</field>
+            <field name="evaluation_type">GPA</field>
+            <field name="reg_fees">True</field>
+            <field name="product_id" ref="op_product_23"/>
+            <field name="fees_term_id" ref="openeducat_fees.op_fees_term_1"/>
+        </record>
+
+        <record id="op_course_24" model="op.course">
+            <field name="code">bca1</field>
+            <field name="name">BCA-Sem-1</field>
+            <field name="evaluation_type">GPA</field>
+            <field name="reg_fees">True</field>
+             <field name="parent_id" ref="op_course_23"/>
+            <field name="product_id" ref="op_product_23"/>
+            <field name="fees_term_id" ref="openeducat_fees.op_fees_term_1"/>
+       </record>
+
+        <record id="op_course_25" model="op.course">
+            <field name="code">bca2</field>
+            <field name="name">BCA-Sem-2</field>
+            <field name="evaluation_type">GPA</field>
+            <field name="reg_fees">True</field>
+             <field name="parent_id" ref="op_course_23"/>
+            <field name="product_id" ref="op_product_23"/>
+            <field name="fees_term_id" ref="openeducat_fees.op_fees_term_1"/>
+        </record>
+    </data>
+</odoo>

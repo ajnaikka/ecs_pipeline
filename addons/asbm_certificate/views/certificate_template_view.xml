@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+        <record id="view_course_certificate_tree" model="ir.ui.view">
+            <field name="name">course.certificate.tree</field>
+            <field name="model">certificate.template</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Course Certificate Template" sample="1" multi_edit="1">
+                    <field name="date" string="Date"/>
+                    <field name="name" string="Name"/>
+                    <field name="course_id" optional="show"/>
+                    <field name="certificate_type" optional="show"/>
+                    <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_course_certificate_template_form" model="ir.ui.view">
+            <field name="name">course.certificate.form</field>
+            <field name="model">certificate.template</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Course Certificate Template">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <div class="oe_title mb24">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name" requeired="1"/>
+
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="course_id"/>
+                                <field name="main_certificate"/>
+                                <field name="mark_sheet"/>
+                                <field name="consolidate_sheet"/>
+                            </group>
+                            <group>
+                                <field name="main_report_id" attrs="{'invisible': [('main_certificate', '=', False)]}"/>
+                                <field name="mark_sheet_report_id" attrs="{'invisible': [('mark_sheet', '=', False)]}"/>
+                                <field name="consolidate_report_id" attrs="{'invisible': [('consolidate_sheet', '=', False)]}"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_certificate_template_form" model="ir.actions.act_window">
+            <field name="name">Certificate Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">certificate.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Certificate Template for course
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem name="Certificate Template" id="course_certificate_template_main_menu" parent="asbm_certificate_main_menu_root"
+                  sequence="2"/>
+
+        <menuitem name="Certificate Template" id="course_certificate_template_menu" parent="course_certificate_main_menu"
+                  sequence="10"
+                  action="action_certificate_template_form"/>
+
+    </data>
+</odoo>

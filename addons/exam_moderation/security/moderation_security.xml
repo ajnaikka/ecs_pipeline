@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="category_exam_moderation">
+            <field name="name">Exam Moderation</field>
+            <field name="sequence">15</field>
+        </record>
+
+        <record id="group_exam_moderation_ah_approval" model="res.groups">
+            <field name="name">AH Approval</field>
+            <field name="category_id" ref="category_exam_moderation"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+    </data>
+</odoo>

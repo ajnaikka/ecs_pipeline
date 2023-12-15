@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="op_student_course_exam_status_form_view" model="ir.ui.view">
+            <field name="name">op.student.course.exam.status.form.view</field>
+            <field name="model">op.student.course</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_course_form"/>
+            <field name="arch" type="xml">
+                <field name="academic_term_id" position="after">
+                    <field name="exam_register_id" invisible="1"/>
+                    <field name="course_status"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="op_student_course_exam_status_list_view" model="ir.ui.view">
+            <field name="name">op.student.course.exam.status.list.view</field>
+            <field name="model">op.student.course</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_course_tree"/>
+            <field name="arch" type="xml">
+                <field name="subject_ids" position="after">
+                    <field name="exam_register_id" invisible="1"/>
+                    <field name="course_status"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

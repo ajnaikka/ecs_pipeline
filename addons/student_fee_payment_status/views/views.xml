@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="op_student_fees_details_form_payment_status" model="ir.ui.view">
+            <field name="name">op.student.fees.details.payment.status</field>
+            <field name="model">op.student.fees.details</field>
+            <field name="inherit_id" ref="openeducat_fees_enterprise.view_op_student_fees_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_state']" position="after">
+                    <field name="payment_state"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="op_student_fees_details_tree_payment_status" model="ir.ui.view">
+            <field name="name">op.student.fees.details.payment.status</field>
+            <field name="model">op.student.fees.details</field>
+            <field name="inherit_id" ref="openeducat_fees_enterprise.view_op_student_fees_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_state']" position="after">
+                    <field name="payment_state"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

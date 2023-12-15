@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="op_subject_40" model="op.subject">
+            <field name="code">BCA1-0040</field>
+            <field name="name">Core Java</field>
+            <field name="type">practical</field>
+            <field name="course_id" ref="op_course_24"/>
+        </record>
+
+        <record id="op_subject_41" model="op.subject">
+            <field name="code">BCA1-0041</field>
+            <field name="name">Computer Networking</field>
+            <field name="type">theory</field>
+            <field name="course_id" ref="op_course_24"/>
+        </record>
+
+        <record id="op_subject_42" model="op.subject">
+            <field name="code">BCA1-0042</field>
+            <field name="name">Object-Oriented Programming</field>
+            <field name="type">both</field>
+            <field name="course_id" ref="op_course_24"/>
+        </record>
+
+        <record id="op_subject_43" model="op.subject">
+            <field name="code">BCA1-0043</field>
+            <field name="name">Database Management</field>
+            <field name="type">both</field>
+            <field name="course_id" ref="op_course_24"/>
+        </record>
+
+        <record id="op_subject_44" model="op.subject">
+            <field name="code">BCA2-0044</field>
+            <field name="name">Advanced Web Technologies</field>
+            <field name="type">both</field>
+            <field name="course_id" ref="op_course_25"/>
+        </record>
+
+        <record id="op_subject_45" model="op.subject">
+            <field name="code">BCA2-0045</field>
+            <field name="name">Software Testing</field>
+            <field name="type">both</field>
+            <field name="course_id" ref="op_course_25"/>
+        </record>
+
+        <record id="op_subject_46" model="op.subject">
+            <field name="code">BCA2-0046</field>
+            <field name="name">Software Engineering</field>
+            <field name="type">both</field>
+            <field name="course_id" ref="op_course_25"/>
+        </record>
+
+        <record id="op_subject_47" model="op.subject">
+            <field name="code">BCA2-0047</field>
+            <field name="name">Python Scripting</field>
+            <field name="type">both</field>
+            <field name="course_id" ref="op_course_25"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="student_activity_progression_report"
+              inherit_id="openeducat_student_progress_enterprise.student_progression_report"
+              priority="60">
+        <xpath expr="//div[hasclass('progression')]" position="after">
+            <div t-if="objs.activity_lines" class="row mt32" style="page-break-inside:avoid;">
+                <div class="col-12" style="page-break-inside:avoid;">
+                    <div class="row mb16 col-8" style="page-break-inside:avoid;">
+                        <strong>Activities:</strong>
+                    </div>
+                    <table class="table table-bordered" style="page-break-inside:avoid;">
+                        <thead class="text-center" style="background-color:#eeeeee; font-size:14px; font-weight:600;">
+                            <tr>
+                                <th>Date</th>
+                                <th>Faculty</th>
+                                <th>Activity Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" style="font-size:12px;">
+                            <t t-foreach="objs.activity_lines.sorted(key=lambda record: record.date, reverse=False)"
+                               t-as="lines">
+                                <tr>
+                                    <td>
+                                        <t t-esc="lines.date" t-options="{'widget': 'date'}"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="lines.faculty_id.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="lines.type_id.name"/>
+                                    </td>
+
+                                    <td>
+                                        <t t-esc="lines.description"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

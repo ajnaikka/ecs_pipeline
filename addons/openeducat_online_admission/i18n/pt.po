@@ -1,0 +1,197 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_online_admission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-26 09:24+0000\n"
+"PO-Revision-Date: 2019-09-26 09:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_admission
+msgid "Admission"
+msgstr "Admissão"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Admission Confirm"
+msgstr "Confirmar admissão"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "City"
+msgstr "Cidade"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.view_op_admission_inherit_online_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country"
+msgstr "País"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country..."
+msgstr "País..."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Date of Birth"
+msgstr "Data de nascimento"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Done"
+msgstr "Feito"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Draft"
+msgstr "Esboço, projeto"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Email"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__product_id
+msgid "Fees"
+msgstr "Honorários"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Female"
+msgstr "Fêmea"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "First Name"
+msgstr "Primeiro nome"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Gender"
+msgstr "Gênero"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_course
+msgid "LMS Course"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Last Name"
+msgstr "Último nome"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Male"
+msgstr "Masculino"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Middle Name"
+msgstr "Nome do meio"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Mobile Number"
+msgstr "Número de celular"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Next"
+msgstr "Seguinte"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Online Admission"
+msgstr "Admissão on-line"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Pending"
+msgstr "Pendente"
+
+#. module: openeducat_online_admission
+#: model:website.menu,name:openeducat_online_admission.menu_admissionregistration
+msgid "Registration"
+msgstr "Cadastro"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__reg_fees
+msgid "Registration Fees"
+msgstr "Taxas de registro"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__order_id
+msgid "Registration Fees Ref"
+msgstr "Taxas de Inscrição Ref"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Rejected"
+msgstr "rejeitado"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Class"
+msgstr "Selecionar classe"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Course"
+msgstr "Escolha um Curso"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__state
+msgid "State"
+msgstr "Estado"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Street"
+msgstr "Rua"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Submitted"
+msgstr "Submetido"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.application_confirmed
+msgid "Your application has been confirmed."
+msgstr "A sua candidatura foi confirmada."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Zip / Postal Code"
+msgstr "CEP / Código Postal"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "mm/dd/yyyy"
+msgstr "mm / dd / aaaa"
+

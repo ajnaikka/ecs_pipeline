@@ -1,0 +1,197 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_online_admission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-30 05:33+0000\n"
+"PO-Revision-Date: 2019-09-30 05:33+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_admission
+msgid "Admission"
+msgstr "вход"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Admission Confirm"
+msgstr "Прием Confirm"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Cancelled"
+msgstr "отменен"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "City"
+msgstr "город"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.view_op_admission_inherit_online_form
+msgid "Confirm"
+msgstr "подтвердить"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Confirmed"
+msgstr "подтвердил"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country"
+msgstr "Страна"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country..."
+msgstr "Страна..."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Date of Birth"
+msgstr "Дата рождения"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Done"
+msgstr "Готово"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Draft"
+msgstr "Черновой вариант"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Email"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__product_id
+msgid "Fees"
+msgstr "сборы"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Female"
+msgstr "женский"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "First Name"
+msgstr "Имя"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Gender"
+msgstr "Пол"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_course
+msgid "LMS Course"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Last Name"
+msgstr "Фамилия"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Male"
+msgstr "мужчина"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Middle Name"
+msgstr "Второе имя"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Mobile Number"
+msgstr "Номер мобильного"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Next"
+msgstr "Далее"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Online Admission"
+msgstr "Интернет Прием"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Pending"
+msgstr "в ожидании"
+
+#. module: openeducat_online_admission
+#: model:website.menu,name:openeducat_online_admission.menu_admissionregistration
+msgid "Registration"
+msgstr "Регистрация"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__reg_fees
+msgid "Registration Fees"
+msgstr "Регистрационные сборы"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__order_id
+msgid "Registration Fees Ref"
+msgstr "Регистрационный взнос Ссылка"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Rejected"
+msgstr "Отклонено"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Class"
+msgstr "Выбор класса"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Course"
+msgstr "Выберите курс"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__state
+msgid "State"
+msgstr "государственный"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Street"
+msgstr "улица"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Submitted"
+msgstr "Отправлено"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.application_confirmed
+msgid "Your application has been confirmed."
+msgstr "Ваша заявка была подтверждена."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Zip / Postal Code"
+msgstr "Zip / Почтовый индекс"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "mm/dd/yyyy"
+msgstr "мм / дд / гггг"
+

@@ -1,0 +1,222 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_online_admission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-09 09:58+0000\n"
+"PO-Revision-Date: 2019-12-09 09:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_admission
+msgid "Admission"
+msgstr "การรับเข้า"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Admission Confirm"
+msgstr "ยืนยันการรับสมัคร"
+
+#. module: openeducat_online_admission
+#: model:product.product,name:openeducat_online_admission.op_product_23
+#: model:product.template,name:openeducat_online_admission.op_product_23_product_template
+msgid "Admission Fees for BCA"
+msgstr "ค่าธรรมเนียมค่าเข้าชมสำหรับเก็บกวาด"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Cancelled"
+msgstr "ยกเลิก"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "City"
+msgstr "เมือง"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.view_op_admission_inherit_online_form
+msgid "Confirm"
+msgstr "ยืนยัน"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Confirmed"
+msgstr "ได้รับการยืนยัน"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country"
+msgstr "ประเทศ"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country..."
+msgstr "ประเทศ..."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Date of Birth"
+msgstr "วันเกิด"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Done"
+msgstr "เสร็จสิ้น"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Draft"
+msgstr "ร่าง"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Email"
+msgstr "อีเมล์"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__product_id
+msgid "Fees"
+msgstr "ค่าเล่าเรียน"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Female"
+msgstr "หญิง"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "First Name"
+msgstr "ชื่อจริง"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Gender"
+msgstr "เพศ"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_course
+msgid "LMS Course"
+msgstr "LMS หลักสูตร"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Last Name"
+msgstr "นามสกุล"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Male"
+msgstr "ชาย"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Middle Name"
+msgstr "ชื่อกลาง"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Mobile Number"
+msgstr "เบอร์มือถือ"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Next"
+msgstr "ต่อไป"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Online Admission"
+msgstr "ค่าเข้าชมออนไลน์"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Pending"
+msgstr "รอดำเนินการ"
+
+#. module: openeducat_online_admission
+#: model:website.menu,name:openeducat_online_admission.menu_admissionregistration
+msgid "Registration"
+msgstr "การลงทะเบียน"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__reg_fees
+msgid "Registration Fees"
+msgstr "ค่าลงทะเบียน"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__order_id
+msgid "Registration Fees Ref"
+msgstr "ค่าลงทะเบียน Ref"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Rejected"
+msgstr "ปฏิเสธ"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Class"
+msgstr "เลือกชั้นเรียน"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Course"
+msgstr "เลือกหลักสูตร"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__state
+msgid "State"
+msgstr "สถานะ"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Street"
+msgstr "ถนน"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Submitted"
+msgstr "ส่ง"
+
+#. module: openeducat_online_admission
+#: model:product.product,uom_name:openeducat_online_admission.op_product_23
+#: model:product.template,uom_name:openeducat_online_admission.op_product_23_product_template
+msgid "Unit(s)"
+msgstr "หน่วย"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.application_confirmed
+msgid "Your application has been confirmed."
+msgstr "ใบสมัครของคุณได้รับการยืนยัน"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Zip / Postal\n"
+"                                                    Code"
+msgstr "รหัสไปรษณีย์\n"
+"                                                    รหัส"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Zip / Postal Code"
+msgstr "Zip / รหัสไปรษณีย์"
+
+#. module: openeducat_online_admission
+#: model:product.product,weight_uom_name:openeducat_online_admission.op_product_23
+#: model:product.template,weight_uom_name:openeducat_online_admission.op_product_23_product_template
+msgid "kg"
+msgstr "กก."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "mm/dd/yyyy"
+msgstr "dd / mm / ปปปป"
+

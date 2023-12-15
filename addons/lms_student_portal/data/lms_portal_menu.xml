@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="website_menu_lms" model="openeducat.portal.menu">
+        <field name="name">LMS</field>
+        <field name="link">/slides/all?my=1</field>
+        <field name="active">True</field>
+        <field name="sequence" type="int">120</field>
+        <field name="background_color">#45ac34</field>
+        <field name="is_visible_to_parent">False</field>
+        <field name="icon_image" type="base64"
+               file="lms_student_portal/static/img/lms.png"/>
+    </record>
+
+</odoo>

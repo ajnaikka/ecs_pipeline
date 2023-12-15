@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        <record id="student_invoice_creation" model="ir.actions.server">
+            <field name="name">Create Invoice</field>
+            <field name="model_id" ref="model_op_student_fees_details"/>
+            <field name="binding_model_id" 
+                ref="openeducat_fees_enterprise.model_op_student_fees_details"/>
+            <field name="state">code</field>
+            <field name="code">model.create_student_invoice()</field>
+        </record>
+    </data>
+</odoo>

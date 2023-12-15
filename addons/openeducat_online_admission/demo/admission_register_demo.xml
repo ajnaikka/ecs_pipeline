@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="op_admission_register_online" model="op.admission.register">
+            <field name="name">Bachelor of Computer Applications</field>
+            <field name="min_count">20</field>
+            <field name="max_count">50</field>
+            <field name="state">application</field>
+            <field name="start_date" eval="DateTime.now() - relativedelta(days=15)"/>
+            <field name="end_date" eval="DateTime.now() + relativedelta(days=15)"/>
+            <field name="course_id" ref="op_course_23"/>
+            <field name="product_id" ref="openeducat_fees.op_product_1"/>
+        </record>
+    </data>
+</odoo>

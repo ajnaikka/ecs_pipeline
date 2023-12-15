@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="student_fees_menu"
+           name="Student Fees Detail"
+           parent="openeducat_core.menu_op_general_student"
+           sequence="50"
+           action="act_open_op_student_fees_details"
+           groups="openeducat_core.group_op_back_office_admin"/>
+
+        <menuitem id="student_invoice_menu"
+           name="Student Invoice"
+           parent="openeducat_core.menu_op_general_student"
+           sequence="60"
+           action="action_op_student_invoice_view"
+           groups="openeducat_core.group_op_back_office_admin"/>
+    </data>
+</odoo>

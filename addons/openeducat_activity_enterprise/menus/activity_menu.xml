@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_op_activity_analysis"
+                  name="Activity Analysis"
+                  parent="openeducat_core_enterprise.menu_op_course_analysis_reporting"
+                  sequence="10"
+                  action="openeducat_activity_enterprise.act_op_activity_analysis_pivot_view"/>
+    </data>
+</odoo>

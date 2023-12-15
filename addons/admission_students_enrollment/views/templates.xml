@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="student_enrollment_email_template" model="mail.template">
+            <field name="name">Admission: Student Enrollment</field>
+            <field name="model_id" ref="openeducat_admission.model_op_admission"/>
+            <field name="email_from">{{ (object.create_uid.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">{{ object.partner_id.name}} - Enrollment</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear
+                        <t t-out="object.partner_id.name"/>
+                        <br/>
+                        <br/>
+                        <div name="open_link">
+                            This is to inform you that you are successfully enrolled
+                            <br/>
+                            Your enrollment ID - <t t-out="object.enrollment_number"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        Do not hesitate to contact us if you have any queries.
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

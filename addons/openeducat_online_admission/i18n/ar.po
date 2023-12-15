@@ -1,0 +1,197 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_online_admission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-26 05:06+0000\n"
+"PO-Revision-Date: 2019-09-26 05:06+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_admission
+msgid "Admission"
+msgstr "القبول"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Admission Confirm"
+msgstr "القبول تأكيد"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Cancelled"
+msgstr "تم إلغاء"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "City"
+msgstr "المدينة"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.view_op_admission_inherit_online_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Confirmed"
+msgstr "وأكد"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country"
+msgstr "دولة"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country..."
+msgstr "الدولة..."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Date of Birth"
+msgstr "تاريخ الولادة"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Done"
+msgstr "تم"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Draft"
+msgstr "مشروع"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__product_id
+msgid "Fees"
+msgstr "رسوم"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Female"
+msgstr "إناثا"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "First Name"
+msgstr "الاسم الاول"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Gender"
+msgstr "جنس"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_course
+msgid "LMS Course"
+msgstr "دورة LMS"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Last Name"
+msgstr "الكنية"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Male"
+msgstr "الذكر"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Middle Name"
+msgstr "الاسم الوسطى"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Mobile Number"
+msgstr "رقم الهاتف المحمول"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Next"
+msgstr "التالي"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Online Admission"
+msgstr "القبول عبر الإنترنت"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Pending"
+msgstr "معلقة"
+
+#. module: openeducat_online_admission
+#: model:website.menu,name:openeducat_online_admission.menu_admissionregistration
+msgid "Registration"
+msgstr "التسجيل"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__reg_fees
+msgid "Registration Fees"
+msgstr "رسوم التسجيل"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__order_id
+msgid "Registration Fees Ref"
+msgstr "رسوم التسجيل المرجع"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Rejected"
+msgstr "ورفض"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Class"
+msgstr "اختر الفئة"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Course"
+msgstr "اختر دورة"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Street"
+msgstr "الشارع"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Submitted"
+msgstr "قدمت"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.application_confirmed
+msgid "Your application has been confirmed."
+msgstr "تم تأكيد طلبك."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Zip / Postal Code"
+msgstr "الرمز البريدي / الرمز البريدي"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "mm/dd/yyyy"
+msgstr "مم / يوم / سنة"
+

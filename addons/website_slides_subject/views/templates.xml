@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <template id="flip_book_slide_icon" inherit_id="website_slides.slide_icon">
+            <xpath expr="//i[last()]" position="after">
+                <i t-if="slide.slide_type == 'flip_book'" t-att-class="'fa fa-book %s' % icon_class"></i>
+            </xpath>
+
+        </template>
+
+        <template id="slide_content_detailed" inherit_id="website_slides.slide_content_detailed">
+
+            <xpath expr="//div[hasclass('o_wslides_lesson_content_type')][2]" position="inside">
+                <div t-if="slide.slide_category == 'subject'" class="ratio ratio-4x3 embed-responsive-item mb8"
+                     style="height: 600px;">
+                    <t t-if="slide.embed_code" t-out="slide.embed_code"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

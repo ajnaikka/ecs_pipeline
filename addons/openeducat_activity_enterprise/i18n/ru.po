@@ -1,0 +1,227 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* openeducat_activity_enterprise
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-12 10:29+0000\n"
+"PO-Revision-Date: 2019-11-12 10:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_activity_progression_report
+msgid "<strong>Activities:</strong>"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__activity_ids
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.view_op_student_progress_activity_form_inherite
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.view_op_student_progress_activity_tree_inherite
+msgid "Activity"
+msgstr "Мероприятие"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progression_activity_portal_inherit
+msgid ""
+"Activity\n"
+"                                <strong style=\"float:left;padding: 0 20px 0 20px;\">+</strong>"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.Enterprise_student_activity_portal
+msgid ""
+"Activity Log\n"
+"                                <span style=\"float:left;padding: 0 20px 0 20px;\">+</span>"
+msgstr ""
+"Журнал активности\n"
+"                                <span style=\"float:left;padding: 0 20px 0 20px;\">+</span>"
+
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model,name:openeducat_activity_enterprise.model_activity_progress_wizard
+msgid "Activity Progress Wizard"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model,name:openeducat_activity_enterprise.model_op_activity_type
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_op_activity__type_id
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.Enterprise_student_activity_portal
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_activity_progression_report
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progression_activity_portal_inherit
+msgid "Activity Type"
+msgstr "Тип действия"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progress_wizad_form
+msgid "Add"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model:ir.actions.act_window,name:openeducat_activity_enterprise.act_win_progress_activity_wizard_action
+msgid "Add Activity"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progress_wizad_form
+msgid "Close"
+msgstr "Закрыть"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_op_activity__company_id
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_op_activity_type__company_id
+msgid "Company"
+msgstr "Компания"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__create_uid
+msgid "Created By"
+msgstr "Создано"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__create_uid
+msgid "Created by"
+msgstr "Создано"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__create_date
+msgid "Created on"
+msgstr "Создан"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__create_date
+msgid "Creation Date"
+msgstr "Дата создания"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__date
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.Enterprise_student_activity_portal
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_activity_progression_report
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progression_activity_portal_inherit
+msgid "Date"
+msgstr "Дата"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.Enterprise_student_activity_portal
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_activity_progression_report
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progression_activity_portal_inherit
+msgid "Description"
+msgstr "Описание"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__display_name
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__display_name
+msgid "Display Name"
+msgstr "Отображаемое Имя"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__faculty_id
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.Enterprise_student_activity_portal
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_activity_progression_report
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progression_activity_portal_inherit
+msgid "Faculty"
+msgstr "факультет"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.view_op_student_progress_activity_form_inherite
+msgid "Get Activity"
+msgstr "Получить активность"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__id
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__id
+msgid "ID"
+msgstr "Номер"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard____last_update
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report____last_update
+msgid "Last Modified on"
+msgstr "Последнее изменение"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Последний раз обновил"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__write_date
+msgid "Last Updated on"
+msgstr "Последнее обновление"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.actions.act_window,name:openeducat_activity_enterprise.action_migration_report
+msgid "Migration Analysis"
+msgstr "Анализ миграции"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model,name:openeducat_activity_enterprise.model_migration_report
+#: model:ir.ui.menu,name:openeducat_activity_enterprise.menu_migration_report
+msgid "Migration Report"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.view_report_migration_pivot
+msgid "Migration Statistics"
+msgstr "Миграционные Статистика"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_op_student_progression__activity_lines
+msgid "Progression Activities"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_op_activity__progression_id
+msgid "Progression No"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__student_id
+msgid "Student"
+msgstr "Ученик"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model,name:openeducat_activity_enterprise.model_op_activity
+msgid "Student Activity"
+msgstr "Студенческая деятельность"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_activity_progress_wizard__student_id
+msgid "Student Name"
+msgstr "Имя ученика"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model,name:openeducat_activity_enterprise.model_op_student_progression
+msgid "Student progression"
+msgstr ""
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_op_student_progression__total_activity
+msgid "Total Activity"
+msgstr "Общая активность"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__write_uid
+msgid "Updated By"
+msgstr "Обновлено По"
+
+#. module: openeducat_activity_enterprise
+#: model:ir.model.fields,field_description:openeducat_activity_enterprise.field_migration_report__write_date
+msgid "Updated Date"
+msgstr "Обновлено Дата"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.view_op_student_progress_activity_form_inherite
+msgid "Values"
+msgstr "Значения"
+
+#. module: openeducat_activity_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_activity_enterprise.student_progress_wizad_form
+msgid "student progress wizard"
+msgstr ""

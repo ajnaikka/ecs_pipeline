@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="openeducat_student_form">
+      <field name="name">openeducat.student.form</field>
+      <field name="model">op.student</field>
+      <field name="inherit_id" ref="openeducat_core.view_op_student_form" />
+      <field name="arch" type="xml">
+
+         <xpath expr="//page[@name='personal_information']/group/group/field[@name='birth_date']" position="after">
+            <field name="marital_status" />
+              <field name="fath_or_hus_name" />
+        </xpath>
+
+           <xpath expr="//page[@name='personal_information']//group[@name='address']//div[@name='div_address']/field[@name='street']" position="before">
+            <field name="house_no" placeholder="House No"/>
+              <field name="house_name" placeholder="House Name"/>
+        </xpath>
+
+            <xpath expr="//page[@name='personal_information']//group[@name='address']//div[@name='div_address']/field[@name='street2']" position="after">
+            <field name="landmark" placeholder="Landmark"/>
+        </xpath>
+
+        <xpath expr="//page[@name='personal_information']//group[@name='personal_detail']/group/field[@name='partner_id']" position="after">
+            <field name="residential_no" />
+             <field name="facebook_id" />
+             <field name="whatsapp_id" />
+        </xpath>
+
+           <xpath expr="//page[@name='educational']//group//group/field[@name='gr_no']" position="after">
+              <field name="branch"/>
+             <field name="batch_code" />
+             <field name="application_for_admission" />
+
+           </xpath>
+
+            <xpath expr="//page[@name='educational']//group//group" position="after">
+               <group string="Specialization" name="specialization" priority="2">
+                         <field name="specialization1"/>
+                   <field name="specialization2"/>
+                   <field name="specialization3"/>
+                   <field name="specialization4"/>
+                                </group>
+           </xpath>
+
+
+
+
+
+      </field>
+    </record>
+
+  </data>
+</odoo>

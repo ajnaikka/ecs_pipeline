@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="lead_documents_bdh_verification_wizard_view" model="ir.ui.view">
+            <field name="name">lead.documents.bdh.verification.wizard</field>
+            <field name="model">lead.documents.bdh.verification</field>
+            <field name="arch" type="xml">
+                <form string="Verify Documents">
+                    <group>
+                        <field name="status"/>
+                        <field name="reason" attrs="{'invisible':[('status', '=', 'verified')], 'required':[('status', '=', 'declined')]}"/>
+                        <field name="lead_document_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_verify_documents" type="object" string="Submit" class="btn-primary" data-hotkey="q"/>
+                        <button class="btn-secondary" special="cancel" data-hotkey="z" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_lead_documents_bdh_verification" model="ir.actions.act_window">
+            <field name="name">Verify Documents</field>
+            <field name="res_model">lead.documents.bdh.verification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="lead_documents_bdh_verification_wizard_view"/>
+        </record>
+    </data>
+</odoo>

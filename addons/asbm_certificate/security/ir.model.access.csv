@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_course_certificate,course.certificate,model_course_certificate,base.group_user,1,1,1,1
+access_subject_score_lines,subject.score.lines,model_subject_score_lines,base.group_user,1,1,1,1
+access_certificate_template,certificate.template,model_certificate_template,base.group_user,1,1,1,1
+access_mark_sheet_lines,mark.sheet.lines,model_mark_sheet_lines,base.group_user,1,1,1,1

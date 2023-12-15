@@ -1,0 +1,872 @@
+<odoo>
+    <template id="token_expire_msg_student_emp_form">
+        <t t-call="website.layout">
+            <t t-set="title">Access denied</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <span>
+                        <strong>The page you are trying to acces has been expired.
+                            <br/>
+                            Please contact the organization for the access.
+                        </strong>
+                    </span>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="student_employee_form">
+<!--        <xpath expr="." position="inside">-->
+<!--            <script src="/static/src/js/asbm_web.js" type="text/javascript"/>-->
+<!--        </xpath>-->
+        <t t-call="website.layout">
+            <t t-set="title">STUDENT EMPLOYMENT DETAILS</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <!-- <p>Hello world</p> -->
+                    <form action="/submit_student_employee_form" class="s_website_form" method="POST"
+                          style="height:100%;float:center; width:80%;" enctype="multipart/form-data">
+                        <style>
+                            body {
+                            }
+                            <!--                     input {-->
+                            <!--                          border-top-style: hidden;-->
+                            <!--                          border-right-style: hidden;-->
+                            <!--                          border-left-style: hidden;-->
+                            <!--                          border-bottom-style: groove;-->
+                            <!--&lt;!&ndash;                          background-color:#f1f4ff;&ndash;&gt;-->
+                            <!--                           }-->
+                            .input-without-border {
+                            border-top-style: hidden;
+                            border-right-style: hidden;
+                            border-left-style: hidden;
+                            border-bottom-style: hidden;
+
+                            }
+                            .input-with-border {
+                            border-top-style: groove;
+                            border-right-style: groove;
+                            border-left-style: groove;
+                            border-bottom-style: groove;
+
+                            }
+                            .border-td {
+                            border: 1px solid ;
+                            border-collapse: collapse;
+                            <!--                         border-color: #c21408;-->
+                            }
+
+
+                            .no-outline:focus {
+                            outline: none;
+                            }
+                            .table_align
+                            {
+                            float:left;
+                            border:none;
+                            border: 0;
+                            font-size: 10px;
+                            text-weight:bold;
+                            width:100%;
+                            }
+                        </style>
+                        <div style=" height:100%;width:100%;">
+                            <input type="hidden" name="lead_id" id="lead_id" t-att-value="lead_id.id"/>
+                            <div style="float:right; height:100%;width:100%;">
+                                <!--                                 Batch Code:<input type="text" name="batch_code" id="student_name"/>-->
+                                <br/>
+
+
+                                <div class="row" style="width:100%;">
+                                    <div style="float:center;text-align:center; font-size : 18px; width:75%;"
+                                         height="110px;">
+                                        <span>
+                                            <b style="font-size : 16px;font-family:verdana;">STUDENT EMPLOYMENT
+                                                DETAILS
+                                            </b>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <b style="font-size : 10px;color:#bdbbbb;">FILL THE FORMAT IN CAPITAL
+                                                LETTERS
+                                            </b>
+                                        </span>
+                                    </div>
+                                    <div style="float:right;text-align:center; width:25%;"
+                                         t-if="lead_id.course_type.code=='asbm'">
+                                        <img src="/asbm_application_form_website/static/src/img/logo_web.png"
+                                             width="150px;" height="110px;"/>
+
+                                    </div>
+                                    <div style="float:right;text-align:center; width:25%;"
+                                         t-if="lead_id.course_type.code=='aste'">
+                                        <img src="/asbm_application_form_website/static/src/img/aste_logo.png"
+                                             width="150px;" height="110px;"/>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+
+                                    <table style="float:left;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>STUDENTS NAME</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="student_name"
+                                                               id="student_name" t-att-value="lead_id.partner_id.name"
+                                                               class="form-control s_website_form_input"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+
+                                    <table style="float:right; border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>COURSE ENROLLED</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="course_enrolled" id="course_enrolled"
+                                                               readonly="1" class="form-control s_website_form_input"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+
+                                    <table style="float:left;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>E-Mail ID</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="email" name="email" id="email" t-att-value="lead_id.email_from"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table style="padding-top:20px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>COMPANY NAME</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_name" id="company_name"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>CORR. ADDRESS</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add1" id="company_add1"
+                                                               placeholder="Street 1"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>COMPANY ADDRESS</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add1" id="company_add1"
+                                                               placeholder="Street 1"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add2" id="company_add2"
+                                                               placeholder="Street 2"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add2" id="company_add2"
+                                                               placeholder="Street 2"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="curr_add3" id="curr_add3"
+                                                               placeholder="Place"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add3" id="company_add3"
+                                                               placeholder="Place"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="curr_add4" id="curr_add4"
+                                                               placeholder="City"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add4" id="company_add4"
+                                                               placeholder="City"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="curr_add5" id="curr_add5"
+                                                               placeholder="Zip"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;">
+                                                    <span></span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_add5" id="company_add5"
+                                                               placeholder="Zip"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <span>
+                                                        <b>COMPANY PH.NO'S.</b>
+                                                    </span>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="company_phone_no" id="company_phone_no"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <b>MOBILE NO.</b>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="mobile" id="mobile"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <b>DESIGNATION</b>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span >:</span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="function" id="function"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <b>LAND LINE NO.</b>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="contact_ll_no" id="contact_ll_no"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <b>WORKING DEPT</b>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="working_dept" id="working_dept"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+
+                                    <table style="padding-top:10px;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:25%;font-family:verdana;">
+                                                    <b>OFFICE NO.</b>
+                                                </td>
+                                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                                <td style="width:75%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="residential_no" id="residential_no"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+
+                                <div class="row" style="padding-top:10px;width:50%;float:left;">
+                                    <table name="table_reference_number_part1"
+                                           style="float:left;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:20%;font-family:verdana;">
+                                                    <b>REFERENCE NUMBER</b>
+                                                </td>
+                                                <td style="width:2%;">
+                                                    <span></span>
+                                                </td>
+                                                <td style="width:2%;font-family:verdana;">
+                                                    <span>1</span>
+                                                </td>
+                                                <td style="width:65%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="reference_no1" id="reference_no1"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:20%;font-family:verdana;">
+                                                    <b></b>
+                                                </td>
+                                                <td style="width:2%;">
+                                                    <span></span>
+                                                </td>
+                                                <td style="width:2%;font-family:verdana;">
+                                                    <span>2</span>
+                                                </td>
+                                                <td style="width:65%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="reference_no2" id="reference_no2"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:20%;font-family:verdana;">
+                                                    <b></b>
+                                                </td>
+                                                <td style="width:2%;">
+                                                    <span></span>
+                                                </td>
+                                                <td style="width:2%;font-family:verdana;">
+                                                    <span>3</span>
+                                                </td>
+                                                <td style="width:65%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="reference_no3" id="reference_no3"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="row" style="padding-top:10px;width:50%;float:right;">
+                                    <table name="table_reference_number_part1"
+                                           style="float:left;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">
+                                        <tbody>
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:20%;font-family:verdana;">
+                                                    <b></b>
+                                                </td>
+                                                <td style="width:2%;">
+                                                    <span></span>
+                                                </td>
+                                                <td style="width:2%;font-family:verdana;">
+                                                    <span>4</span>
+                                                </td>
+                                                <td style="width:65%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="reference_no4" id="reference_no4"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:20%;font-family:verdana;">
+                                                    <b></b>
+                                                </td>
+                                                <td style="width:2%;">
+                                                    <span></span>
+                                                </td>
+                                                <td style="width:2%;font-family:verdana;">
+                                                    <span>5</span>
+                                                </td>
+                                                <td style="width:65%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="reference_no5" id="reference_no5"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="border:none;border: 0;width:100%;line-height: 20px;">
+                                                <td style="width:20%;font-family:verdana;">
+                                                    <b></b>
+                                                </td>
+                                                <td style="width:2%;">
+                                                    <span></span>
+                                                </td>
+                                                <td style="width:2%;font-family:verdana;">
+                                                    <span>6</span>
+                                                </td>
+                                                <td style="width:65%;font-family:verdana;">
+                                                    <span>
+                                                        <input type="text" name="reference_no6" id="reference_no6"
+                                                               class="form-control s_website_form_input"
+                                                               style="width:100%;"/>
+
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                                <!--                                     <div class="row" style="padding-top:10px;width:50%;float:right;">-->
+                                <!--                                         <table name="table_reference_number_part1" style="float:left;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">-->
+                                <!--                                        <tbody>-->
+                                <!--                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">-->
+                                <!--                                      <td style="width:20%;"><span></span> </td>-->
+                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                <!--                                        <td style="width:2%;font-family:verdana;"><span >2</span></td>-->
+                                <!--                                      <td style="width:75%;font-family:verdana;"><span >-->
+                                <!--                                           <input type="text" name="reference_no2" id="reference_no2"  class="form-control s_website_form_input" style="width:100%;"/>-->
+
+                                <!--                                      </span></td></tr>-->
+
+                                <!--                                        </tbody>-->
+                                <!--                                     </table>-->
+
+                                <!--                                    </div>-->
+
+
+                                <!--                                    <div class="row" style="padding-top:10px;width:50%;float:right;">-->
+                                <!--                                         <table name="table_reference_number_part3" style="float:left;border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">-->
+                                <!--                                        <tbody>-->
+                                <!--                                   <tr style="border:none;border: 0;width:100%;line-height: 20px;">-->
+                                <!--                                      <td style="width:20%;"><span></span> </td>-->
+                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                <!--                                        <td style="width:2%;font-family:verdana;"><span >3</span></td>-->
+                                <!--                                      <td style="width:75%;font-family:verdana;"><span >-->
+                                <!--                                           <input type="text" name="reference_no3" id="reference_no3"   class="form-control s_website_form_input"  style="width:100%;"/>-->
+
+                                <!--                                      </span></td></tr>-->
+
+                                <!--                                        </tbody>-->
+                                <!--                                     </table>-->
+                                <!--                                    </div>-->
+
+
+                                <!--                                    <div  class="row" style="padding-top:10px;width:50%;float:right;">-->
+                                <!--                                        <table name="table_reference_number_part1" style="float:right; border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">-->
+                                <!--                                        <tbody>-->
+                                <!--                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">-->
+                                <!--                                       <td style="width:20%;"><span></span> </td>-->
+                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                <!--                                        <td style="width:2%;font-family:verdana;"><span >4</span></td>-->
+                                <!--                                      <td style="width:75%;font-family:verdana;"><span >-->
+                                <!--                                   <input type="text" name="reference_no4" id="reference_no4"  class="form-control s_website_form_input"  style="width:100%;"/>-->
+
+                                <!--                                      </span></td></tr>-->
+
+
+                                <!--                                        </tbody>-->
+                                <!--                                     </table>-->
+                                <!--                                    </div>-->
+
+
+                                <!--                                     <div  class="row" style="padding-top:10px;width:50%;float:right;">-->
+                                <!--                                        <table name="table_reference_number_part1" style="float:right; border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">-->
+                                <!--                                        <tbody>-->
+                                <!--                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">-->
+                                <!--                                       <td style="width:20%;"><span></span> </td>-->
+                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                <!--                                        <td style="width:2%;font-family:verdana;"><span >5</span></td>-->
+                                <!--                                      <td style="width:75%;font-family:verdana;"><span >-->
+                                <!--                                   <input type="text" name="reference_no5" id="reference_no5"   class="form-control s_website_form_input"  style="width:100%;"/>-->
+
+                                <!--                                      </span></td></tr>-->
+
+
+                                <!--                                        </tbody>-->
+                                <!--                                     </table>-->
+                                <!--                                    </div>-->
+
+
+                                <!--                                      <div class="row" style="padding-top:10px;width:50%;float:right;">-->
+                                <!--                                         <table name="table_reference_number_part1" style="float:right; border:none;border: 0;font-size: 10px;text-weight:bold; width:100%;">-->
+                                <!--                                        <tbody>-->
+                                <!--                                  <tr style="border:none;border: 0;width:100%;line-height: 20px;">-->
+                                <!--                                      <td style="width:20%;"><span></span> </td>-->
+                                <!--                                      <td style="width:2%;"><span ></span></td>-->
+                                <!--                                        <td style="width:2%;font-family:verdana;"><span >6</span></td>-->
+                                <!--                                      <td style="width:75%;font-family:verdana;"><span >-->
+                                <!--                                   <input type="text" name="reference_no6" id="reference_no6"  class="form-control s_website_form_input"  style="width:100%;"/>-->
+
+                                <!--                                      </span></td></tr>-->
+
+
+                                <!--                                        </tbody>-->
+                                <!--                                     </table>-->
+                                <!--                                    </div>-->
+
+
+                                <div class="row" style="padding-top:50px;width:100%;float:center;">
+                                    <button style="margin-left:70%;float:right;" type="submit" class="btn btn-primary">
+                                        Save Form
+                                    </button>
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                    <!--                                      <button style="margin-left:10%;float:left;" type="reset" class="btn btn-primary">Reset</button>-->
+                                </div>
+
+                                <br/>
+                                <br/>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+
+        </t>
+    </template>
+
+
+</odoo>

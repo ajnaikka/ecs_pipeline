@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+     <record id="course_inherit_form_view" model="ir.ui.view">
+            <field name="name">is.product.op.course</field>
+            <field name="model">op.course</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_course_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='max_unit_load']" position="after">
+                   <field name="is_product" force_save="1"/>
+                    <field name="list_price"  attrs="{'invisible':[('is_product','=',False)]}"/>
+                    <field name="product_id" groups="base.group_no_one"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+  </data>
+</odoo>

@@ -1,0 +1,181 @@
+<odoo>
+    <data>
+        <template id="student_exam_portal_details">
+            <t t-call="portal.portal_layout">
+                <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">
+                    <t t-call="portal.portal_back_in_edit_mode">
+                        <t t-set="backend_url"
+                           t-value="'/web#model=op.exam&amp;id=%s&amp;view_type=form' % (meeting_id.id)"/>
+                    </t>
+                </t>
+                <t t-call="portal.portal_record_layout">
+                    <t t-set="card_header">
+                        <h5 class="mb-0">
+                            <small class="text-muted">Exam Information</small>
+                        </h5>
+                    </t>
+                </t>
+
+                <div t-if="exam_details_id" style="background-color:white; padding: 20px 40px 20px 40px;">
+                    <div class="mt32">
+                        <div t-if="exam_details_id.admission_id.student_id" class="row col-md-12">
+                            <div class="row col-md-6" style="padding-left:0;">
+                                <div id="exam_name" t-if="exam_details_id.name" class="col-md-4">
+                                    <strong>Exam:</strong>
+                                </div>
+                                <div t-if="exam_details_id.name" class="col-md-8">
+                                    <span t-esc="exam_details_id.name"/>
+                                </div>
+                                <div t-if="exam_details_id.session_id" class="col-md-4">
+                                    <strong>Exam session:</strong>
+                                </div>
+                                <div t-if="exam_details_id.session_id" class="col-md-8">
+                                    <span t-esc="exam_details_id.session_id.name"/>
+                                </div>
+                                <div t-if="exam_details_id.subject_id" class="col-md-4">
+                                    <strong>Subject:</strong>
+                                </div>
+                                <div t-if="exam_details_id.subject_id" class="col-md-8">
+                                    <span t-esc="exam_details_id.subject_id.name"/>
+                                </div>
+                                <div t-if="exam_details_id.exam_date" class="col-md-4">
+                                    <strong>Exam Date:</strong>
+                                </div>
+                                <div t-if="exam_details_id.exam_date" class="col-md-8">
+                                    <span t-esc="exam_details_id.exam_date" t-options="{'widget': 'date'}"/>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-6" style="padding-left:0;">
+                                <div t-if="exam_details_id.exam_code" class="col-md-4">
+                                    <strong>Exam Code:</strong>
+                                </div>
+                                <div t-if="exam_details_id.exam_code" class="col-md-8">
+                                    <span t-esc="exam_details_id.exam_code"/>
+                                </div>
+
+                                <div t-if="exam_details_id.total_marks" class="col-md-4">
+                                    <strong>Total marks:</strong>
+                                </div>
+                                <div t-if="exam_details_id.total_marks" class="col-md-8">
+                                    <span t-esc="exam_details_id.total_marks"/>
+                                </div>
+                                <div t-if="exam_details_id.min_marks" class="col-md-4">
+                                    <strong>Passing marks:</strong>
+                                </div>
+                                <div t-if="exam_details_id.min_marks" class="col-md-8">
+                                    <span t-esc="exam_details_id.min_marks"/>
+                                </div>
+                                <div t-if="exam_details_id.exam_status" class="col-md-4">
+                                    <strong>Status:</strong>
+                                </div>
+                                <div t-if="exam_details_id.exam_status" class="col-md-8">
+                                    <t t-if="exam_details_id.exam_status == 'pass'">
+                                        <span class="badge rounded-pill text-bg-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Finished" title="Finished"
+                                               role="img"></i>
+                                            <span class="d-none d-md-inline">Pass</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="exam_details_id.exam_status == 'fail'">
+                                        <span class="badge rounded-pill text-bg-danger">
+                                            <i class="fa fa-fw fa-remove" aria-label="Cancel" title="Cancel"
+                                               role="img"></i>
+                                            <span class="d-none d-md-inline">Fail</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="exam_details_id.exam_status == 'not_done'">
+                                        <span class="badge rounded-pill text-bg-info">
+                                            <i class="fa fa-fw fa-remove" aria-label="Not Done" title="Not Done"
+                                               role="img"></i>
+                                            <span class="d-none d-md-inline">Not Done</span>
+                                        </span>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+
+        <template id="student_exam_portal_list">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Exam List</t>
+                </t>
+                <t t-if="not exam_ids">
+                    <div class="alert alert-warning mt8" role="alert">
+                        There are no records.
+                    </div>
+                </t>
+
+                <t t-if="exam_ids" t-call="portal.portal_table">
+                    <thead>
+                        <tr>
+                            <th>Exam</th>
+                            <th>Subject</th>
+                            <th>Exam date</th>
+                            <th>Exam Code</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Exam Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-if="exam_ids" t-foreach="exam_ids" t-as="exam">
+                            <tr>
+                                <td>
+                                    <a t-attf-href="/student/exam_details/data/#{stud_id}/#{exam.id}">
+                                        <span t-esc="exam.name"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <span t-esc="exam.subject_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="exam.exam_date" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td>
+                                    <span t-esc="exam.exam_code"/>
+                                </td>
+                                <td>
+                                    <span t-esc="exam.start_time"/>
+                                </td>
+                                <td>
+                                    <span t-esc="exam.end_time"/>
+                                </td>
+                                <td>
+                                    <t t-if="exam.exam_status == 'pass'">
+                                        <span class="badge rounded-pill text-bg-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Finished" title="Finished"
+                                               role="img"></i>
+                                            <span class="d-none d-md-inline">Pass</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="exam.exam_status == 'fail'">
+                                        <span class="badge rounded-pill text-bg-danger">
+                                            <i class="fa fa-fw fa-remove" aria-label="Cancel" title="Cancel"
+                                               role="img"></i>
+                                            <span class="d-none d-md-inline">Fail</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="exam.exam_status == 'not_done'">
+                                        <span class="badge rounded-pill text-bg-info">
+                                            <i class="fa fa-fw fa-remove" aria-label="Not Done" title="Not Done"
+                                               role="img"></i>
+                                            <span class="d-none d-md-inline">Not Done</span>
+                                        </span>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

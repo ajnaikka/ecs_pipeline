@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="op_batch_7" model="op.batch">
+            <field name="code">bca01</field>
+            <field name="name">BCA-Sem-1</field>
+            <field name="start_date"
+                   eval="(DateTime.today() - relativedelta(years=1)).strftime('%Y-06-02 %H:%M')"/>
+            <field name="end_date"
+                   eval="(DateTime.today() + relativedelta(years=2)).strftime('%Y-06-02 %H:%M')"/>
+            <field name="course_id" ref="openeducat_online_admission.op_course_24"/>
+        </record>
+
+        <record id="op_batch_8" model="op.batch">
+            <field name="code">bca02</field>
+            <field name="name">BCA-Sem-2</field>
+            <field name="start_date"
+                   eval="(DateTime.today() - relativedelta(years=1)).strftime('%Y-06-05 %H:%M')"/>
+            <field name="end_date"
+                   eval="(DateTime.today() + relativedelta(years=2)).strftime('%Y-06-05 %H:%M')"/>
+            <field name="course_id" ref="openeducat_online_admission.op_course_25"/>
+        </record>
+    </data>
+</odoo>

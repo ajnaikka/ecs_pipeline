@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_student_fees_tree" model="ir.ui.view">
+            <field name="name">op.student.fees.details.tree</field>
+            <field name="model">op.student.fees.details</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Student Fees Detail">
+                    <field name="student_id"/>
+                    <field name="course_id"/>
+                    <field name="batch_id"/>
+                    <field name="date"/>
+                    <field name="discount"/>
+                    <field name="after_discount_amount"/>
+                    <field name="amount" widget="monetary"/>
+                    <field name="state"/>
+                    <field name="invoice_state"/>
+                    <button string="Create Invoice"
+                            states="draft" type="object" name="get_invoice"
+                            groups="openeducat_core.group_op_back_office"/>
+                    <button string="View Invoice"
+                            groups="openeducat_core.group_op_back_office"
+                            states="invoice" type="object"
+                            name="action_get_invoice"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_op_student_fees_form" model="ir.ui.view">
+            <field name="name">op.student.fees.details.form</field>
+            <field name="model">op.student.fees.details</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Student Fees Detail">
+                    <sheet>
+                        <group col="4">
+                            <field name="student_id"/>
+                            <field name="course_id"/>
+                            <field name="batch_id"/>
+                            <field name="date"/>
+                            <field name="discount"/>
+                            <field name="after_discount_amount"/>
+                            <field name="amount" widget="monetary"/>
+                            <field name="state"/>
+                            <field name="invoice_state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_student_fees_search" model="ir.ui.view">
+            <field name="name">op.student.fees.details.search</field>
+            <field name="model">op.student.fees.details</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Student Fees">
+                    <field name="student_id"/>
+                    <field name="course_id"/>
+                    <field name="batch_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <field name="invoice_state"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Student" name="group_by_student_id"
+                                domain="[]" context="{'group_by':'student_id'}"/>
+                        <filter string="State" name="group_by_state"
+                                domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Course" name="group_by_course_id"
+                                domain="[]" context="{'group_by':'course_id'}"/>
+                        <filter string="Batch" name="group_by_batch_id"
+                                domain="[]" context="{'group_by':'batch_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="view_op_student_fees_pivot" model="ir.ui.view">
+            <field name="name">op.student.fees.details.pivot</field>
+            <field name="model">op.student.fees.details</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <pivot string="Student Fees Details">
+                    <field name="student_id"/>
+                    <field name="course_id" type="row"/>
+                    <field name="batch_id" type="row"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <field name="invoice_state"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_student_fees_details">
+            <field name="name">Student Fees Detail</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.student.fees.details</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_op_student_fees_search"/>
+        </record>
+    </data>
+</odoo>

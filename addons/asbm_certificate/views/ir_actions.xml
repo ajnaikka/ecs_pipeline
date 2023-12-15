@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_ir_action_inherit_form_certificate" model="ir.ui.view">
+        <field name="name">ir.actions.report.form.inherit</field>
+        <field name="model">ir.actions.report</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.act_report_xml_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='report_type']" position="after">
+                <field name="is_main_certificate"/>
+                <field name="is_marksheet"/>
+                <field name="is_consolidate_marksheet"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

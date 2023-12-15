@@ -1,0 +1,225 @@
+<odoo>
+    <data>
+        <record id="view_course_certificate_tree" model="ir.ui.view">
+            <field name="name">course.certificate.tree</field>
+            <field name="model">course.certificate</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Course Certificate" sample="1" multi_edit="1">
+                    <field name="date" string="Date"/>
+                    <field name="name" string="Name"/>
+                    <field name="student_id" optional="show"/>
+                    <field name="certificate_type" optional="show"/>
+                    <field name="course_id" optional="hide" readonly="1"/>
+                    <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_course_certificate_form" model="ir.ui.view">
+            <field name="name">course.certificate.form</field>
+            <field name="model">course.certificate</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Course Certificate">
+                    <header>
+                        <button name="genarate_mark_list" string="Genarate MarkList" type="object" attrs="{'invisible':[('is_marklist_genarated', '=', True),('certificate_status','not in',('draft'))]}"/>
+                        <button name="send_mark_list" string="Send MarkList" type="object" attrs="{'invisible':[('certificate_status','not in',('generated'))]}"/>
+                        <button name="deliver_marklist" string="Delivered" type="object" attrs="{'invisible':[('certificate_status','not in',('send'))]}"/>
+<!--                        <button name="print_mark_sheet" string="Print MarkList" type="object" attrs="{'invisible':[('is_marklist_genarated', '=', False)]}"/>-->
+                        <field name="certificate_status" widget="statusbar" force_save="1" readonly="1"
+                               statusbar_visible="draft,generated,send,delivered"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_mark_lists" string="Mark Sheets" type="object" icon="fa-plus-square"
+                                    attrs="{'invisible':[('is_marklist_genarated', '=', False)]}"
+                                    class="oe_stat_button"/>
+                        </div><div class="oe_title mb24">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name" requeired="1"/>
+
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="student_id"/>
+                                <field name="course_id"/>
+                                <field name="grade_id"/>
+                                <field name="percentage" readonly="1"/>
+                                <field name="grade"/>
+                                <field name="certificate_type"/>
+                                <field name="template_id"/>
+                                <field name="main_certificate" invisible="1"/>
+                                <field name="mark_sheet" invisible="1"/>
+                                <field name="consolidate_sheet" invisible="1"/>
+                                <field name="is_marklist_genarated" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="student_code"/>
+                                <field name="month_year"/>
+                                <field name="main_report_id" invisible="1"/>
+                                <field name="mark_sheet_report_id" invisible="1"/>
+                                <field name="consolidate_report_id" invisible="1"/>
+                                <field name="mark_sheet_ids" readonly="1" widget="many2many_tags"/>
+                                <field name="company_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Mark Sheet">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="sl_no"/>
+                                        <field name="subject_code"/>
+                                        <field name="subject_id"/>
+                                        <field name="showing_as_id"/>
+                                        <field name="max_marks"/>
+                                        <field name="max_awarded"/>
+                                        <field name="month_year"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_course_certificate_form" model="ir.actions.act_window">
+            <field name="name">Certificates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">course.certificate</field>
+            <field name="domain">[('certificate_type','=','main')]</field>
+            <field name="context">{'default_certificate_type':'main'}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Certificate for subject in your address book
+                </p>
+            </field>
+        </record>
+        <record id="action_course_certificate_consolidate_sheet" model="ir.actions.act_window">
+            <field name="name">Certificates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">course.certificate</field>
+            <field name="domain">[('certificate_type','=','consolidated')]</field>
+            <field name="context">{'default_certificate_type':'consolidated'}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Certificate for subject in your address book
+                </p>
+            </field>
+        </record>
+        <record id="action_course_certificate_marksheet_form" model="ir.actions.act_window">
+            <field name="name">Certificates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">course.certificate</field>
+            <field name="domain">[('certificate_type','=','marksheet')]</field>
+            <field name="context">{'default_certificate_type':'marksheet'}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Certificate for subject in your address book
+                </p>
+            </field>
+        </record>
+
+
+
+
+        <record id="view_mark_sheet_lines_form" model="ir.ui.view">
+            <field name="name">mark.sheet.lines.form</field>
+            <field name="model">mark.sheet.lines</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Mark Sheet">
+<!--                    <header>-->
+<!--                        <button name="genarate_mark_list" string="Genarate MarkList" type="object"/>-->
+<!--                    </header>-->
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <div class="oe_title mb24">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name"/>
+
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="certificate_id"/>
+                                <field name="showing_as_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Mark Sheet">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="sl_no"/>
+                                        <field name="subject_code"/>
+                                        <field name="subject_id"/>
+                                        <field name="max_marks"/>
+                                        <field name="max_awarded"/>
+                                        <field name="month_year"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_mark_sheet_lines_tree" model="ir.ui.view">
+            <field name="name">mark.sheet.lines.tree</field>
+            <field name="model">mark.sheet.lines</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Mark Sheet" sample="1" multi_edit="1">
+                    <field name="name" string="Name"/>
+                    <field name="showing_as_id" optional="show"/>
+                    <field name="certificate_id" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_mark_sheet_lines_form" model="ir.actions.act_window">
+            <field name="name">Mark Sheets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mark.sheet.lines</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Mark List in your address book
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="asbm_certificate_main_menu_root"
+                  name="Certificates"
+                  sequence="45"
+                  web_icon="asbm_certificate,static/description/icon.png"/>
+
+
+        <!-- menu categories -->
+        <menuitem name="Certificates" id="course_certificate_main_menu" parent="asbm_certificate_main_menu_root"
+                  sequence="0"/>
+
+        <menuitem name="Main Certificate" id="course_certificate_menu" parent="course_certificate_main_menu"
+                  sequence="10"
+                  action="action_course_certificate_form"/>
+        <menuitem name="Mark List" id="mark_list_menu" parent="course_certificate_main_menu"
+                  sequence="10"
+                  action="action_course_certificate_marksheet_form"/>
+        <menuitem name="Consolidate Mark List" id="consolidate_mark_list_menu" parent="course_certificate_main_menu"
+                  sequence="10"
+                  action="action_course_certificate_consolidate_sheet"/>
+    </data>
+</odoo>

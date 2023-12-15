@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="application_fee_details_form_view" model="ir.ui.view">
+            <field name="name">op.admission.feed.details</field>
+            <field name="model">op.admission</field>
+            <field name="inherit_id" ref="openeducat_admission.view_op_admission_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet/field[@name='active']" position="after">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                type="object"
+                                style="border-right: 1px solid;border-bottom: 1px solid;white-space: inherit;display: inline-flex;"
+                                name="view_student_fees_details"
+                                icon="fa-file"
+                                string="Fees details">
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='admission_detail']//field[@name='course_id']" position="after">
+                    <field name="course_type"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

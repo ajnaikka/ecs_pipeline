@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="exam_moderation_form_view" model="ir.ui.view">
+            <field name="name">exam.moderation.form.view</field>
+            <field name="model">op.exam</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_exam_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(exam_moderation.action_exam_moderation_wizard)d" type="action" string="Moderate Exam" class="oe_highlight"
+                    attrs="{'invisible':['|', '|', '|', ('state', '!=', 'schedule'), ('first_exam_status', '!=', 'fail'),
+                    ('second_exam_status', '=', 'pass'), ('third_exam_status', '=', 'pass')]}"
+                            />
+                </xpath>
+                <field name="min_marks" position="after">
+                    <field name="moderation_exam_status" invisible="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

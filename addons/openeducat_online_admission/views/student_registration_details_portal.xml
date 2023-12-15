@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sale.portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="not (user_id.sudo().is_student or user_id.sudo().is_parent)">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Quotations</t>
+                    <t t-set="url" t-value="'/my/quotes'"/>
+                    <t t-set="placeholder_count" t-value="'quotation_count'"/>
+                </t>
+            </t>
+            <t t-if="not (user_id.sudo().is_student or user_id.sudo().is_parent)">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Sales Orders</t>
+                    <t t-set="url" t-value="'/my/orders'"/>
+                    <t t-set="placeholder_count" t-value="'order_count'"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+     <template id="portal_my_home_admission_registration" name="Show Invoices &amp; Bills" inherit_id="portal.portal_my_home"
+              customize_show="True" priority="10">
+         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+         <t t-if="not (user_id.sudo().is_student or user_id.sudo().is_parent)">
+                <t t-if="admission_count" t-call="portal.portal_docs_entry">
+                    <t t-set="title">Admission Registration</t>
+                    <t t-set="url" t-value="'/student/registration/info/'"/>
+                    <t t-set="count" t-value="admission_count"/>
+                </t>
+            </t>
+         </xpath>
+    </template>
+
+
+    <template id="portal_my_home_menu_admission_register" name="Portal layout : Admission register"
+              inherit_id="openeducat_core_enterprise.portal_breadcrumbs_inhetrite" priority="10">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <t t-if="user_id.sudo().is_parent">
+                <li t-if="page_name == 'Student Admission register info'"
+                    t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
+                    <a t-if="registration_id" t-attf-href="/student/registration/info/#{stud_id}?{{ keep_query() }}">
+                        Admission Registration
+                    </a>
+                    <t t-else="">Admission Registration</t>
+                </li>
+            </t>
+            <t t-if="user_id.sudo().is_student">
+                <li t-if="page_name == 'Student Admission register info'"
+                    t-attf-class="breadcrumb-item #{'active ' if not invoice else ''}">
+                    <a t-if="registration_id" t-attf-href="/student/registration/info/?{{ keep_query() }}">
+                        Admission Registration
+                    </a>
+                    <t t-else="">Admission Registration</t>
+                </li>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="openeducat_student_registration_list_data">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Student Registration Details</t>
+            </t>
+            <t t-if="not grouped_tasks">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are no records.
+                </div>
+            </t>
+
+            <t t-if="grouped_tasks">
+                <t t-if="registration_id" t-call="portal.portal_table">
+                    <t t-foreach="grouped_tasks" t-as="tasks">
+                        <thead>
+                            <tr t-attf-class="{{'thead-light' if not groupby == 'none' else ''}}">
+                                <th t-if="groupby == 'none'">Application Number</th>
+                                <th t-else="">
+                                    <em class="font-weight-normal text-muted">Registration For:</em>
+                                    <span t-field="tasks[0].sudo().course_id.name"/>
+                                </th>
+                                <th>Name</th>
+                                <th>Admission Date</th>
+                                <th>Application date</th>
+                                <th>Course</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="tasks" t-as="registration">
+                                <tr>
+                                    <td>
+                                        <span t-esc="registration.application_number"/>
+                                    </td>
+                                    <td>
+                                        <span id="registration_name" t-esc="registration.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="registration.admission_date" t-options="{'widget': 'date'}"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="registration.application_date"
+                                              t-options="{'widget': 'datetime'}"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="registration.course_id.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-if="registration.state == 'draft'">
+                                            <span class="badge rounded-pill text-bg-mute">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'pending'">
+                                            <span class="badge rounded-pill text-bg-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Pending" title="Pending"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Pending</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'submit'">
+                                            <span class="badge rounded-pill text-bg-primary">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Submitted" title="Submitted"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Submitted</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'confirm'">
+                                            <span class="badge rounded-pill text-bg-primary">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirmed" title="Confirmed"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Confirmed</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'admission'">
+                                            <span class="badge rounded-pill text-bg-primary">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Admission Confirm"
+                                                   title="Admission Confirm" role="img"></i>
+                                                <span class="d-md-inline">Admission Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'online'">
+                                            <span class="badge rounded-pill text-bg-primary">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Online Admission"
+                                                   title="Online Admission" role="img"></i>
+                                                <span class="d-md-inline">Online Admission</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="registration.state == 'done'">
+                                            <span class="badge rounded-pill text-bg-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Done" title="Done"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Done</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'reject'">
+                                            <span class="badge rounded-pill text-bg-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Rejected" title="Rejected"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Rejected</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="registration.state == 'cancel'">
+                                            <span class="badge rounded-pill text-bg-warning">
+                                                <i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled"
+                                                   role="img"></i>
+                                                <span class="d-md-inline">Cancelled</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

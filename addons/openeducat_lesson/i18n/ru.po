@@ -1,0 +1,310 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_lesson
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-30 05:23+0000\n"
+"PO-Revision-Date: 2019-09-30 05:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+msgid "<strong>Lesson Topic</strong>"
+msgstr "<Сильный> Урок Тема </ STRONG>"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_needaction
+msgid "Action Needed"
+msgstr "Необходимое действие"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_attachment_count
+msgid "Attachment Count"
+msgstr "Приложение Граф"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__batch_id
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Batch"
+msgstr "партия"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+msgid "Cancel"
+msgstr "Отменить"
+
+#. module: openeducat_lesson
+#: selection:op.lesson,state:0
+msgid "Cancelled"
+msgstr "отменен"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+#: selection:op.lesson,state:0
+msgid "Conducted"
+msgstr "Провели"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__course_id
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Course"
+msgstr "Курс"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__create_uid
+msgid "Created by"
+msgstr "Создано"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__create_date
+msgid "Created on"
+msgstr "Создано на"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: openeducat_lesson
+#: selection:op.lesson,state:0
+msgid "Draft"
+msgstr "Черновой вариант"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__end_datetime
+msgid "End Time"
+msgstr "Время окончания"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__faculty_id
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Faculty"
+msgstr "факультет"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_follower_ids
+msgid "Followers"
+msgstr "Читают"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Читатели (каналы)"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Читатели (партнеры)"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Group By..."
+msgstr "Группа по..."
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__id
+msgid "ID"
+msgstr "Номер"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__message_unread
+msgid "If checked new messages require your attention."
+msgstr "Если флажок новые сообщения требуют вашего внимания."
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Если флажок установлен, новые сообщения требуют вашего внимания."
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Если флажок установлен, некоторые сообщения имеют ошибки доставки."
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_is_follower
+msgid "Is Follower"
+msgstr "Является ли Последователь"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson____last_update
+msgid "Last Modified on"
+msgstr "Последнее изменение"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__write_uid
+msgid "Last Updated by"
+msgstr "Последнее обновление от"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__write_date
+msgid "Last Updated on"
+msgstr "Последнее обновление"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__name
+msgid "Lecture Name"
+msgstr "Лекция Имя"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__lesson_topic
+msgid "Lecture Topic"
+msgstr "Лекция тема"
+
+#. module: openeducat_lesson
+#: model:ir.actions.act_window,name:openeducat_lesson.action_lesson_info
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_session__lesson_ids
+msgid "Lesson"
+msgstr "Урок"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_list_view
+msgid "Lesson Information"
+msgstr "Урок информация"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_calendar_view
+msgid "Lesson Learning"
+msgstr "Урок обучения"
+
+#. module: openeducat_lesson
+#: model:ir.ui.menu,name:openeducat_lesson.menu_op_lesson_sub
+#: model:ir.ui.menu,name:openeducat_lesson.menu_op_school_config_lesson
+msgid "Lesson Planning"
+msgstr "Планирование урока"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+msgid "Lesson Topic ..."
+msgstr "Урок Тема ..."
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Главная Attachment"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_has_error
+msgid "Message Delivery error"
+msgstr "Сообщение об ошибке доставки"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Month"
+msgstr "Месяц"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_has_error_counter
+msgid "Number of error"
+msgstr "Количество ошибок"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Количество сообщений, которое требует действий"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Число сообщений с ошибкой доставки"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Количество непрочитанных сообщений"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+#: selection:op.lesson,state:0
+msgid "Planned"
+msgstr "планируемый"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__session_ids
+msgid "Session"
+msgstr "сессия"
+
+#. module: openeducat_lesson
+#: model:ir.model,name:openeducat_lesson.model_op_session
+msgid "Sessions"
+msgstr "сессии"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_form_view
+msgid "Set to Draft"
+msgstr "Набор для разработки проекта"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__start_datetime
+msgid "Start Time"
+msgstr "Время начала"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__state
+msgid "Status"
+msgstr "Статус"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__subject_id
+msgid "Subject"
+msgstr "Тема"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Subjects"
+msgstr "Предметы"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Today"
+msgstr "сегодня"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_unread
+msgid "Unread Messages"
+msgstr "Непрочитанные сообщения"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Непрочитанные сообщения Счетчик"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,field_description:openeducat_lesson.field_op_lesson__website_message_ids
+msgid "Website Messages"
+msgstr "Сайт сообщение"
+
+#. module: openeducat_lesson
+#: model:ir.model.fields,help:openeducat_lesson.field_op_lesson__website_message_ids
+msgid "Website communication history"
+msgstr "Сайт истории связи"
+
+#. module: openeducat_lesson
+#: model_terms:ir.ui.view,arch_db:openeducat_lesson.lesson_search_view
+msgid "Week"
+msgstr "Неделю"
+
+#. module: openeducat_lesson
+#: model:ir.model,name:openeducat_lesson.model_op_lesson
+msgid "op.lesson"
+msgstr ""
+

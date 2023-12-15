@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <record id="exam_scheduling_form_view" model="ir.ui.view">
+            <field name="name">exam.scheduling.form.view</field>
+            <field name="model">op.exam</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_exam_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='%(openeducat_exam.act_open_op_room_distribution_view)d']"
+                       position="replace">
+                    <button name="action_schedule_exam" states="draft" type="object"
+                            string="Schedule Exam" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="%(action_exam_add_survey)d" type="action" id="first_exam_template"
+                            attrs="{'invisible':['|', ('state', '!=', 'schedule'), ('survey_id', '!=', False)]}"
+                            string="Add Question" class="oe_highlight"/>
+                    <button name="%(action_exam_add_survey)d" type="action" id="second_exam_template"
+                            attrs="{'invisible':['|', '|', '|', ('state', '!=', 'schedule'), ('survey_id', '=', False), ('survey_id_2', '!=', False), ('first_exam_status', 'in', ['pass', 'not_done'])]}"
+                            string="Add Question" class="oe_highlight"/>
+                    <button name="%(action_exam_add_survey)d" type="action" id="third_exam_template"
+                            attrs="{'invisible':['|', '|', '|', ('state', '!=', 'schedule'), ('survey_id_2', '=', False), ('survey_id_3', '!=', False), ('second_exam_status', 'in', ['pass', 'not_done'])]}"
+                            string="Add Question" class="oe_highlight"/>
+                    <button name="action_send_exam_link" string="Share" type="object" class="oe_highlight" id="first_exam_template_share"
+                            attrs="{'invisible': ['|', '|', ('state', '!=', 'schedule'), ('survey_id', '=', False), ('survey_id_shared', '=', True)]}"/>
+                    <button name="action_send_exam_link" string="Share" type="object" class="oe_highlight" id="second_exam_template_share"
+                            attrs="{'invisible': ['|', '|', ('state', '!=', 'schedule'), ('survey_id_2', '=', False), ('survey_id_2_shared', '=', True)]}"/>
+                    <button name="action_send_exam_link" string="Share" type="object" class="oe_highlight" id="third_exam_template_share"
+                            attrs="{'invisible': ['|', '|', ('state', '!=', 'schedule'), ('survey_id_3', '=', False), ('survey_id_3_shared', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//sheet/group[2]" position="after">
+                    <group string="Exam Template" name="exam_template">
+                        <group string="Exam(1)">
+                            <field name="survey_id" readonly="1" force_save="1"/>
+                            <field name="session_code" readonly="1" force_save="1"/>
+                            <field name="session_link" readonly="1" force_save="1"/>
+                            <field name="first_exam_status" invisible="1"/>
+                            <field name="survey_id_shared" invisible="1"/>
+                        </group>
+                        <group string="Exam(2)">
+                            <field name="survey_id_2" readonly="1" force_save="1"/>
+                            <field name="session_code_2" readonly="1" force_save="1"/>
+                            <field name="session_link_2" readonly="1" force_save="1"/>
+                            <field name="second_exam_status" invisible="1"/>
+                            <field name="survey_id_2_shared" invisible="1"/>
+                        </group>
+                        <group string="Exam(3)">
+                            <field name="survey_id_3" readonly="1" force_save="1"/>
+                            <field name="session_code_3" readonly="1" force_save="1"/>
+                            <field name="session_link_3" readonly="1" force_save="1"/>
+                            <field name="third_exam_status" invisible="1"/>
+                            <field name="survey_id_3_shared" invisible="1"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

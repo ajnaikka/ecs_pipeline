@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_timetable_enterprise
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-30 07:13+0000\n"
+"PO-Revision-Date: 2019-09-30 07:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.view_op_timing_form_onboard
+msgid "Apply"
+msgstr "Terapkan"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Batch"
+msgstr "setumpuk"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Closed"
+msgstr "Tutup"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model,name:openeducat_timetable_enterprise.model_res_company
+msgid "Companies"
+msgstr "Perusahaan"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_op_session__company_id
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_op_timing__company_id
+msgid "Company"
+msgstr "Perusahaan"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Course"
+msgstr "kuliah"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "Customize"
+msgstr "Sesuaikan"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Day"
+msgstr "Hari"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Done"
+msgstr "Selesai"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "End Time"
+msgstr "Akhir waktu"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Faculty"
+msgstr "Fakultas"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_batch_timetable_dashboard_kanban_view
+msgid "Generate TimeTable"
+msgstr "menghasilkan TimeTable"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Just done"
+msgstr "hanya dilakukan"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "Looks great!"
+msgstr "Tampak hebat!"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Not done"
+msgstr "Belum selesai"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model,name:openeducat_timetable_enterprise.model_op_batch
+msgid "OpenEduCat Batch"
+msgstr ""
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model,name:openeducat_timetable_enterprise.model_op_timing
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.view_op_timing_form_onboard
+msgid "Period"
+msgstr "Titik"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "See how to create a Timing."
+msgstr "Lihat cara membuat Timing a."
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.actions.act_window,name:openeducat_timetable_enterprise.act_dashboard_op_timetable_view
+#: model:ir.actions.act_window,name:openeducat_timetable_enterprise.act_main_dashboard_op_timetable_view
+#: model:ir.model,name:openeducat_timetable_enterprise.model_op_session
+msgid "Sessions"
+msgstr "sesi"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Start Time"
+msgstr "Waktu mulai"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_res_company__core_onboarding_timing_layout_state
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_res_company__openeducat_timing_onboard_panel
+msgid "State of the onboarding timing layout step"
+msgstr "Negara sosialisasi waktu tata letak langkah"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Status"
+msgstr ""
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Subject"
+msgstr "Subyek"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "There are currently no information for your account!!!"
+msgstr "Saat ini tidak ada informasi untuk akun Anda !!!"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_batch_timetable_dashboard_kanban_view
+msgid "TimeTable Report"
+msgstr "TimeTable Laporan"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.portal_my_home_achivemenet
+msgid "Timetable"
+msgstr "jadwal"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Timetable List"
+msgstr "Daftar jadwal"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Timing"
+msgstr "pemilihan waktu"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.actions.act_window,name:openeducat_timetable_enterprise.action_onboarding_timing_layout
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "Timing Type Configuration"
+msgstr "Timing Jenis Konfigurasi"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_batch_timetable_dashboard_kanban_view
+msgid "Today's Lectures"
+msgstr "Kuliah hari ini"
+

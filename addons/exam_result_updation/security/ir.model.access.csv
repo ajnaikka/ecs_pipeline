@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_exam_result_updation_exam_result_updation,exam_result_updation.exam_result_updation,model_exam_result_updation_exam_result_updation,base.group_user,1,1,1,1

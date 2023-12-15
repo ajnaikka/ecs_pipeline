@@ -1,0 +1,197 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_online_admission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-30 08:55+0000\n"
+"PO-Revision-Date: 2019-09-30 08:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_admission
+msgid "Admission"
+msgstr "Toelating"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Admission Confirm"
+msgstr "toelating bevestigen"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Cancelled"
+msgstr "Geannuleerd"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "City"
+msgstr "Plaats"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.view_op_admission_inherit_online_form
+msgid "Confirm"
+msgstr "Bevestigen"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Confirmed"
+msgstr "Bevestigd"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country"
+msgstr "Land"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Country..."
+msgstr "Land ..."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Date of Birth"
+msgstr "Geboortedatum"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Done"
+msgstr "Gedaan"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Draft"
+msgstr "Ontwerp"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Email"
+msgstr "E-mail"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__product_id
+msgid "Fees"
+msgstr "vergoedingen"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Female"
+msgstr "Vrouw"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "First Name"
+msgstr "Voornaam"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Gender"
+msgstr "Geslacht"
+
+#. module: openeducat_online_admission
+#: model:ir.model,name:openeducat_online_admission.model_op_course
+msgid "LMS Course"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Last Name"
+msgstr "Achternaam"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Male"
+msgstr "Mannetje"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Middle Name"
+msgstr "Midden-naam"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Mobile Number"
+msgstr "Mobiele nummer"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Next"
+msgstr "Volgende"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Online Admission"
+msgstr "online Toelating"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Pending"
+msgstr "In behandeling"
+
+#. module: openeducat_online_admission
+#: model:website.menu,name:openeducat_online_admission.menu_admissionregistration
+msgid "Registration"
+msgstr "registratie"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_course__reg_fees
+msgid "Registration Fees"
+msgstr "Registratiekosten"
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__order_id
+msgid "Registration Fees Ref"
+msgstr "Registratierechten Ref"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Rejected"
+msgstr "Verworpen"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Class"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Select Course"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model:ir.model.fields,field_description:openeducat_online_admission.field_op_admission__state
+msgid "State"
+msgstr "Staat"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Street"
+msgstr "Straat"
+
+#. module: openeducat_online_admission
+#: selection:op.admission,state:0
+msgid "Submitted"
+msgstr "Ingezonden"
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.application_confirmed
+msgid "Your application has been confirmed."
+msgstr "Uw aanvraag is bevestigd."
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "Zip / Postal Code"
+msgstr ""
+
+#. module: openeducat_online_admission
+#: model_terms:ir.ui.view,arch_db:openeducat_online_admission.admission_registration
+msgid "mm/dd/yyyy"
+msgstr "mm / dd / yyyy"
+

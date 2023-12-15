@@ -1,0 +1,229 @@
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="view_content_development_list">
+            <field name="name">content.development.list</field>
+            <field name="model">content.development</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="subject_id"/>
+                    <field name="unit_id"/>
+                    <field name="topic_id"/>
+                    <field name="stage_1"/>
+                    <field name="stage_2"/>
+                    <field name="stage_3"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_content_development_form">
+            <field name="name">content.development.form</field>
+            <field name="model">content.development</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" force_save="1"
+                               statusbar_visible="content_book_format,alignment_dtp_work,vetting_external,book_verification"/>
+                    </header>
+                    <header>
+                        <button name="content_action_assign" type="object" class="btn-primary" string="Assign"
+                                attrs="{'invisible':['|',('stage_1', 'not in', ['draft']),('is_team_lead', '=', False)]}" />
+
+                        <button name="action_content_submitted_to_tl" type="object" class="btn-primary"
+                                string="Submit To TL"
+                                attrs="{'invisible':['|',('stage_1', 'not in', ['assigned','rejected_by_tl']),('is_assigned_emp_1', '=', False)]}"/>
+
+                        <button name="content_action_tl_approve" type="object" class="btn-primary" string="Approve(TL)"
+                                attrs="{'invisible':['|',('stage_1', 'not in', ['submitted_to_tl','reject']),('is_team_lead', '=', False)]}"
+                                groups="course_frame.group_academy_team_lead"/>
+                        <button name="content_action_tl_reject" type="object" class="btn-primary" string="Reject(TL)"
+                                attrs="{'invisible':['|',('stage_1', 'not in', ['submitted_to_tl','reject']),('is_team_lead', '=', False)]}"
+                                groups="course_frame.group_academy_team_lead"/>
+
+                        <button name="content_action_ah_approve" type="object" class="btn-primary" string="Approve(AH)"
+                                attrs="{'invisible':['|',('stage_1', 'not in', ['tl_approved']),('is_academic_head', '=', False)]}"
+                                groups="course_frame.group_academy_academy_head"/>
+                        <button name="content_action_ah_reject" type="object" class="btn-primary" string="Reject(AH)"
+                                attrs="{'invisible':['|',('stage_1', 'not in', ['tl_approved']),('is_academic_head', '=', False)]}"
+                                groups="course_frame.group_academy_academy_head"/>
+
+
+
+
+                        <button name="alignment_action_assign" type="object" class="btn-primary" string="Assign To DH"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['draft']),('state', 'not in', ['alignment_dtp_work']),('is_team_lead', '=', False)]}"/>
+
+                        <button name="alignment_action_assign_emp" type="object" class="btn-primary" string="Assign To EMP"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['assigned']),('state', 'not in', ['alignment_dtp_work']),('is_dh', '=', False)]}"/>
+
+
+                        <button name="alignment_content_submitted_to_dh" type="object" class="btn-primary"
+                                string="Submit To DH"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['assigned_emp','rejected_by_dh']),('state', 'not in', ['alignment_dtp_work']),('is_assigned_emp_2', '=', False)]}"/>
+
+                        <button name="alignment_action_dh_approve" type="object" class="btn-primary" string="Approve(DH)"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['submitted_to_dh','ah_rejected']),('state', 'not in', ['alignment_dtp_work']),('is_dh', '=', False)]}"/>
+                        <button name="content_action_dh_reject" type="object" class="btn-primary" string="Reject(DH)"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['submitted_to_dh','ah_rejected']),('state', 'not in', ['alignment_dtp_work']),('is_dh', '=', False)]}"/>
+
+                        <button name="alignment_action_ah_approve" type="object" class="btn-primary" string="Approve(TL)"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['dh_approved']),('state', 'not in', ['alignment_dtp_work']),('is_team_lead', '=', False)]}"
+                                groups="course_frame.group_academy_team_lead"/>
+                        <button name="alignment_action_ah_reject" type="object" class="btn-primary" string="Reject(TL)"
+                                attrs="{'invisible':['|','|',('stage_2', 'not in', ['dh_approved']),('state', 'not in', ['alignment_dtp_work']),('is_team_lead', '=', False)]}"
+                                groups="course_frame.group_academy_team_lead"/>
+
+
+
+                        <button name="vetting_content_send_to_receiver" type="object" class="btn-primary" string="Send"
+                                attrs="{'invisible':['|','|',('stage_3', 'not in', ['draft']),('state', 'not in', ['vetting_external']),('is_team_lead', '=', False)]}"/>
+                        <button name="vetting_content_send_to_ah" type="object" class="btn-primary" string="Submitted to AH"
+                                attrs="{'invisible':['|','|',('stage_3', 'not in', ['send','reject']),('state', 'not in', ['vetting_external']),('is_team_lead', '=', False)]}"/>
+
+                        <button name="vetting_content_approved_by_ah" type="object" class="btn-primary" string="Approve(AH)"
+                                attrs="{'invisible':['|','|',('stage_3', 'not in', ['submitted']),('state', 'not in', ['vetting_external']),('is_academic_head', '=', False)]}"
+                                groups="course_frame.group_academy_academy_head"/>
+                        <button name="vetting_content_rejected_by_ah" type="object" class="btn-primary" string="Reject(AH)"
+                                attrs="{'invisible':['|','|',('stage_3', 'not in', ['submitted','approved']),('state', 'not in', ['vetting_external']),('is_academic_head', '=', False)]}"
+                                groups="course_frame.group_academy_academy_head"/>
+
+                        <button name="vetting_content_approved_by_md" type="object" class="btn-primary" string="Approve(MD)"
+                                attrs="{'invisible':['|','|',('stage_4', 'not in', ['send',]),('state', 'not in', ['book_verification']),('is_managing_dir', '=', False)]}"
+                                groups="course_frame.group_academy_academy_head"/>
+
+                        <button name="vetting_content_rejected_by_md" type="object" class="btn-primary" string="Reject(MD)"
+                                attrs="{'invisible':['|','|',('stage_4', 'not in', ['send',]),('state', 'not in', ['book_verification']),('is_managing_dir', '=', False)]}"
+                                groups="course_frame.group_academy_academy_head"/>
+
+
+
+
+                        <field name="stage_1" widget="statusbar" force_save="1"
+                               statusbar_visible="draft,assigned,submitted_to_tl,tl_approved,approved"
+                               attrs="{'invisible': [('state', 'not in', ['content_book_format'])]}"/>
+                        <field name="stage_2" widget="statusbar" force_save="1"
+                               statusbar_visible="draft,assigned,assigned_emp,submitted_to_dh,dh_approved,ah_approved"
+                               attrs="{'invisible': [('state', 'not in', ['alignment_dtp_work'])]}"/>
+                        <field name="stage_3" widget="statusbar" force_save="1"
+                               statusbar_visible="draft,send,submitted,approved"
+                               attrs="{'invisible': [('state', 'not in', ['vetting_external'])]}"/>
+                        <field name="stage_4" widget="statusbar" force_save="1"
+                               statusbar_visible="send,approve"
+                               attrs="{'invisible': [('state', 'not in', ['book_verification'])]}"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_title mb24">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name"
+                                       attrs="{'readonly':[('stage_1', 'not in', ['draft'])]}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="subject_id"/>
+                                <field name="unit_id"/>
+                                <field name="topic_id"/>
+                            </group>
+                            <group>
+                                <field name="user_id" readonly="1"/>
+                                <field name="course_frame_id"/>
+                                <field name="date"/>
+                                <field name="is_assigned_emp_1" invisible="1"/>
+                                <field name="is_assigned_emp_2" invisible="1"/>
+                                <field name="is_dh" invisible="1"/>
+                                <field name="is_content_writer" invisible="1"/>
+                                <field name="is_team_lead" invisible="1"/>
+                                <field name="is_academic_head" invisible="1"/>
+                                <field name="is_ass_dean" invisible="1"/>
+                                <field name="is_managing_dir" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="remarks"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Content Development for Book Format">
+                                <group>
+                                    <group>
+                                        <field name="employee_1_id"
+                                               attrs="{'readonly': [('stage_1', 'not in', ['draft']),('state', 'not in', ['content_book_format'])]}"/>
+                                        <field name="book_format_content" widget="binary"
+                                               attrs="{'readonly': ['|',('stage_1', 'not in', ['assigned']),('state', 'not in', ['content_book_format'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="due_date"
+                                               attrs="{'readonly': [('stage_1', 'not in', ['draft']),('state', 'not in', ['content_book_format'])]}"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                            <page string="Book Content alignment DTP work"
+                                  attrs="{'invisible': [('state', 'in', ['content_book_format'])]}">
+                                <group>
+                                    <group>
+                                        <field name="department_id"
+                                               attrs="{'readonly': [('stage_2', 'not in', ['draft']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                        <field name="request_type_id"
+                                               attrs="{'readonly': [('stage_2', 'not in', ['draft']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                        <field name="employee_2_id" domain="[('department_id','=',department_id)]"
+                                               attrs="{'invisible': ['|',('stage_2', 'not in', ['assigned']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                        <field name="dtp_content" widget="binary"
+                                               attrs="{'readonly': ['|',('stage_2', 'not in', ['assigned_emp']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="department_head_id"
+                                               attrs="{'readonly': [('stage_2', 'not in', ['draft']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                        <field name="expected_date"
+                                               attrs="{'readonly': [('stage_2', 'not in', ['draft']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                        <field name="dead_date"
+                                               attrs="{'readonly': [('stage_2', 'not in', ['draft']),('state', 'not in', ['alignment_dtp_work'])]}"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                            <page string="Book Contant Vetting External"
+                                  attrs="{'invisible': [('state', 'in', ['content_book_format','alignment_dtp_work'])]}">
+                                <group>
+                                    <group>
+                                        <field name="vetting_content" widget="binary"
+                                               attrs="{'readonly': ['|',('stage_3', 'not in', ['draft']),('state', 'not in', ['vetting_external'])]}"/>
+                                        <field name="vetting_content_checked" widget="binary"
+                                               attrs="{'readonly': ['|',('stage_3', 'not in', ['send','reject']),('state', 'not in', ['vetting_external'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="receive_user_id"
+                                               attrs="{'readonly': [('stage_3', 'not in', ['draft']),('state', 'not in', ['vetting_external'])]}"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="content_development_action_window">
+            <field name="name">Condent Development</field>
+            <field name="res_model">content.development</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_content_development"
+                  name="Content Development"
+                  parent="menu_op_course_main"
+                  action="content_development_action_window" sequence="3"/>
+    </data>
+</odoo>

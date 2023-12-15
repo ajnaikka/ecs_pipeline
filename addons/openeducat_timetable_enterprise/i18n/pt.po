@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* openeducat_timetable_enterprise
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-26 09:29+0000\n"
+"PO-Revision-Date: 2019-09-26 09:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.view_op_timing_form_onboard
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Batch"
+msgstr "fornada"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Closed"
+msgstr "Fechadas"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model,name:openeducat_timetable_enterprise.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_op_session__company_id
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_op_timing__company_id
+msgid "Company"
+msgstr "companhia"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Course"
+msgstr "Curso"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "Customize"
+msgstr "Personalizar"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Day"
+msgstr "Dia"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Done"
+msgstr "Feito"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "End Time"
+msgstr "Fim do tempo"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Faculty"
+msgstr "Faculdade"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_batch_timetable_dashboard_kanban_view
+msgid "Generate TimeTable"
+msgstr "gerar TimeTable"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Just done"
+msgstr "apenas feito"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "Looks great!"
+msgstr "Parece bem!"
+
+#. module: openeducat_timetable_enterprise
+#: selection:res.company,core_onboarding_timing_layout_state:0
+#: selection:res.company,openeducat_timing_onboard_panel:0
+msgid "Not done"
+msgstr "Não realizado"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model,name:openeducat_timetable_enterprise.model_op_batch
+msgid "OpenEduCat Batch"
+msgstr ""
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model,name:openeducat_timetable_enterprise.model_op_timing
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.view_op_timing_form_onboard
+msgid "Period"
+msgstr "Período"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "See how to create a Timing."
+msgstr "Veja como criar um sincronismo."
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.actions.act_window,name:openeducat_timetable_enterprise.act_dashboard_op_timetable_view
+#: model:ir.actions.act_window,name:openeducat_timetable_enterprise.act_main_dashboard_op_timetable_view
+#: model:ir.model,name:openeducat_timetable_enterprise.model_op_session
+msgid "Sessions"
+msgstr "sessões"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Start Time"
+msgstr "start Time"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_res_company__core_onboarding_timing_layout_state
+#: model:ir.model.fields,field_description:openeducat_timetable_enterprise.field_res_company__openeducat_timing_onboard_panel
+msgid "State of the onboarding timing layout step"
+msgstr "Estado da etapa de layout de integração sincronismo"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Status"
+msgstr "Estado"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Subject"
+msgstr "Assunto"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "There are currently no information for your account!!!"
+msgstr "Não existem informações para a sua conta !!!"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_batch_timetable_dashboard_kanban_view
+msgid "TimeTable Report"
+msgstr "Relatório TimeTable"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.portal_my_home_achivemenet
+msgid "Timetable"
+msgstr "Calendário"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Timetable List"
+msgstr "Lista de calendário"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_timetable_portal
+msgid "Timing"
+msgstr "Cronometragem"
+
+#. module: openeducat_timetable_enterprise
+#: model:ir.actions.act_window,name:openeducat_timetable_enterprise.action_onboarding_timing_layout
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.onboarding_timing_layout_step
+msgid "Timing Type Configuration"
+msgstr "Configuração Tipo de sincronização"
+
+#. module: openeducat_timetable_enterprise
+#: model_terms:ir.ui.view,arch_db:openeducat_timetable_enterprise.openeducat_batch_timetable_dashboard_kanban_view
+msgid "Today's Lectures"
+msgstr "Palestras de hoje"
+

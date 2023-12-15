@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="application_student_enrollment_form_view" model="ir.ui.view">
+            <field name="name">op.admission.student.enrollment</field>
+            <field name="model">op.admission</field>
+            <field name="inherit_id" ref="openeducat_admission.view_op_admission_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='admission_detail']//field[@name='fees_start_date']" position="after">
+                    <field name="enrollment_number" attrs="{'invisible': [('state','not in', ['done'])]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="op_exam_date_form_view" model="ir.ui.view">
+            <field name="name">op.exam.date</field>
+            <field name="model">op.exam</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_exam_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='total_marks']" position="after">
+                    <field name="exam_date" required="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

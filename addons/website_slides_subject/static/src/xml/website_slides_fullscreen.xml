@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="website.slides.fullscreen.flip_book">
+        <div class="ratio h-100">
+            <iframe t-att-src="widget.get('slide').embedUrl" seamless="seamless" scrolling="no" frameborder="0" allowfullscreen="true" width="100%" height="480" class="o_wslides_iframe_viewer"
+                    ></iframe>
+        </div>
+    </t>
+
+    <t t-extend="website.slides.fullscreen.title">
+        <t t-jquery=".o_wslides_fs_slide_title_span" t-operation="before">
+            <i t-if="widget.get('slide').category === 'subject'" class="fa fa-book me-2 text"></i>
+        </t>
+    </t>
+</templates>
