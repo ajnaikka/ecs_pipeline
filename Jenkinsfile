@@ -15,7 +15,6 @@ pipeline {
 
     stages {
 
-        stages {
             stage('Checkout') {
                  steps {
                      script {
@@ -87,4 +86,4 @@ pipeline {
             }
         }
     }
-}
+
