@@ -23,7 +23,7 @@ pipeline {
                 }
             }
         }
-    }
+    
 
 
         // stage('Push to CodeCommit') {
@@ -86,4 +86,5 @@ pipeline {
             }
         }
     }
+}
 
