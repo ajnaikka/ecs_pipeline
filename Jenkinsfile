@@ -46,9 +46,7 @@ pipeline {
         stage('Pushing Odoo image') {
             steps{
                 script {
-                    docker.withRegistry( 'https://'+ registry, "ecr:ap-south-1:" + awscredential ) {
-                        dockerImage.push()
-                    }
+                   sh "docker push 565121432796.dkr.ecr.ap-south-1.amazonaws.com/ecs_odoo:latest"
                 }
             }
         }
@@ -65,9 +63,7 @@ pipeline {
         stage('Pushing Nginx image') {
             steps{
                 script {
-                    docker.withRegistry( 'https://'+ registry, "ecr:ap-south-1:" + awscredential ) {
-                        nginxDockerImage.push()
-                    }
+                     sh "docker push 565121432796.dkr.ecr.ap-south-1.amazonaws.com/ecs_nginx:latest"
                 }
             }
         }
