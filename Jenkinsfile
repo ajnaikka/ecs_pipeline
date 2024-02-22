@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         registry = "093407068366.dkr.ecr.ap-south-1.amazonaws.com"
-        awscredential = 'fwf-aws-access-credential'
+        awscredential = 'yadhu_aws_key'
         dockerImage = ''
         clusterName = 'ecs_odoo_cluster'
         serviceName = 'ecs-odoo-service'
