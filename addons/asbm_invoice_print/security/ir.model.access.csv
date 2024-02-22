@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_asbm_invoice_print_asbm_invoice_print,asbm_invoice_print.asbm_invoice_print,model_asbm_invoice_print_asbm_invoice_print,base.group_user,1,1,1,1

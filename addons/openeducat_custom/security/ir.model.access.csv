@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_op_course_type,access.op_course_type,model_op_course_type,,1,1,1,1
-access_op_specialization,access.op_specialization,model_op_specialization,,1,1,1,1
-access_academic_details,access.academic_details,model_academic_details,,1,1,1,1
-access_work_experience_details,access.work_experience_details,model_work_experience_details,,1,1,1,1
-access_access_token,access.access_token,model_access_token,,1,1,1,1

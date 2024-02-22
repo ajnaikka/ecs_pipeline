@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_flip_book_all,flip.book.all,course_frame.model_flip_book,,1,0,0,0
-access_op_subject_all,op.subject.all,openeducat_core.model_op_subject,,1,0,0,0

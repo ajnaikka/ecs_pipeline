@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-<!--  <record id="ir_config_parameter_access_token_validity" model="ir.config_parameter">-->
-<!--      <field name="key">openeducat_custom.access_token_validity</field>-->
-<!--      <field name="value">30</field>-->
-<!--  </record>-->
-</odoo>

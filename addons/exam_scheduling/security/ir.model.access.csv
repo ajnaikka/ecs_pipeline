@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_exam_add_survey,exam_scheduling.exam.add.survey,model_exam_add_survey,,1,1,1,0
-access_student_exam_invite,exam_scheduling.student.exam.invite,model_student_exam_invite,,1,1,1,0

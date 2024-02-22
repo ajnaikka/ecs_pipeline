@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_crm_bdh_document_verification,access.crm.bdh.document.verification,model_crm_bdh_document_verification,,1,1,1,0
-access_lead_documents_bdh_verification,access.lead.documents.bdh.verification,model_lead_documents_bdh_verification,,1,1,1,0
