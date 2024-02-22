@@ -1,7 +1,7 @@
 #Dockerfile for running odoo 16.0 community edition by copying the addons folder
 
 
-FROM odoo:16.0
+FROM odoo:17.0
 
 USER root
 
