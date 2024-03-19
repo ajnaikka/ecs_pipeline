@@ -46,7 +46,7 @@ pipeline {
         stage('Pushing Odoo image') {
             steps{
                 script {
-                   sh "docker push 093407068366.dkr.ecr.ap-south-1.amazonaws.com/ecs_odoo:latest"
+                   sh "docker push 730335261581.dkr.ecr.ap-south-1.amazonaws.com/ecs_odoo:latest"
                 }
             }
         }
@@ -63,7 +63,7 @@ pipeline {
         stage('Pushing Nginx image') {
             steps{
                 script {
-                     sh "docker push 093407068366.dkr.ecr.ap-south-1.amazonaws.com/ecs_nginx:latest"
+                     sh "docker push 730335261581.dkr.ecr.ap-south-1.amazonaws.com/ecs_nginx:latest"
                 }
             }
         }
