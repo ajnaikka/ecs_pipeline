@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        registry = "093407068366.dkr.ecr.ap-south-1.amazonaws.com"
-        awscredential = 'yadhu_aws_key'
+        registry = "730335261581.dkr.ecr.ap-south-1.amazonaws.com"
+        awscredential = 'wikki2707-aws-root-id'
         dockerImage = ''
         clusterName = 'ecs_odoo_cluster'
         serviceName = 'ecs-odoo-service'
