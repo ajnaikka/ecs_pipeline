@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+
+    environment {
+        registry = "381492301317.dkr.ecr.ap-south-1.amazonaws.com"
+        dockerImage = ''
+        nginxDockerImage = ''
+        clusterName = 'ecs_odoo_cluster'
+        serviceName = 'ecs-odoo-service'
+        awsRegion = 'ap-south-1'
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    def gitInfo = checkout scm
+                    env.repo_name = gitInfo.GIT_URL.split('/')[-1].replace('.git', '')
+                }
+            }
+        }
+
+        stage('Authenticate Docker to ECR') {
+            steps {
+                script {
+                    sh """
+                    aws ecr get-login-password --region ${awsRegion} | docker login --username AWS --password-stdin ${registry}
+                    """
+                }
+            }
+        }
+
+        stage('Building Odoo image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${registry}/ecs_odoo:latest")
+                }
+            }
+        }
+
+        stage('Pushing Odoo image') {
+            steps {
+                script {
+                    dockerImage.push('latest')
+                }
+            }
+        }
+
+        stage('Building Nginx image') {
+            steps {
+                dir('nginx') {
+                    script {
+                        nginxDockerImage = docker.build("${registry}/ecs_nginx:latest")
+                    }
+                }
+            }
+        }
+
+        stage('Pushing Nginx image') {
+            steps {
+                script {
+                    nginxDockerImage.push('latest')
+                }
+            }
+        }
+
+        stage('Deploy to ECS') {
+            steps {
+                script {
+                    sh """
+                    aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment --region ${awsRegion}
+                    aws ecs wait services-stable --cluster ${clusterName} --services ${serviceName} --region ${awsRegion}
+                    """
+                }
+            }
+        }
+    }
+}
