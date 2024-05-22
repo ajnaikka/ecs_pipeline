@@ -74,6 +74,7 @@ pipeline {
                     aws ecs wait services-stable --cluster ${clusterName} --services ${serviceName} --region ${awsRegion}
                     """
                 }
+
             }
         }
     }
