@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <template id="attendance_menu" name="Link to frontend attendance portal" inherit_id="portal.user_dropdown">
+        <xpath expr="//*[@id='o_logout_divider']" position="after">
+            <a href="/my/employee_list/attendance_correction" role="menuitem" class="dropdown-item ps-3">
+                
+                Attendance Correction
+            </a>
+        </xpath>
+    </template> -->
+
+
+    <template id="employee_list_template_attendance" name="attendance correction"
+              inherit_id="inf_employee_portal.employee_list_template">
+<!--        <t t-call="portal.portal_layout">-->
+<!--            <t t-set="my_details" t-value="True"/>-->
+          <xpath expr="//div[@id='portal_common_category_employee']" position="inside">
+                 <div class="o_portal_category row g-2 mt-3" id="portal_attendance_category">
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="icon"
+                           t-value="'/infi_portal_attendance_correction/static/description/attendance_correction.png'"/>
+                        <t t-set="title">Attendance Correction Request</t>
+                        <t t-set="text">Create your Attendance Correction request</t>
+                        <t t-set="url" t-value="'/my/employees/attendance'"/>
+                        <t t-set="config_card" t-value="True"/>
+                    </t>
+                 </div>
+
+            </xpath>
+<!--        </t>-->
+    </template>
+
+    <template id="employee_list_attendance_form" name="Employee List Template">
+        <t t-call="portal.portal_layout">
+            <div id="portal_attendance">
+                <form method="post" action="/my/send_mail/attendance" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group mb-6">
+                        <div class="form-group mb-3" style="text-align:left">
+
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <div class="col-3">
+                                <a href="/my/attendance/table">
+                                    <button type="button" id="checkStatus" name="checkStatus" class="btn btn-primary">
+                                        Check Status
+                                    </button>
+                                </a>
+                                <a href="/my/employee_list/attendance_correction">
+                                    <button type="button" id="goback_attendance" name="goback_attendance"
+                                            class="btn btn-primary">Go Back
+                                    </button>
+                                </a>
+
+                            </div>
+                            <div style="text-align:right;">
+
+                                <div class="btn-group" role="group" aria-label="Stage Buttons">
+                                    <button type="button"
+                                            t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }} ">
+                                        Draft
+                                    </button>
+                                    <button type="button" t-attf-class="btn btn-secondary ">Attendance Correction
+                                        Request to Manager
+                                    </button>
+                                    <button type="button"
+                                            t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">
+                                        Issue Addressed
+                                    </button>
+                                    <button type="button"
+                                            t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">
+                                        Accepted &amp; Corrected
+                                    </button>
+                                    <button type="button"
+                                            t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">
+                                        Rejected
+                                    </button>
+                                    <button type="button"
+                                            t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">
+                                        Closed
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <h3 class="text-center">Attendance Correction Form</h3>
+                    </div>
+                    <div id="email_attendance_wrapper">
+                        <div class="form-group mb-3">
+                            <!-- <label for="email_attendance" >Send To:</label> -->
+                            <input type="hidden" id="email_attendance" name="email_attendance" class="form-control"
+                                   t-att-value="request.env.user.employee_id.parent_id.work_email" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="name_email_attendance">Send To:</label>
+                        <input type="text" id="name_email_attendance" name="name_email_attendance" class="form-control"
+                               t-att-value="request.env.user.employee_id.parent_id.name" readonly="readonly"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email">From:</label>
+                        <input type="email" id="email_attendance_from" name="email_attendance_from" class="form-control"
+                               t-att-value="request.env.user.work_email" readonly="readonly"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject_attendance" name="subject_attendance" class="form-control"
+                               t-att-value="'Attendance Correction Request from ' + request.env.user.name"/>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="description">Description:</label>
+                        <textarea id="description_attendance" name="description_attendance" class="form-control"
+                                  rows="4"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="attachments">Attachments:</label>
+                        <input type="file" id="attachments_attendance" name="attachments_attendance"
+                               class="form-control"/>
+                    </div>
+                    <div class="" style="text-align:center">
+                        <a t-attf-href="/my/employee_list/attendance_correction" class="btn btn-primary">Discard</a>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="application_submited_view" name="Attendance submit view">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_submit">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Attendance Correction
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Your Form Submited Successfully!</h5>
+                        <p class="card-text"></p>
+                        <a href="/my/attendance/table" class="btn btn-primary">Check Status</a>
+
+                        <a href="/my/employee_list/attendance_correction" class="btn btn-primary">Back to home</a>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="attendance_table_view_template" name="Attendance Table View">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_table">
+                <a href="/my/employees/attendance">
+                    <button type="button" id="goback_attendance" name="goback_attendance" class="btn btn-primary">Go
+                        Back
+                    </button>
+                </a>
+                <h3 style="text-align:center;">Attendance Correction Status</h3>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr class="text-center">
+                            <th>Requested Date</th>
+                            <th>Employee</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <t t-foreach="records" t-as="record">
+                            <tr>
+                                <td>
+                                    <t t-esc="record.request_date"/>
+                                </td>
+                                <td>
+                                    <t t-esc="record.employee_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="state_dict.get(record.state, '')"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

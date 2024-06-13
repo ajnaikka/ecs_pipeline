@@ -1,0 +1,1439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="view_about_me_form" name="Employee Form">
+        <t t-call="portal.portal_layout">
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <div class="o_portal_docs row g-2">
+                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+                    <p class="o_portal_no_doc_message d-none">No Documents to display</p>
+                    <div class="o_portal_category row g-2" id="portal_common_category">
+                        <!--                        <form method="post" action="/employee/form" enctype="multipart/form-data">-->
+                        <!--                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="employee_name">Employee Name:</label>
+                                    <input type="text" id="employee_name" name="employee_name" class="form-control"
+                                           t-att-value="employee.name"
+                                           readonly="readonly"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="job_position">Job Position:</label>
+                                    <input type="text" id="job_position" name="job_position" class="form-control"
+                                           t-att-value="employee.job_id.name"
+                                           readonly="readonly"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="work_email">Work Email:</label>
+                                    <input type="email" id="work_email" name="work_email" class="form-control"
+                                           t-att-value="employee.work_email"
+                                           readonly="readonly"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="work_phone">Work Phone:</label>
+                                    <input type="text" id="work_phone" name="work_phone" class="form-control"
+                                           t-att-value="employee.work_phone"
+                                           readonly="readonly"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="manager">Manager:</label>
+                                    <input type="text" id="manager" name="manager" class="form-control"
+                                           t-att-value="employee.parent_id.name"
+                                           readonly="readonly"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="hr_manager">HR Manager:</label>
+                                    <input type="text" id="hr_manager" name="hr_manager" class="form-control"
+                                           t-att-value="employee.hr_manager_id.name"
+                                           readonly="readonly"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="o_notebook">
+                                    <div class="o_notebook_header">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#" data-target="work_info">Work
+                                                    Information
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" data-target="private_info">Private
+                                                    Information
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" data-target="document_details">
+                                                    Document Details
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" data-target="additional_details">
+                                                    Compensation Details
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="o_notebook_content">
+                                        <div class="tab-pane active" id="work_info">
+                                            <div class="form-group mb-3">
+                                                <label for="work_address">
+                                                    <b>Work Address:</b>
+                                                </label>
+                                                <div class="row mt-3 mb-2">
+                                                    <div class="col-md-6">
+                                                        <label for="street">Street:</label>
+                                                        <input type="text" id="street" name="street"
+                                                               class="form-control"
+                                                               t-att-value="employee.address_id.street"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="street2">Street 2:</label>
+                                                        <input type="text" id="street2" name="street2"
+                                                               class="form-control"
+                                                               t-att-value="employee.address_id.street2"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="city">City:</label>
+                                                        <input type="text" id="city" name="city"
+                                                               class="form-control"
+                                                               t-att-value="employee.address_id.city"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="zip">ZIP Code:</label>
+                                                        <input type="text" id="zip" name="zip" class="form-control"
+                                                               t-att-value="employee.address_id.zip"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="state">State:</label>
+                                                        <select id="state" name="state" class="form-control"
+                                                                readonly="readonly">
+                                                            <t t-foreach="states" t-as="state">
+                                                                <option t-att-value="state.id"
+                                                                        t-att-selected="state.id == work_state_id">
+                                                                    <t t-esc="state.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="country">Country:</label>
+                                                        <select id="country" name="country" class="form-control"
+                                                                readonly="readonly">
+                                                            <t t-foreach="countries" t-as="country">
+                                                                <option t-att-value="country.id"
+                                                                        t-att-selected="country.id == work_country_id">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group mb-3">
+                                                <label for="work_location">
+                                                    <b>Work Location:</b>
+                                                </label>
+                                                <select id="work_location" name="work_location"
+                                                        class="form-control"
+                                                        readonly="readonly">
+                                                    <t t-foreach="work_locations" t-as="location">
+                                                        <option t-att-value="location.id"
+                                                                t-att-selected="location.id == work_location_id">
+                                                            <t t-esc="location.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="tab-pane" id="private_info">
+                                            <!-- Private Information Fields -->
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Private Contact</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="private_address">
+                                                            <b>Private Address:</b>
+                                                        </label>
+                                                        <div class="row">
+                                                            <div class="col-md-4 mb-2">
+                                                                <label for="street">Street:</label>
+                                                                <input type="text" id="street" name="street"
+                                                                       class="form-control"
+                                                                       t-att-value="employee.private_street"
+                                                                       readonly="readonly"/>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                <label for="street2">Street 2:</label>
+                                                                <input type="text" id="street2" name="street2"
+                                                                       class="form-control"
+                                                                       t-att-value="employee.private_street2"
+                                                                       readonly="readonly"/>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                <label for="city">City:</label>
+                                                                <input type="text" id="city" name="city"
+                                                                       class="form-control"
+                                                                       t-att-value="employee.private_city"
+                                                                       readonly="readonly"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-md-4 mb-2">
+                                                                <label for="zip">ZIP Code:</label>
+                                                                <input type="text" id="zip" name="zip"
+                                                                       class="form-control"
+                                                                       t-att-value="employee.private_zip"
+                                                                       readonly="readonly"/>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                <label for="state">State:</label>
+                                                                <select id="state" name="state" class="form-control"
+                                                                        readonly="readonly">
+                                                                    <t t-foreach="states" t-as="state">
+                                                                        <option t-att-value="state.id"
+                                                                                t-att-selected="state.id == employee.private_state_id.id">
+                                                                            <t t-esc="state.name"/>
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4 mb-2">
+                                                                <label for="country">Country:</label>
+                                                                <select id="country" name="country"
+                                                                        class="form-control"
+                                                                        readonly="readonly">
+                                                                    <t t-foreach="countries" t-as="country">
+                                                                        <option t-att-value="country.id"
+                                                                                t-att-selected="country.id == employee.private_country_id.id">
+                                                                            <t t-esc="country.name"/>
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="email">Email:</label>
+                                                        <input type="email" id="email" name="email"
+                                                               class="form-control"
+                                                               t-att-value="employee.private_email"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="phone">Phone:</label>
+                                                        <input type="tel" id="phone" name="phone"
+                                                               class="form-control"
+                                                               t-att-value="employee.private_phone"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="pan_no">Pan No:</label>
+                                                        <input type="text" id="pan_no" name="pan_no"
+                                                               class="form-control"
+                                                               t-att-value="employee.pancard_no"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group mb-3">
+                                                        <label for="language">Language:</label>
+                                                        <select id="language" name="language" class="form-control"
+                                                                readonly="readonly">
+                                                            <option value="en_US">English</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group mb-3">
+                                                        <label for="home_work_distance">Home-Work Distance:</label>
+                                                        <input type="text" id="home_work_distance"
+                                                               name="home_work_distance" class="form-control"
+                                                               t-att-value="employee.km_home_work"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group mb-3">
+                                                        <label for="private_car_plate">Private Car Plate:</label>
+                                                        <input type="text" id="private_car_plate"
+                                                               name="private_car_plate" class="form-control"
+                                                               t-att-value="employee.private_car_plate"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="bank_account">Bank Account Number:</label>
+                                                        <select id="bank_account" name="bank_account"
+                                                                class="form-control"
+                                                                readonly="readonly">
+                                                            <t t-foreach="bank_accounts" t-as="bank_account">
+                                                                <option t-att-value="bank_account.id"
+                                                                        t-att-selected="bank_account.id == employee.bank_account_id.id">
+                                                                    <t t-esc="bank_account.acc_number"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Family Status</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h5>Father</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="father_first_name">Father's First Name:</label>
+                                                        <input type="text" id="father_first_name"
+                                                               t-att-value="employee.father_first_name"
+                                                               name="father_first_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="father_middle_name">Father's Middle Name:
+                                                        </label>
+                                                        <input type="text" id="father_middle_name"
+                                                               t-att-value="employee.father_middle_name"
+                                                               name="father_middle_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="father_last_name">Father's Last Name:</label>
+                                                        <input type="text" id="father_last_name"
+                                                               t-att-value="employee.father_last_name"
+                                                               name="father_last_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="father_gender">Father's Gender:</label>
+                                                        <select id="father_gender" name="father_gender"
+                                                                readonly="readonly"
+                                                                class="form-control">
+                                                            <option value="">Select Gender</option>
+                                                            <option value="male"
+                                                                    t-att-selected="employee.father_gender == 'male'">
+                                                                Male
+                                                            </option>
+                                                            <option value="female"
+                                                                    t-att-selected="employee.father_gender == 'female'">
+                                                                Female
+                                                            </option>
+                                                            <option value="other"
+                                                                    t-att-selected="employee.father_gender == 'other'">
+                                                                Others
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="father_attachment">Father's Attachment:</label>
+                                                        <t t-if="employee.father_attachment_ids">
+                                                            <ul>
+                                                                <t t-foreach="employee.father_attachment_ids"
+                                                                   t-as="father_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + father_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="father_attachment"-->
+                                                        <!--                                                                       name="father_attachment" class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h5>Mother</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="mother_first_name">Mother's First Name:</label>
+                                                        <input type="text" id="mother_first_name"
+                                                               t-att-value="employee.mother_first_name"
+                                                               name="mother_first_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="mother_middle_name">Mother's Middle Name:
+                                                        </label>
+                                                        <input type="text" id="mother_middle_name"
+                                                               t-att-value="employee.mother_middle_name"
+                                                               name="mother_middle_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="mother_last_name">Mother's Last Name:</label>
+                                                        <input type="text" id="mother_last_name"
+                                                               t-att-value="employee.mother_last_name"
+                                                               name="mother_last_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="mother_gender">Mother's Gender:</label>
+                                                        <select id="mother_gender" name="father_gender"
+                                                                readonly="readonly"
+                                                                class="form-control">
+                                                            <option value="">Select Gender</option>
+                                                            <option value="male"
+                                                                    t-att-selected="employee.mother_gender == 'male'">
+                                                                Male
+                                                            </option>
+                                                            <option value="female"
+                                                                    t-att-selected="employee.mother_gender == 'female'">
+                                                                Female
+                                                            </option>
+                                                            <option value="other"
+                                                                    t-att-selected="employee.mother_gender == 'other'">
+                                                                Others
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="mother_attachment">Mother's Attachment:</label>
+                                                        <t t-if="employee.mother_attachment_ids">
+                                                            <ul>
+                                                                <t t-foreach="employee.mother_attachment_ids"
+                                                                   t-as="mother_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + mother_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+
+                                                        <!--                                                                <input type="file" id="mother_attachment"-->
+                                                        <!--                                                                       name="mother_attachment" class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 mt-3">
+                                                        <h5>Others</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mt-3">
+                                                        <div class="form-group mb-3">
+                                                            <label for="marital_status">Marital Status:</label>
+                                                            <select id="marital_status" name="marital_status"
+                                                                    readonly="readonly"
+                                                                    class="form-control">
+                                                                <option value="single"
+                                                                        t-att-selected="employee.marital == 'single'">
+                                                                    Single
+                                                                </option>
+                                                                <option value="married"
+                                                                        t-att-selected="employee.marital == 'married'">
+                                                                    Married
+                                                                </option>
+                                                                <option value="cohabitant"
+                                                                        t-att-selected="employee.marital == 'cohabitant'">
+                                                                    Legal Cohabitant
+                                                                </option>
+                                                                <option value="widower"
+                                                                        t-att-selected="employee.marital == 'widower'">
+                                                                    Widower
+                                                                </option>
+                                                                <option value="divorced"
+                                                                        t-att-selected="employee.marital == 'divorced'">
+                                                                    Divorced
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group mt-3">
+                                                            <label for="dependent_children">Number of Dependent
+                                                                Children:
+                                                            </label>
+                                                            <input type="number" id="dependent_children"
+                                                                   t-att-value="employee.children"
+                                                                   readonly="readonly"
+                                                                   name="dependent_children" class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="form-group mt-3">
+                                                            <label for="children_hostel">Children Residing in
+                                                                Hostel:
+                                                            </label>
+                                                            <input type="number" id="children_hostel"
+                                                                   t-att-value="employee.l10n_in_residing_child_hostel"
+                                                                   readonly="readonly"
+                                                                   name="children_hostel" class="form-control"/>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <t t-if="employee.marital == 'married'">
+                                                <div class="row">
+                                                    <div class="col-md-12 mt-3">
+                                                        <h4>Spouse</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="form-group mt-3">
+                                                            <label for="spouse_first_name">Spouse's First Name:
+                                                            </label>
+                                                            <input type="text" id="spouse_first_name"
+                                                                   t-att-value="employee.spouse_first_name"
+                                                                   name="spouse_first_name" class="form-control"
+                                                                   readonly="readonly"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="form-group mt-3">
+                                                            <label for="spouse_middle_name">Spouse's Middle Name:
+                                                            </label>
+                                                            <input type="text" id="spouse_middle_name"
+                                                                   t-att-value="employee.spouse_middle_name"
+                                                                   name="spouse_middle_name" class="form-control"
+                                                                   readonly="readonly"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mt-3">
+                                                        <div class="form-group mb-3">
+                                                            <label for="spouse_last_name">Spouse's Last Name:
+                                                            </label>
+                                                            <input type="text" id="spouse_last_name"
+                                                                   t-att-value="employee.spouse_last_name"
+                                                                   name="spouse_last_name" class="form-control"
+                                                                   readonly="readonly"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mt-3">
+                                                        <div class="form-group mb-3">
+                                                            <label for="spouse_gender">Spouse's Gender:</label>
+                                                            <select id="spouse_gender" name="spouse_gender"
+                                                                    class="form-control"
+                                                                    readonly="readonly">
+                                                                <option value="">Select Gender</option>
+                                                                <option value="male"
+                                                                        t-att-selected="employee.spouse_gender == 'male'">
+                                                                    Male
+                                                                </option>
+                                                                <option value="female"
+                                                                        t-att-selected="employee.spouse_gender == 'female'">
+                                                                    Female
+                                                                </option>
+                                                                <option value="other"
+                                                                        t-att-selected="employee.spouse_gender == 'other'">
+                                                                    Others
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mt-3">
+                                                        <div class="form-group mb-3">
+                                                            <label for="spouse_attachment">Spouse's Attachment:
+                                                            </label>
+                                                            <t t-if="employee.spouse_attachment_ids">
+                                                                <ul>
+                                                                    <t t-foreach="employee.spouse_attachment_ids"
+                                                                       t-as="spouse_attachment">
+                                                                        <li>
+                                                                            <a t-att-href="'data:application/octet-stream;base64,' + spouse_attachment.datas.decode('utf-8')">
+                                                                                Download Attachment
+                                                                            </a>
+                                                                        </li>
+                                                                    </t>
+                                                                </ul>
+                                                            </t>
+                                                            <!--                                                                <t t-if="employee.enable_emp_profile_edit">-->
+                                                            <!--                                                                    <input type="file" id="spouse_attachment"-->
+                                                            <!--                                                                           name="spouse_attachment" class="form-control"-->
+                                                            <!--                                                                           t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                            <!--                                                                </t>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+
+                                            <t t-if="employee.children_ids">
+
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Children Details</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-md-12 mt-3">
+                                                <div class="children-container">
+                                                    <div class="children-container">
+                                                        <t t-foreach="employee.children_ids" t-as="child"
+                                                           t-key="child.id">
+                                                            <div class="child-details">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="child_first_name">Child's
+                                                                                First Name:
+                                                                            </label>
+                                                                            <input type="text" class="form-control"
+                                                                                   t-att-value="child.first_name"
+                                                                                   readonly="readonly"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="child_middle_name">Child's
+                                                                                Middle Name:
+                                                                            </label>
+                                                                            <input type="text" class="form-control"
+                                                                                   t-att-value="child.mid_name"
+                                                                                   readonly="readonly"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="child_last_name">Child's
+                                                                                Last Name:
+                                                                            </label>
+                                                                            <input type="text" class="form-control"
+                                                                                   t-att-value="child.last_name"
+                                                                                   readonly="readonly"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="child_gender">Child's
+                                                                                Gender:
+                                                                            </label>
+                                                                            <select id="child_gender"
+                                                                                    name="child_gender[]"
+                                                                                    class="form-control"
+                                                                                    readonly="readonly">
+                                                                                <option t-att-selected="child.child_gender == 'male'">
+                                                                                    Male
+                                                                                </option>
+                                                                                <option t-att-selected="child.child_gender == 'female'">
+                                                                                    Female
+                                                                                </option>
+                                                                                <option t-att-selected="child.child_gender == 'other'">
+                                                                                    Other
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="child_attachment">Child's
+                                                                                Attachment:
+                                                                            </label>
+                                                                            <!--                                                                                <input type="file"-->
+                                                                            <!--                                                                                       class="form-control"-->
+                                                                            <!--                                                                                       t-if="employee.enable_emp_profile_edit"/>-->
+
+                                                                            <t t-if="employee.children_ids">
+                                                                                <ul>
+                                                                                    <t t-foreach="employee.children_ids.children_attachment_ids"
+                                                                                       t-as="children_attachment">
+                                                                                        <li>
+                                                                                            <a t-att-href="'data:application/octet-stream;base64,' + children_attachment.datas.decode('utf-8')">
+                                                                                                Download Attachment
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </t>
+                                                                                </ul>
+                                                                            </t>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            </t>
+                                            <!--                                                <button id="add_child_btn" type="button" class="btn btn-primary mt-3"-->
+                                            <!--                                                        t-if="employee.enable_emp_profile_edit">-->
+                                            <!--                                                    Add Child-->
+                                            <!--                                                </button>-->
+
+
+                                            <!--                                                <script type="text/javascript">-->
+                                            <!--                                                    document.addEventListener('DOMContentLoaded', function() {-->
+                                            <!--                                                    var addChildBtn = document.getElementById('add_child_btn');-->
+                                            <!--                                                    var childrenContainer =-->
+                                            <!--                                                    document.querySelector('.children-container');-->
+                                            <!--                                                    var childDetailsTemplate = document.querySelector('.child-details');-->
+
+                                            <!--                                                    if (childDetailsTemplate) {-->
+                                            <!--                                                    addChildBtn.addEventListener('click', function() {-->
+                                            <!--                                                    var newChildDetails = childDetailsTemplate.cloneNode(true);-->
+
+                                            <!--                                                    // Clear input field values in the cloned child details template-->
+                                            <!--                                                    var inputFields = newChildDetails.querySelectorAll('input');-->
+                                            <!--                                                    inputFields.forEach(function(inputField) {-->
+                                            <!--                                                    inputField.value = '';-->
+                                            <!--                                                    });-->
+
+                                            <!--                                                    childrenContainer.appendChild(newChildDetails);-->
+                                            <!--                                                    });-->
+                                            <!--                                                    } else {-->
+                                            <!--                                                    console.error('Child details template not found.');-->
+                                            <!--                                                    }-->
+                                            <!--                                                    });-->
+                                            <!--                                                </script>-->
+
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Emergency Contact</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="emergency_contact_name">Contact Name:</label>
+                                                        <input type="text" id="emergency_contact_name"
+                                                               t-att-value="employee.emergency_contact"
+                                                               name="emergency_contact_name" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="emergency_relationship">Relationship:</label>
+                                                        <input type="text" id="emergency_relationship"
+                                                               t-att-value="employee.l10n_in_relationship"
+                                                               name="emergency_relationship" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="emergency_contact_phone">Contact Phone:</label>
+                                                        <input type="tel" id="emergency_contact_phone"
+                                                               t-att-value="employee.emergency_phone"
+                                                               name="emergency_contact_phone" class="form-control"
+                                                               readonly="readonly"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Education</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="certificate_level">Certificate Level:</label>
+                                                        <select id="certificate_level" name="certificate_level"
+                                                                class="form-control"
+                                                                readonly="readonly">
+                                                            <option value="">Select Certificate Level</option>
+                                                            <option value="graduate"
+                                                                    t-att-selected="employee.certificate == 'graduate'">
+                                                                Graduate
+                                                            </option>
+                                                            <option value="bachelor"
+                                                                    t-att-selected="employee.certificate == 'bachelor'">
+                                                                Bachelor
+                                                            </option>
+                                                            <option value="master"
+                                                                    t-att-selected="employee.certificate == 'master'">
+                                                                Master
+                                                            </option>
+                                                            <option value="doctor"
+                                                                    t-att-selected="employee.certificate == 'doctor'">
+                                                                Doctor
+                                                            </option>
+                                                            <option value="other"
+                                                                    t-att-selected="employee.certificate == 'other'">
+                                                                Other
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="field_of_study">Field of Study:</label>
+                                                        <input type="text" id="field_of_study" name="field_of_study"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.study_field"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="school">School:</label>
+                                                        <input type="text" id="school" name="school"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.study_school"
+
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Work Permit</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="visa_no">Visa No:</label>
+                                                        <input type="text" id="visa_no" name="visa_no"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.visa_no"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="work_permit_no">Work Permit No:</label>
+                                                        <input type="text" id="work_permit_no" name="work_permit_no"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.permit_no"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="visa_exp_date">Visa Expiration Date:</label>
+                                                        <input type="date" id="visa_exp_date" name="visa_exp_date"
+                                                               t-att-value="employee.visa_expire"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="work_permit_exp_date">Work Permit Expiration
+                                                            Date:
+                                                        </label>
+                                                        <input type="date" id="work_permit_exp_date"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.work_permit_expiration_date"
+                                                               name="work_permit_exp_date" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="work_permit_file">Work Permit Document:</label>
+
+                                                        <input type="file" id="work_permit_file"
+                                                               readonly="readonly"
+                                                               name="work_permit_file" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Citizenship</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="nationality">Nationality (Country):</label>
+                                                        <select id="nationality" name="nationality"
+                                                                readonly="readonly"
+                                                                class="form-control">
+                                                            <option value="">Select Country</option>
+                                                            <t t-foreach="countries" t-as="country">
+                                                                <option t-att-value="country.id"
+                                                                        t-att-selected="country.id == employee.country_id.id">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="uan_no">UAN No:</label>
+                                                        <input type="text" id="uan_no" name="uan_no"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.identification_id"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="pf_no">PF No:</label>
+                                                        <input type="text" id="pf_no" name="pf_no"
+                                                               t-att-value="employee.pf_number"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="insurance_no">Insurance No:</label>
+                                                        <input type="text" id="insurance_no" name="insurance_no"
+                                                               t-att-value="employee.insurance_number"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="eso_no">ESO No:</label>
+                                                        <input type="text" id="eso_no" name="eso_no"
+                                                               t-att-value="employee.ssnid"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="passport_no">Passport No:</label>
+                                                        <input type="text" id="passport_no" name="passport_no"
+                                                               t-att-value="employee.passport_id"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="gender">Gender:</label>
+                                                        <select id="gender" name="gender" class="form-control"
+                                                                readonly="readonly">
+                                                            <option value="">
+                                                            </option>
+                                                            <option value="male"
+                                                                    t-att-selected="employee.gender == 'male'">Male
+                                                            </option>
+                                                            <option value="female"
+                                                                    t-att-selected="employee.gender == 'female'">
+                                                                Female
+                                                            </option>
+                                                            <option value="other"
+                                                                    t-att-selected="employee.gender == 'other'">
+                                                                Other
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="dob">Date of Birth:</label>
+                                                        <input type="date" id="dob" name="dob"
+                                                               t-att-value="employee.birthday"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="place_of_birth">Place of Birth:</label>
+                                                        <input type="text" id="place_of_birth" name="place_of_birth"
+                                                               t-att-value="employee.place_of_birth"
+                                                               readonly="readonly"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="country_of_birth">Country of Birth:</label>
+                                                        <select id="country_of_birth" name="country_of_birth"
+                                                                readonly="readonly"
+                                                                class="form-control">
+                                                            <option value="">Select Country</option>
+                                                            <t t-foreach="countries" t-as="country">
+                                                                <option t-att-value="country.id"
+                                                                        t-att-selected="country.id == employee.country_of_birth.id">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="non_resident">Non-resident:</label>
+                                                        <input type="checkbox" id="non_resident" name="non_resident"
+                                                               t-att-checked="employee.is_non_resident"
+                                                               class="form-check-input"
+                                                               style="pointer-events: none; opacity: 0.5;"/>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Personal Information</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="uan">UAN (Universal Account Number):</label>
+                                                        <input type="text" id="uan" name="uan" class="form-control"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.l10n_in_uan"
+                                                               placeholder="Enter 12 digit UAN"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="esic_number">ESIC Number:</label>
+                                                        <input type="text" id="esic_number" name="esic_number"
+                                                               readonly="readonly"
+                                                               class="form-control"
+                                                               t-att-value="employee.l10n_in_esic_number"
+                                                               placeholder="Enter 17 digit ESIC Number"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="pan">PAN (Permanent Account Number):</label>
+                                                        <input type="text" id="pan" name="pan" class="form-control"
+                                                               readonly="readonly"
+                                                               t-att-value="employee.l10n_in_pan"
+                                                               placeholder="Enter PAN Number"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="tab-pane" id="document_details">
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h5>Personal Details</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="aadhar_attachment">Aadhar Card:
+                                                        </label>
+                                                        <t t-if="employee.aadhar_card">
+                                                            <ul>
+                                                                <t t-foreach="employee.aadhar_card"
+                                                                   t-as="aadar_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + aadar_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="aadhar_attachment"-->
+                                                        <!--                                                                       name="aadhar_attachment" class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="pan_card">Pan Card:</label>
+                                                        <t t-if="employee.pan_card">
+                                                            <ul>
+                                                                <t t-foreach="employee.pan_card"
+                                                                   t-as="attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="pan_card_attachment"-->
+                                                        <!--                                                                       name="pan_card_attachment" class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h5>Qualification</h5>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="10th_certificate">10th Certificate:</label>
+                                                        <t t-if="employee.tenth_cer">
+                                                            <ul>
+                                                                <t t-foreach="employee.tenth_cer"
+                                                                   t-as="tenth_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + tenth_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="10th_certificate"-->
+                                                        <!--                                                                       name="10th_certificate" class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="plus_two_certificate">Plus Two Certificate:
+                                                        </label>
+                                                        <t t-if="employee.plus_two_cer">
+                                                            <ul>
+                                                                <t t-foreach="employee.plus_two_cer"
+                                                                   t-as="plus_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + plus_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="plus_two_certificate"-->
+                                                        <!--                                                                       name="plus_two_certificate" class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="form-group mb-3">
+                                                        <label for="graduation_certificate">Graduation
+                                                            Certificate:
+                                                        </label>
+                                                        <t t-if="employee.graduation">
+                                                            <ul>
+                                                                <t t-foreach="employee.graduation"
+                                                                   t-as="grad_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + grad_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="graduation_certificate"-->
+                                                        <!--                                                                       name="graduation_certificate"-->
+                                                        <!--                                                                       class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <h4>Experience</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group mt-3">
+                                                        <label for="experience_certificate">Experience
+                                                            Certificate:
+                                                        </label>
+                                                        <t t-if="employee.graduation">
+                                                            <ul>
+                                                                <t t-foreach="employee.exp" t-as="exp_attachment">
+                                                                    <li>
+                                                                        <a t-att-href="'data:application/octet-stream;base64,' + exp_attachment.datas.decode('utf-8')">
+                                                                            Download Attachment
+                                                                        </a>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </t>
+
+                                                        <!--                                                            <t t-if="employee.enable_emp_profile_edit">-->
+                                                        <!--                                                                <input type="file" id="experience_certificate"-->
+                                                        <!--                                                                       name="experience_certificate"-->
+                                                        <!--                                                                       class="form-control"-->
+                                                        <!--                                                                       t-att-readonly="not employee.enable_emp_profile_edit"/>-->
+                                                        <!--                                                            </t>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="additional_details">
+                                            <div class="row mt-3">
+                                                <h4>Compensation Details</h4>
+
+
+                                            </div>
+
+                                            <table class="table table-bordered mt-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Monthly Amount</th>
+                                                        <th>Yearly Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-if="employee.salary_details_ids">
+                                                        <t t-foreach="employee.salary_details_ids"
+                                                           t-as="salary_detail">
+                                                            <tr>
+                                                                <td>
+                                                                    <t t-esc="salary_detail.type_id.name"/>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-esc="salary_detail.amount"/>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-esc="salary_detail.amount_year"/>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Add more tab-panes for additional sections -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                            var tabLinks = document.querySelectorAll('.nav-link');
+                            var tabContents = document.querySelectorAll('.tab-pane');
+
+                            // Hide all tab contents except the one with the 'active' class
+                            tabContents.forEach(function(tabContent) {
+                            if (!tabContent.classList.contains('active')) {
+                            tabContent.style.display = 'none';
+                            }
+                            });
+
+                            tabLinks.forEach(function(tabLink) {
+                            tabLink.addEventListener('click', function(event) {
+                            var target = this.getAttribute('data-target');
+
+                            // Remove 'active' class from all tab links
+                            tabLinks.forEach(function(link) {
+                            link.classList.remove('active');
+                            });
+
+                            // Add 'active' class to the clicked tab link
+                            this.classList.add('active');
+
+                            // Hide all tab contents
+                            tabContents.forEach(function(tabContent) {
+                            tabContent.style.display = 'none';
+                            });
+
+                            // Display the selected tab content
+                            document.getElementById(target).style.display = 'block';
+                            });
+                            });
+                            });
+
+
+                        </script>
+
+                        <div class="mb-3">
+                            <a t-attf-href="/my/employee_list" class="btn btn-primary">Cancel</a>
+                            <a role="button" class="btn btn-primary"
+                               data-bs-toggle="modal"
+                               id='submit_modal' data-bs-target="#submit_modal_popup" href="#" t-if="not employee.enable_emp_profile_edit">Submit
+                            </a>
+
+
+                            <a role="button" class="btn btn-primary"
+                               data-bs-toggle="modal"
+                               id='check_modal' data-bs-target="#submit_modal_popup" href="#" t-if="not employee.enable_emp_profile_edit">Change Request
+                            </a>
+
+                            <div class="row">
+                                <div class="modal fade" id="submit_modal_popup" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title">Profile Information</h3>
+                                            </div>
+                                            <form action="/send_email_to_hr" method="post">
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="description">Description:</label>
+                                                        <input type="text" class="form-control" id="description"
+                                                               name="description" placeholder="Enter subject"
+                                                               required="1"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary" id="emp_submitbtn"
+                                                            role="button" onclick="hideChangeRequestButton()">
+                                                        Submit
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function hideChangeRequestButton() {
+                            document.getElementById('submit_modal').style.display = 'none';
+                            document.getElementById('check_modal').style.display = 'none';
+
+
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+
+</odoo>
+
+
+
+
+

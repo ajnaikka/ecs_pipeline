@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="infi_offer_letter_templates">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="page_number" t-value="1"/>
+                <t t-call="web.basic_layout">
+                    <div class="page" style="page-break-before: always;">
+                        <div style="width: 100%; text-align: center;">
+                            <div style="width: 40%; display: inline-block;">
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div style="width: 100%; display: flex; justify-content: flex-end;">
+                            <table class="text-center" style="margin-top:90px; width: 100%; border:1px solid white;">
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <span style="font-size:14pt;font-weight:bold;">Date:</span><b><span t-esc="o.date"/></b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="text-center" style="margin-top:40px; width: 50%; border:1px solid white;">
+                                <tr>
+                                    <td style="text-align: left;">
+                                        <b><span t-esc="o.company_id.street"/></b>,<b><span t-esc="o.company_id.street2"/></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">
+                                       <b> <span t-esc="o.company_id.city"/></b>,<b><span t-esc="o.company_id.country_id.name"/></b>,<b><span t-esc="o.company_id.country_id.name"/></b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <div style="width: 100%; display: flex; justify-content: flex-end;">
+                            <table class="text-center" style="margin-top:20px; width: 100%; border:1px solid white;">
+                                <tr>
+                                    <td style="text-align: Center;">
+                                        <span style="font-size:19pt;font-weight:bold;">Offer Letter</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr/>
+                        <br/>
+                        <div class="body" style="font-size: 14px;">
+
+
+                            <p>This is in reference to your application and subsequent discussions; we are glad to
+                                inform that you have been selected for the position of  <span t-esc="o.position" style="color: red; font-weight: bold;"/> to be based out of
+                                Place, your remuneration will be a total of INR.<span t-esc="12 * o.basic + 12 * o.dra + 12 * o.hra + 12 * o.conveyance + 12 *  o.other_allownance + 12 * o.lpf + 12 * o.lwf + 12 * o.esi" style="color: red; font-weight: bold;"/>/- (Rupees) per
+                                annum.
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                Your joining date with IndiaFirst will be on <span t-esc="o.date_joining" style="color: red; font-weight: bold;"/> (Expected date of joining,
+                                provision to change the Date of joining). Please contact us immediately if you require
+                                an alternative joining date. If you do not confirm your acceptance or we are unable to
+                                set an alternative date, this offer will be withdrawn.
+                            </p>
+                            <p>
+                                A detailed compensation structure is attached as Annexure.
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                Post your joining with us, you will be issued a formal Appointment Letter and on receipt
+                                of following.
+                                documents.
+                            </p>
+                            <p>
+                                1. Photocopy of Aadhar card (mandatory document)
+                            </p>
+                            <p>
+                                2. Photocopy of your Relieving letter /Acceptance of resignation.
+                            </p>
+                            <p>
+                                3. 5 Passport size Photographs
+                            </p>
+                            <p>
+                                4. Photocopy of SSC, HSC, UG and PG marksheets / Degree certificates
+                            </p>
+                            <p>
+                                5. Photocopy of PAN card
+                            </p>
+                            <p>
+                                6.Experience Certificates,
+                            </p>
+                            <p>
+                                7.Police clearance certificate.
+                            </p>
+                            <p>
+                                8.Latest Resume
+                            </p>
+                            <p>
+                                9. Photocopy of Current Address proof
+                            </p>
+                            <p>
+                                Please do not construe this Letter of Intent as a Letter of Appointment.
+                            </p>
+                            <br/>
+                            <p>
+                                Thanking you,
+                            </p>
+                            <br/>
+                            <p>
+                                <b>
+                                    Infi News Network Pvt Ltd.
+                                </b>
+
+                            </p>
+
+                            <div class="footer last-page">
+                                <!-- Horizontal line -->
+                                <hr style="width: 100%; margin-top: 200px; margin-bottom: 20px; border: 1px solid #fff;"/>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--                    <div style="page-break-before: always;"></div>-->
+                    <div class="page" style="page-break-before: always;">
+                        <div style="width: 100%; text-align: center;">
+                            <div style="width: 40%; display: inline-block;">
+
+                            </div>
+                        </div>
+                        <div style="width: 100%; display: flex; justify-content: flex-end;">
+                            <table class="text-center" style="margin-top:90px; width: 100%; border:1px solid white;">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <span style="font-size:19pt;font-weight:bold;">Annexure</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr class="mt8 mb8"/>
+                            <br/>
+                            <div class="body">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 20px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Name
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;" colspan="2">
+                                                <span t-esc="o.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Designation
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;" colspan="2">
+                                                <span t-esc="o.position"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Department
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;" colspan="2">
+                                                <span t-esc="o.department"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Current Location
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;" colspan="2">
+                                                <span t-esc="o.location"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: #ccc;">
+                                            <td style="border: 1px solid #000; padding: 8px;">Salary Components</td>
+                                            <td style="border: 1px solid #000; padding: 8px;">Per Month</td>
+                                            <td style="border: 1px solid #000; padding: 8px;">Per Annum</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Basic
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.basic"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.basic if o.basic else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                DRA
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.dra"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.dra if o.dra else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                HRA
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.hra"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.hra if o.hra else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Conveyance
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.conveyance"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.conveyance if o.conveyance else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                Other Allowance
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.other_allownance"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.other_allownance if o.other_allownance else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                Total
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="o.basic + o.dra + o.hra + o.conveyance + o.other_allownance"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="12 * o.basic + 12 * o.dra + 12 * o.hra + 12 * o.conveyance + 12 *  o.other_allownance"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                EPF
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.lpf"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.lpf if o.lpf else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                LWF
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.lwf"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.lwf if o.lwf else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                ESI
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="o.esi"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px;">
+                                                <span t-esc="12 * o.esi if o.esi else 0"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;color:#ccc">
+                                                Grand Total
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="o.lpf + o.lwf + o.esi"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="12 * o.lpf + 12 * o.lwf + 12 * o.esi"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                Grand Total
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="o.basic + o.dra + o.hra + o.conveyance + o.other_allownance + o.lpf + o.lwf + o.esi"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="12 * o.basic + 12 * o.dra + 12 * o.hra + 12 * o.conveyance + 12 *  o.other_allownance + 12 * o.lpf + 12 * o.lwf + 12 * o.esi"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                ANNUAL COST TO COMPANY
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="o.basic + o.dra + o.hra + o.conveyance + o.other_allownance + o.lpf + o.lwf + o.esi"/>
+                                            </td>
+                                            <td style="border: 1px solid #000; padding: 8px; background-color: #ccc;">
+                                                <span t-esc="12 * o.basic + 12 * o.dra + 12 * o.hra + 12 * o.conveyance + 12 *  o.other_allownance + 12 * o.lpf + 12 * o.lwf + 12 * o.esi"/>
+                                            </td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <br/>
+                                <div class="body" style="font-size: 14px;">
+                                    <p>
+                                        All the above referred payments are subject to necessary tax and other statutory
+                                        deductions as are applicable. You will also contribute towards Employees’
+                                        contribution to Provident Fund and ESI, Labour Welfare Fund, as per rules.
+                                    </p>
+                                    <p>
+                                        To confirm your acceptance of this offer, you are required to sign at the bottom
+                                        of this letter, scan and send the same within 2 days upon receipt of this email.
+                                        Please note that if you do not provide your acceptance, you will not be allowed
+                                        to join on the joining date specified above.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page" style="page-break-before: always;">
+                        <div style="width: 100%; text-align: center;">
+                            <div style="width: 40%; display: inline-block;">
+
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="body" style="font-size: 14px;">
+
+
+                            <p>Any change of joining date must be communicated to the undersigned by email at least 1
+                                day prior to your original joining date. The company may at its discretion accept a new
+                                joining date or may withdraw this offer letter.
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                Kindly let us know whether the above terms are acceptable to you, so as to enable us to
+                                issue the formal appointment order. Also let us know your earliest possible date of
+                                joining.
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                <b>
+                                    Infi News Network Pvt Ltd.
+                                </b>
+                            </p>
+                            <br/>
+                            <p>
+                                <b>
+                                    Jyothish Kumar V
+                                </b>
+                            </p>
+                            <p>
+                                <img t-att-src="'data:image/png;base64,%s' % (user.sign_signature and user.sign_signature.decode('utf-8'))" style="max-width: 200px; max-height: 200px;"/>
+                            </p>
+                            <p>
+                                <b>
+                                    Senior Manager HR
+                                </b>
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                <b>
+                                    Offer Accepted
+                                </b>
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                <b>
+                                    Name:
+                                </b>
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                <b>
+                                    Signature:
+                                </b>
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                <b>
+                                    Date:
+                                </b>
+                            </p>
+
+
+                            <div class="footer last-page">
+                                <!-- Horizontal line -->
+                                <hr style="width: 100%; margin-top: 200px; margin-bottom: 20px; border: 1px solid #fff;"/>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

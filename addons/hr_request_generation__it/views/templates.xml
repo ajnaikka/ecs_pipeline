@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+   <record id="employee_generate_it_request_email" model="mail.template">
+            <field name="name"> Generate Req to IT Email Template</field>
+            <field name="model_id" ref="hr_request_generation__it.model_request_it"/>
+            <field name="subject">Work mail generation request for {{object.employee_id.name}}</field>
+            <field name="email_from">{{object.employee_id.hr_manager_id.work_email}}</field>
+            <field name="email_to">{{', '.join(user.employee_id.work_email for user in object.it_team_emails)}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+        </record>
+          <record id="employee_issue_address_by_it_email" model="mail.template">
+            <field name="name"> Issue Addressed by IT Email Template</field>
+            <field name="model_id" ref="hr_request_generation__it.model_request_it"/>
+            <field name="subject">Work mail generation request for {{object.employee_id.name}} Addressed</field>
+            <field name="email_to">{{object.employee_id.hr_manager_id.work_email}}</field>
+            <field name="email_from">{{', '.join(user.employee_id.work_email for user in object.it_team_emails)}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

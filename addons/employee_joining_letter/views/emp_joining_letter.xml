@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_joining_letter_tree" model="ir.ui.view">
+            <field name="name">joining.letter.tree</field>
+            <field name="model">joining.letter</field>
+            <field name="arch" type="xml">
+                <tree string="Joining Letter" sample="1" editable="bottom">
+                    <field name="employee_id"/>
+                    <field name="joining_date"/>
+                    <field name="department"/>
+                    <field name="designation"/>
+                    <field name="state"/>
+                    <button name="%(employee_joining_letter.action_print_joining_letter)d" string="Print Joining Letter" type="action"
+                            class="btn btn-primary"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_joining_letter" model="ir.actions.act_window">
+            <field name="name">Joining Letters</field>
+            <field name="res_model">joining.letter</field>
+            <field name="view_mode">tree</field>
+            <field name="target">current</field>
+
+        </record>
+
+
+
+        <menuitem id="menu_joining_letter_list" name="Joining Letters" parent="hr.menu_hr_employee_payroll" sequence="3"
+                  action="action_joining_letter"/>
+
+    </data>
+</odoo>

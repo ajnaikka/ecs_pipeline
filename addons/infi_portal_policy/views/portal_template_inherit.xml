@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_policy" name="Portal Policy" customize_show="True" inherit_id="portal.portal_my_home"
+              priority="45">
+        <xpath expr="//div[hasclass('o_portal_category')]" position="before">
+            <!-- Modal -->
+            <div id="policyModal" class="modal fade">
+                <div class="modal-dialog modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="policyModalTitle"></h3>
+                    </div>
+                    <div class="modal-body" id="policyModalBody" style="font-size: 19px;">
+                        <div id="policy_data" t-att-data-policy="policies"/>
+                        <div id="policy_state" t-att-data-state="policy_state"/>
+                        <t t-esc="policy_state"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="prevBtn">Previous</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

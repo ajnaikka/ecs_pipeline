@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="hr_attendance.attendance_menu" t-inherit-mode="extension">
+<!--        Replacing the Default Checkin button-->
+        <xpath expr="//button[contains(@class, 'flex-basis-100') and contains(@class, 'mt-3')]" position="replace">
+            <button t-on-click="() => { this.onClickSignInOut();  }" class="flex-basis-100 mt-3" t-attf-class="btn btn-{{ this.state.checkedIn ? 'warning' : 'success' }}">
+                <span t-if="!this.state.checkedIn" data-bs-toggle="modal" href="#checkinmodeltoggle">     Check in     </span>
+                <span t-else="" data-bs-toggle="modal" href="#checkoutmodeltoggle">     Check out     </span>
+                <i t-attf-class="fa fa-sign-{{ this.state.checkedIn ? 'out' : 'in' }} ms-1"/>
+            </button>
+        </xpath>
+        <!--        Adding the Module for above-->
+
+        <xpath expr="//div[@class='att_container d-flex flex-column']" position="inside">
+<!--            <div id="snapshotContainer" t-if="!this.isFirstAttendance">-->
+<!--                <div id="capturedImageDataInput" name="capturedImageData"></div>-->
+<!--                <button data-bs-toggle="modal" href="#checkinmodeltoggle" id="checkin_button" class="btn btn-primary">Check In</button>-->
+<!--                <button data-bs-toggle="modal" href="#checkoutmodeltoggle" id="checkout_button" class="btn btn-primary">Check out</button>-->
+<!--            </div>-->
+            <div class="modal fade" id="checkinmodeltoggle" aria-hidden="true" aria-labelledby="checkinmodeltoggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel">Check In</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Video element to display camera feed -->
+                                <video id="cameraFeed" style="display: none;"></video>
+                                <!-- Image element to display captured image -->
+                                <img id="capturedImagePreview" style="display: none;"/>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Button to trigger image capture -->
+                                <button class="btn btn-primary" t-on-click="captureImage1" >Check-in</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="modal fade" id="checkoutmodeltoggle" aria-hidden="true" aria-labelledby="checkoutModalLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="checkoutModalLabel">Check Out</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Video element to display camera feed -->
+                                <video id="checkoutCameraFeed" style="display: none;"></video>
+                                <!-- Image element to display captured image -->
+                                <img id="checkoutCapturedImagePreview" style="display: none;"/>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Button to trigger image capture -->
+                                <button class="btn btn-primary" t-on-click="captureImageout" >Check-out</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </xpath>
+
+<!--        Replacing the default fresher Start button -->
+        <xpath expr="//button[@t-if='this.isFirstAttendance']" position="replace">
+            <button t-if="this.isFirstAttendance" t-on-click="() => { this.onClickSignInOut(); }" t-attf-class="btn btn-{{ this.state.checkedIn ? 'warning' : 'success' }}">
+                <span t-if="!this.state.checkedIn" data-bs-toggle="modal" href="#checkinmodeltoggle">     Check in    </span>
+                <span t-else="" data-bs-toggle="modal" href="#checkoutmodeltoggle">     Check out     </span>
+                <i t-attf-class="fa fa-sign-{{ this.state.checkedIn ? 'out' : 'in' }} ms-1"/>
+            </button>
+        </xpath>
+
+<!--        above buttons mode -->
+        <xpath expr="//div[@class='o_att_menu_container d-flex flex-column gap-4']" position="inside">
+<!--            <div id="snapshotContainer" t-if="this.isFirstAttendance">-->
+<!--                <div id="capturedImageDataInput" name="capturedImageData"></div>-->
+<!--                <button data-bs-toggle="modal" href="#checkinmodeltoggle" id="checkin_button" class="btn btn-primary">Check In</button>-->
+<!--                <button data-bs-toggle="modal" href="#checkoutmodeltoggle" id="checkout_button" class="btn btn-primary">Check out</button>-->
+<!--            </div>-->
+
+                <div class="modal fade" id="checkinmodeltoggle" aria-hidden="true" aria-labelledby="checkinmodeltoggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel">Check In</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Video element to display camera feed -->
+                                <video id="cameraFeed" style="display: none;"></video>
+                                <!-- Image element to display captured image -->
+                                <img id="capturedImagePreview" style="display: none;"/>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Button to trigger image capture -->
+                                <button class="btn btn-primary" t-on-click="captureImage1" >Check-in</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="checkoutmodeltoggle" aria-hidden="true" aria-labelledby="checkoutModalLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="checkoutModalLabel">Check Out</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Video element to display camera feed -->
+                                <video id="checkoutCameraFeed" style="display: none;"></video>
+                                <!-- Image element to display captured image -->
+                                <img id="checkoutCapturedImagePreview" style="display: none;"/>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Button to trigger image capture -->
+                                <button class="btn btn-primary" t-on-click="captureImageout" >Check-out</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </xpath>
+
+    </t>
+</templates>

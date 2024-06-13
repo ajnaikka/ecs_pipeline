@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_quotation_higher_form" model="ir.ui.view">
+        <field name="name">Quotation Approval Higher Form</field>
+        <field name="model">quotation.higher</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Approval Higher">
+                <sheet>
+                    <group>
+                        <field name="user_id" readonly="1"/>
+                        <field name="send_to" widget="many2many_tags"/>
+<!--                        <field name="mail_to"/>-->
+                        <field name="group_purchase_director" invisible="1"/>
+
+                    </group>
+                    <group>
+                        <field name="subject"/>
+<!--                        <field name="email"/>-->
+                    </group>
+                    <group>
+                        <field name="message" widget="html"/>
+                        <field name="attachment_ids" widget="many2many_binary" string="Attachments 1"/>
+                        <field name="attachment_sec_ids" widget="many2many_binary" string="Attachments 2"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="button_send_quotation_approval" string="Send Quotation Approval" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_quotation_higher" model="ir.actions.act_window">
+        <field name="name">Quotation Approval Higher</field>
+        <field name="res_model">quotation.higher</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_quotation_higher" name="Submit for Quotation Approval" action="action_quotation_higher" parent="purchase.menu_purchase_config" groups="purchase_order_approval.group_purchase_director" />
+</odoo>

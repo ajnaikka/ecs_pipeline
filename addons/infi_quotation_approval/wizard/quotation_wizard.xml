@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="quotation_approval_wizard_form" model="ir.ui.view">
+        <field name="name">Quotation Approval Wizard</field>
+        <field name="model">quotation.approval</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Approval">
+                <sheet>
+                    <group>
+                        <field name="user_id" readonly="1"/>
+                        <field name="send_to" widget="many2many_tags" />
+                        <field name="group_purchase_director" invisible="1"/>
+
+<!--                        <field name="mail_to"/>-->
+                    </group>
+                    <group>
+                        <field name="subject"/>
+<!--                        <field name="email"/>-->
+                    </group>
+                    <group>
+                        <field name="message" widget="html"/>
+                        <field name="attachment_ids" widget="many2many_binary" string="Attachments 1"/>
+                        <field name="attachment_sec_ids" widget="many2many_binary" string="Attachments 2"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="button_send_quotation_approval" string="Send Quotation Approval" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="quotation_approval_wizard_action" model="ir.actions.act_window">
+        <field name="name">Quotation Approval</field>
+        <field name="res_model">quotation.approval</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="quotation_approval_wizard_menu" name="Submit for Quotation Approval" action="quotation_approval_wizard_action" parent="purchase.menu_purchase_config" groups="purchase_order_approval.group_technical_team"/>
+
+</odoo>

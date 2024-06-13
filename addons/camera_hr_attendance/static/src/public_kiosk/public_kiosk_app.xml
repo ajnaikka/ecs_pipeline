@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+<t t-name="camera_hr_attendance.companyHeader" t-inherit="hr_attendance.companyHeader" t-inherit-mode="extension">
+
+    <xpath expr="//img" position="after">
+        <div> 
+            <button type="button" class="btn btn-secondary" onclick="startCamera()">Start Camera</button>
+        </div>
+        <div id="snapshotContainer"></div>
+    </xpath>
+</t>
+</templates>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_certificate_template" model="mail.template">
+            <field name="name">Employee Certificate Request Email Template</field>
+            <field name="model_id" ref="inf_employee_certificate_request.model_certificate_generations"/>
+            <field name="subject">Employee Certificate of {{object.employee_id.name}}</field>
+            <field name="email_to">{{object.employee_id.work_email}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+            <field name="report_template_ids"
+                   eval="[(4, ref('inf_employee_certificate_request.action_employee_certificate_generation'))]"/>
+        </record>
+
+
+
+    </data>
+
+</odoo>

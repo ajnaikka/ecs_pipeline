@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_list_template_compensatory" name="compensatory benefit"
+              inherit_id="inf_employee_portal.employee_list_template">
+<!--        <t t-call="portal.portal_layout">-->
+<!--            <t t-set="my_details" t-value="True"/>-->
+            <xpath expr="//div[@id='portal_attendance_category']" position="inside">
+<!--                <div class="o_portal_category row g-2 mt-3" id="portal_attendance_category">-->
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="icon" t-value="'/infi_compensatory_request/static/description/images.png'"/>
+                        <t t-set="title">Compensatory Request</t>
+                        <t t-set="text">Create your Compensatory Request</t>
+                        <t t-set="url" t-value="'/my/employee/compensatorys'"/>
+                        <t t-set="config_card" t-value="True"/>
+                    </t>
+<!--                </div>-->
+            </xpath>
+<!--        </t>-->
+    </template>
+<!--    <template id="employee_compensatory_form" name="Compensatory Template">-->
+<!--        <t t-call="portal.portal_layout">-->
+<!--            <div id="portal_attendance">-->
+<!--                <form method="post" action="/my/send_compensatory_request/compensatory" enctype="multipart/form-data">-->
+<!--                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+<!--                    <div class="form-group mb-3">-->
+<!--                        <a href="/my/compensatory/table">-->
+<!--                            <button type="button" id="checkStatus" name="checkStatus" class="btn btn-primary">Check-->
+<!--                                Status-->
+<!--                            </button>-->
+<!--                        </a>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-group mb-3">-->
+<!--                        <h3>Compensatory Benefit Form</h3>-->
+<!--                    </div>-->
+<!--                    <div class="form-group mb-3">-->
+<!--                        <label for="employee">Employee:</label>-->
+<!--                        <input type="text" id="employee_name" name="employee_name" class="form-control"-->
+<!--                               t-att-value="request.env.user.employee_id.name" readonly="readonly"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group mb-3">-->
+<!--                        <label for="request">Request Date:</label>-->
+<!--                        <input type="date" id="request_date" name="request_date" class="form-control"/>-->
+<!--                    </div>-->
+<!--                    <div class="" style="text-align:center">-->
+<!--                        <a t-attf-href="/my/employee/compensatory" class="btn btn-primary">Discard</a>-->
+<!--                        <button type="submit" class="btn btn-primary">Send Mail</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+    <template id="employee_compensatory_email_form" name="Compensatory Template">
+        <t t-call="portal.portal_layout">
+            <div id="portal_attendance">
+                <form method="post" action="/my/employee_compensatory_email" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="col-3">
+                       <a href="/my/compensatory/tables" ><button type="button"  id="checkStatus" name="checkStatus" class="btn btn-primary">Check Status</button></a>
+                        <a href="/my/employee_list/attendance_correction" ><button type="button" id="goback_attendance" name="goback_attendance" class="btn btn-primary">Go Back</button></a>
+
+                    </div>
+                    <div style="text-align:right;">
+
+                        <div class="btn-group" role="group" aria-label="Stage Buttons">
+                            <button type="button"
+                                    t-attf-class="btn btn-secondary {{ 'disabled' if stage != 'draft' else '' }} ">
+                                Draft
+                            </button>
+                            <button type="button"
+                                    t-attf-class="btn btn-secondary {{ 'disabled' if stage != 'to_reporter' else '' }}">
+                                Request To Reporting Manager
+                            </button>
+                            <button type="button"
+                                    t-attf-class="btn btn-secondary {{ 'disabled' if stage != 'to_hr' else '' }}">
+                               Request to hr
+                            </button>
+                            <button type="button"
+                                    t-attf-class="btn btn-secondary {{ 'disabled' if stage != 'approved' else '' }}">
+                               Approved
+                            </button>
+                            <button type="button"
+                                    t-attf-class="btn btn-secondary {{ 'disabled' if stage != 'cancel' else '' }}">
+                                Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="employee">From:</label>
+                        <input type="text" id="employee_name" name="employee_name" class="form-control"
+                               t-att-value="request.env.user.employee_id.name" readonly="readonly"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="employee">Send To:</label>
+                        <input type="text" id="employee_name" name="employee_name" class="form-control"
+                               t-att-value="request.env.user.employee_id.parent_id.user_id.partner_id.email" readonly="readonly"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="subject">Subject:</label>
+                         <input type="text" id="subject_compensatory" name="subject_compensatory" class="form-control" t-att-value="'Compensatory Benefit Request from ' + request.env.user.name" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="subject">Comp off request against:</label>
+                        <input type="date" id="date_from" name="date_from" class="form-control"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="subject">Comp off requested for:</label>
+                        <input type="date" id="date_to" name="date_to" class="form-control"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" class="form-control" rows="4"/>
+                    </div>
+
+                    <a t-attf-href="/my/employee_comp" class="btn btn-primary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </t>
+    </template>
+    <template id="compensatory_submitted_view" name="Compensatory submit view">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_submit" >
+                <div class="card text-center">
+                <div class="card-header">
+                    compensatory Benefit Form
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-success">Your Request has Been Submitted Successfully!</h5>
+                    <p class="card-text"></p>
+
+                    <a href="/my/employee_comp" class="btn btn-primary">Back to home</a>
+                </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="compensatory_cancel_submitted_view" name="Compensatory submit view">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_submit" >
+                <div class="card text-center">
+                <div class="card-header">
+                    compensatory Benefit Form
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-success">No sufficent Befenits avilable to you!</h5>
+                    <p class="card-text"></p>
+
+                    <a href="/my/employee_comp" class="btn btn-primary">Back to home</a>
+                </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="compensatory_table_view_template" name="Attendance Table View">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_table">
+                <a href="/my/employee/compensatorys" ><button type="button" id="goback_compensatory" name="goback_compensatory" class="btn btn-primary">Go Back</button></a>
+                <h3 style="text-align:center;">Compensatory Status</h3>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr class="text-center">
+                            <th>Employee</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <t t-foreach="records" t-as="record">
+                            <tr>
+                                <td><t t-esc="record.employee_id.name"/></td>
+                                <td><t t-esc="state_dict.get(record.state, '')"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

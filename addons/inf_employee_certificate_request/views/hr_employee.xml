@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_confirmation_description_form" model="ir.ui.view">
+        <field name="name">confirmation.description.form</field>
+        <field name="model">confirmation.description</field>
+        <field name="arch" type="xml">
+            <form string="Confirmation Description">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"
+                            invisible="status_bool == False" groups="infinous_user_groups.reporting_manager"/>
+
+
+                    <button name="action_terminate" string="Terminate" type="object" class="oe_highlight"
+                            invisible="status_bool == True" groups="infinous_user_groups.reporting_manager"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="description"/>
+                        <field name="status_bool" invisible="1"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                        <field name="employee_id" force_save="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_confirmation_description_form" model="ir.actions.act_window">
+        <field name="name">Confirmation Descriptions</field>
+        <field name="res_model">confirmation.description</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new confirmation description.
+            </p>
+        </field>
+    </record>
+
+
+    <record id="view_employee_certificate_form" model="ir.ui.view">
+        <field name="name">hr.employee.certificate.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <button invisible="user_id != uid" type="object" class="oe_stat_button" id="open_probation_info"
+                        icon="fa-calendar" name="action_probation_info"
+                        groups="infinous_user_groups.reporting_manager,infinous_user_groups.assigment_hr">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Probation Info
+                        </span>
+                    </div>
+                </button>
+
+                <button invisible="user_id != uid" type="object" class="oe_stat_button" id="open_certificate_info"
+                        icon="fa-calendar" name="action_certificate_info"
+                        groups="infinous_user_groups.reporting_manager,infinous_user_groups.assigment_hr">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Certificate Requests
+                        </span>
+                    </div>
+                </button>
+            </div>
+            <xpath expr="header" position="inside">
+                <button name="%(inf_employee_certificate_request.action_hr_employee_probation_request)d" type="action"
+                        class="oe_highlight" string="Probation Mail" invisible="user_id != uid"
+                        groups="infinous_user_groups.reporting_manager"/>
+
+
+                <button name="%(inf_employee_certificate_request.action_employee_birthdate_filter_wizard)d"
+                        type="action"
+                        class="oe_highlight" string="Birthday / Work Anniversary" invisible="user_id != uid"
+                        groups="infinous_user_groups.assigment_hr"
+
+                />
+                <button name="%(inf_employee_certificate_request.action_hr_employee_certificate_request)d" type="action"
+                        class="oe_highlight" string="Certificate Request"/>
+
+                <button name="%(inf_employee_certificate_request.action_hr_employee_general_announcement_wizard)d"
+                        type="action"
+                        class="oe_highlight" string="General Announcement" invisible="user_id != uid"/>
+
+
+            </xpath>
+            <xpath expr="//page[@name='personal_information']/group/group[2]/field[@name='marital']" position="before">
+                <label for="father_first_name"/>
+                <div class="o_address_format">
+                    <field name="father_first_name" placeholder="First Name..." class="o_address_street"/>
+                    <field name="father_middle_name" placeholder="Middle Name..." class="o_address_street"/>
+                    <field name="father_last_name" placeholder="Last Name" class="o_address_street"/>
+                    <field name="father_birthday" class="o_address_street" placeholder="Date of birth"/>
+                    <field name="father_gender" class="o_address_street" placeholder="Gender..."/>
+                    <field name="father_attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1"
+                           colspan="2"/>
+                </div>
+
+                <label for="mother_first_name"/>
+                <div class="o_address_format">
+                    <field name="mother_first_name" placeholder="First Name..." class="o_address_street"/>
+                    <field name="mother_middle_name" placeholder="Middle Name..." class="o_address_street"/>
+                    <field name="mother_last_name" placeholder="Last Name" class="o_address_street"/>
+                    <field name="mother_birthday" class="o_address_street" placeholder="Date of birth"/>
+                    <field name="mother_gender" class="o_address_street" placeholder="Gender..."/>
+                    <field name="mother_attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1"/>
+                </div>
+
+
+            </xpath>
+
+            <xpath expr="//page[@name='personal_information']/group/group[2]/field[@name='spouse_complete_name']"
+                   position="replace">
+                <label for="spouse_first_name" invisible="marital != 'married'"/>
+                <div class="o_address_format" invisible="marital != 'married'">
+                    <field name="spouse_first_name" placeholder="Spouse First Name..." class="o_address_street"/>
+                    <field name="spouse_middle_name" placeholder="Spouse Middle Name..." class="o_address_street"/>
+                    <field name="spouse_last_name" placeholder="Spouse Last Name" class="o_address_street"/>
+                    <field name="spouse_birthday" class="o_address_street" placeholder="Spouse Date of birth"/>
+                    <field name="spouse_gender" class="o_address_street" placeholder="Gender..."/>
+                    <field name="spouse_attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1"
+                           colspan="2"/>
+                </div>
+
+
+            </xpath>
+
+            <xpath expr="//page[@name='personal_information']/group/group[2]/field[@name='spouse_birthdate']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+
+
+            </xpath>
+
+
+            <xpath expr="//page[@name='personal_information']//field[@name='birthday']"
+                   position="after">
+                <field name="current_contract_start" invisible="1"/>
+                <field name="probation_notification_sent" invisible="1"/>
+
+
+            </xpath>
+
+            <xpath expr="//field[@name='work_email']" position="after">
+                <field name="enable_emp_profile_edit" invisible="1"/>
+                <label for="probation_start_date"/>
+                <div class="o_row">
+                    <field name="probation_start_date"/>
+                    <field name="probation_end_date"/>
+                </div>
+
+
+            </xpath>
+
+            <!--             <xpath expr="//field[@name='parent_id']" position="after">
+                            <field name="hr_manager_id"/>
+
+
+                        </xpath> -->
+
+            <xpath expr="//page[@name='hr_settings']//field[@name='user_id']" position="attributes">
+                <attribute name="domain">[('active', '=', True)]</attribute>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Documents">
+                    <group>
+                        <group string="Personal Details">
+                            <field name="aadhar_card" widget="many2many_binary"
+                           colspan="2"/>
+                            <field name="pan_card"  widget="many2many_binary"
+                           colspan="2"/>
+
+
+                            <!--                            <field name="aadhar_card" filename="filename1" readonly="user_group_bool != True"/>-->
+                            <!--                            <field name="pan_card" filename="filename2" readonly="user_group_bool != True"/>-->
+                            <!--                            <field name="filename1" invisible="1"/>-->
+                            <!--                            <field name="filename2" invisible="1"/>-->
+                            <!--                            <field name="filename3" invisible="1"/>-->
+                            <!--                            <field name="filename4" invisible="1"/>-->
+                            <!--                            <field name="filename5" invisible="1"/>-->
+                            <!--                            <field name="filename6" invisible="1"/>-->
+                        </group>
+
+                        <group string="Qualification">
+                            <field name="tenth_cer" widget="many2many_binary"
+                           colspan="2"/>
+                            <field name="plus_two_cer" widget="many2many_binary"
+                           colspan="2"/>
+                            <field name="graduation" widget="many2many_binary"
+                           colspan="2"/>
+                            <field name="exp" widget="many2many_binary"
+                           colspan="2"/>
+                            <!--                            <field name="tenth_cer" filename="filename3" readonly="user_group_bool != True"/>-->
+                            <!--                            <field name="plus_two_cer" filename="filename4" readonly="user_group_bool != True"/>-->
+                            <!--                            <field name="graduation" filename="filename5" readonly="user_group_bool != True"/>-->
+                            <field name="user_group_bool" invisible="1" />
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Experience">
+                            <field name="exp" widget="many2many_binary" string="Attach a file" nolabel="1"
+                           colspan="2" readonly="user_group_bool != True"/>
+                        </group>
+                    </group>
+
+                </page>
+
+                <page string="Compensation Details">
+                    <separator string="Compensation Details"/>
+
+
+                    <field name="salary_details_ids" readonly="user_group_bool != True" widget="one2many_list">
+                        <tree editable="bottom">
+                            <field name="type_id" required="1"/>
+                            <field name="amount"/>
+                            <field name="amount_year"/>
+                        </tree>
+                    </field>
+                </page>
+
+
+            </xpath>
+
+            <xpath expr="//page[@name='personal_information']//field[@name='children']" position="after">
+                <field name="children_ids" class="one2many_width">
+                    <tree editable="bottom">
+                        <field name="first_name"/>
+                        <field name="mid_name"/>
+                        <field name="last_name"/>
+                        <field name="birthday"/>
+                        <field name="child_gender"/>
+                        <field name="children_attachment_ids" widget="many2many_binary"/>
+
+                    </tree>
+
+                </field>
+
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

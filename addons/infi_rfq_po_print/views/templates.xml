@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+ <record id="infi_purchase_order_paperformat" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">35</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_infi_rfq_print" model="ir.actions.report">
+            <field name="name">Request for Quotation Custom</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">infi_rfq_po_print.print_rqf</field>
+            <field name="report_file">infi_rfq_po_print.print_rqf</field>
+            <field name="print_report_name">'RFQ- %s' % (object.name).replace('/', '')</field>
+            <field name="paperformat_id" ref="infi_rfq_po_print.infi_purchase_order_paperformat"/>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_infi_purchase_order_print" model="ir.actions.report">
+            <field name="name">Purchase Order Custom</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">infi_rfq_po_print.print_purchase_order</field>
+            <field name="report_file">infi_rfq_po_print.print_purchase_order</field>
+            <field name="print_report_name">'Purchase Order - %s' % (object.name).replace('/', '')</field>
+            <field name="paperformat_id" ref="infi_rfq_po_print.infi_purchase_order_paperformat"/>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

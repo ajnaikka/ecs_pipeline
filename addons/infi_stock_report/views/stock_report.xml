@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="view_product_template_tree1" model="ir.ui.view">
+            <field name="name">product.template.tree1</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                 <tree string="Camera Unit stock Report">
+                    <field name="name" options="{'no_create': True}"/>
+                    <field name="default_code" options="{'no_create': True}"/>
+                    <field name="qty_available" string="Current Camera Units" options="{'no_create': True}" sum="Quantity Available"/>
+                    <field name="stock_out" string="Camera units out For Shoot" options="{'no_create': True}" sum="stock out"/>
+                    <field name="total_quantity" options="{'no_create': True}" sum="Total Quantity"/>
+                    <field name="is_camera_unit" column_invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="product_template_tree_view_inherited" model="ir.ui.view">
+            <field name="name">product.template.tree.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="qty_available" position="after">
+                    <field name="stock_out"/>
+                    <field name="total_quantity"/>
+                    <field name="is_camera_unit" column_invisible="1"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="stock_report_product_template_form_view">
+            <field name="name">product.template.stock.report</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <span class="d-inline-block">
+                        <field name="is_camera_unit"/>
+                        <label for="is_camera_unit"/>
+                    </span>
+                </div>
+            </field>
+        </record>
+
+        <record id="stock_request_action" model="ir.actions.act_window">
+            <field name="name">Stock Report</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_template_tree1"/>
+            <field name="domain">[('is_camera_unit', '=', True)]</field>
+        </record>
+
+
+        <menuitem
+                id="stock_request_menu" groups="infinous_user_groups.store_in_charge"
+                parent="stock_account.menu_inventory_aging"
+                sequence="11"
+                name="Stock Report"
+                action="stock_request_action"
+        />
+    </data>
+</odoo>

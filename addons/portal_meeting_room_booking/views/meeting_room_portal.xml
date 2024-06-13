@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_portal_meeting_room_booking" name="meeting room"
+              inherit_id="inf_employee_portal.employee_list_template">
+        <xpath expr="//div[@id='portal_common_category_employee']" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon"
+                   t-value="'/portal_meeting_room_booking/static/description/meeting.png'"/>
+                <t t-set="title">Meeting Room Booking</t>
+                <t t-set="text">Book your meeting room</t>
+                <t t-set="url" t-value="'/meeting/room/booking'"/>
+                <t t-set="config_card" t-value="True"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="meeting_room_booking_form" name="Meeting Room Booking">
+        <t t-call="portal.portal_layout">
+            <div id="portal_attendance">
+                <form method="post" action="/room_booking/submit/from" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group mb-6">
+                        <div class="form-group mb-3 row">
+                            <div class="col-3">
+                                <a href="/meeting/room/booking">
+                                    <button type="button" id="goback_attendance" name="goback_attendance"
+                                            class="btn btn-primary">Go Back
+                                    </button>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <h3 class="text-center">Meeting Room Booking Form</h3>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="meeting_name">Meeting Name:</label>
+                        <input type="text" id="meeting_name" name="meeting_name" required="1" class="form-control"
+                               t-att-value="room_booking.name if room_booking else ''"/>
+
+                        <input type="hidden" id="room_booking" name="room_booking" class="form-control"
+                               t-att-value="room_booking.id if room_booking else ''"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="room_id">Room:</label>
+                        <select id="room_id" name="room_id" required="required" class="form-control">
+                            <t t-if="room_booking">
+                                <t t-set="selected_room_id" t-value="room_booking.room_id.id"/>
+                            </t>
+                            <option value="">Select Room</option>
+                            <t t-foreach="rooms" t-as="room">
+                                <option t-att-value="room.id" t-att-selected="room.id == selected_room_id">
+                                    <t t-esc="room.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <div class="col-4">
+                            <label for="start_datetime">Start Date:</label>
+                            <input type="datetime-local" required="1" id="start_datetime" name="start_datetime"
+                                   class="form-control"
+                                   t-att-value="start_datetime.strftime('%Y-%m-%d %H:%M') if room_booking and start_datetime else current_time.strftime('%Y-%m-%d %H:%M')"/>
+                        </div>
+                        <div class="col-4">
+                            <label for="current_time">End Date:</label>
+                            <input type="datetime-local" required="1" id="stop_datetime" name="stop_datetime"
+                                   class="form-control"
+                                   t-att-value="stop_datetime.strftime('%Y-%m-%d %H:%M') if room_booking and stop_datetime else current_time.strftime('%Y-%m-%d %H:%M')"/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="organizer">Organizer:</label>
+                        <select id="organizer" name="organizer" class="form-control">
+                            <t t-foreach="organizer" t-as="org">
+                                <option t-att-value="org.id">
+                                    <t t-esc="org.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div style="text-align:center">
+                        <a t-attf-href="/meeting/room/booking" class="btn btn-primary">Discard</a>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="application_submited_view" name="Attendance submit view">
+        <t t-call="portal.portal_layout">
+            <div id="meeting_room_submit">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Meeting Room
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Meeting Room Booked Successfully!</h5>
+                        <p class="card-text"></p>
+                        <a href="/meeting/room/booking" class="btn btn-primary">Back to home</a>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="meeting_room_table_view_template" name="Meeting Room Booking View">
+        <t t-call="portal.portal_layout">
+            <div id="meeting_room_table">
+                <a href="/my/employee_list">
+                    <button type="button" id="goback_home" name="goback_home" class="btn btn-primary">Go
+                        Back Home
+                    </button>
+                </a>
+
+                <a href="/meeting/room/booking/form">
+                    <button type="button" id="create_booking" name="create_booking" class="btn btn-primary">
+                        Create New
+                    </button>
+                </a>
+                <h3 style="text-align:center;">Room Booking Details</h3>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr class="text-center">
+                            <th>Start Datetime</th>
+                            <th>End Datetime</th>
+                            <th>Name</th>
+                            <th>Room</th>
+                            <th>Organizer</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <t t-foreach="room_booked_list" t-as="room">
+                            <tr>
+                                <td>
+                                    <t t-if="room.get('start_datetime')">
+                                        <t t-esc="room.get('start_datetime')"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-if="room.get('stop_datetime')">
+                                        <t t-esc="room.get('stop_datetime')"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-if="room.get('name')">
+                                        <t t-esc="room.get('name')"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-if="room.get('room_name')">
+                                        <t t-esc="room.get('room_name')"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-if="room.get('organizer_name')">
+                                        <t t-esc="room.get('organizer_name')"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <a t-attf-href="/meeting/room/booking/form?room_id={{room.get('room_id')}}"
+                                       class="btn btn-primary">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        </t>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

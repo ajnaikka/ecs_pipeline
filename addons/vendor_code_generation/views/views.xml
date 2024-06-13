@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+
+
+      <record id="unique_view_partner_form_inherit" model="ir.ui.view">
+		    <field name="name">res.partner.form.inherit</field>
+		    <field name="model">res.partner</field>
+		    <field name="inherit_id" ref="base.view_partner_form"/>
+		    <field name="arch" type="xml">
+			 <xpath expr="//group[1]" position="inside">
+                 <group>
+                     <field name="unique_reference_id" readonly="True" invisible="supplier_rank == False"/>
+<!--                     <field name="unique_reference_id" position="attributes">-->
+<!--                <attribute name="invisible">['|', ('supplier_rank', '!=', 1), ('supplier_rank', '=', False)]</attribute>-->
+<!--            </field>-->
+                 <field name="supplier_rank" invisible="1"/>
+<!--                 <field name="customer_rank" invisible="1"/>-->
+<!--                      <field name="flag_unique_sequence_customer" invisible="1"/>-->
+<!--                     <field name="flag_unique_sequence_supplier" invisible="1"/>-->
+<!--                     <field name="flag_sequence_number" invisible="1"/>-->
+<!--                  <label for="" name="unique_reference">-->
+<!--                 <b attrs="{'invisible': ['|',('supplier_rank','>',0),('flag_unique_sequence_supplier','=',True)]}"> Customer ID</b>-->
+<!--                 <b attrs="{'invisible': ['|',('customer_rank','>',0),('flag_unique_sequence_customer','=',True)]}"> Vendor ID</b>-->
+<!--                  </label>-->
+<!--&lt;!&ndash;                <label for="" string="Vendor ID" attrs="{'invisible': [('customer_rank','>',0)]}"/>&ndash;&gt;-->
+<!--                 <div class="o_address_format">-->
+<!--                     <field name="unique_reference_id" nolabel="1" attrs="{'invisible': [('flag_unique_sequence_customer','=',True),('flag_unique_sequence_supplier','=',True)]}"/>-->
+<!--                 </div>-->
+        </group>
+             </xpath>
+		    </field>
+               </record>
+
+<record id="view_res_partner_vendor_code_tree" model="ir.ui.view">
+        <field name="name">res.partner.vendor.code.inherit.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                     <field name="unique_reference_id" readonly="True" invisible="supplier_rank == False"/>
+                 <field name="supplier_rank" invisible="1" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+
+
+       <record id="vendor_id_view_purchase_print_button" model="ir.ui.view">
+            <field name="name">purchase.order.vendor.id</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_ref" position="after">
+			        <field name="vendor_id" readonly="True" force_save="1"/>
+			    </field>
+            </field>
+       </record>
+
+
+
+
+
+  </data>
+</odoo>

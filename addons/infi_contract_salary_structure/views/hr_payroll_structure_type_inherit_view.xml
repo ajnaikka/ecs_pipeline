@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_hr_payroll_structure_type_form_inherit" model="ir.ui.view">
+            <field name="name">view.hr.payroll.structure.type.form.inherit</field>
+            <field name="model">hr.payroll.structure.type</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payroll_structure_type_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='wage_type']" position="after">
+                    <field name="contract_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='contract_type_id']" position="after">
+                    <field name="contract_type"/>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>

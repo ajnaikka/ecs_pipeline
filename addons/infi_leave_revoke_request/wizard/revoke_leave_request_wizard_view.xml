@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_leave_request_revoke" model="ir.ui.view">
+        <field name="name">view.hr.employee.leave.revoke.request</field>
+        <field name="model">request.revoke.leave.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Request Revoke Leave">
+
+                <group class="o_label_nowrap">
+                    <field name="send_to_revoke"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="mail_displayed" invisible="not mail_displayed" string=""/>
+                </group>
+                <group col="4" string="Time Off">
+                    <label for="start_date"/>
+                    <div class="o_row">
+                        <field name="start_date" force_save="1"/>
+                        End Date:<field name="end_date" style="margin-left:10px;" force_save="1"/>
+                    </div>
+                </group>
+                <group class="o_label_nowrap" string="Mail Options">
+
+                    <field name="subject" placeholder="Signature Request"/>
+                </group>
+                <field name="message" placeholder="Optional Message..." widget="html"/>
+                <field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
+                <footer>
+                    <button name="validate_request_revoke" string="Send" type="object" class="oe_highlight"
+                            data-hotkey="q"/>
+
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_button_request_for_revoke_leave" model="ir.actions.act_window">
+        <field name="name">Request Revoke Leave</field>
+        <field name="res_model">request.revoke.leave.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

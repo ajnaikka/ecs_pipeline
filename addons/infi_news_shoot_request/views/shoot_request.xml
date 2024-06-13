@@ -1,0 +1,107 @@
+<odoo>
+    <data>
+        <record id="shoot_request_tree" model="ir.ui.view">
+            <field name="name">shoot.request.tree</field>
+            <field name="model">shoot.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="request_date"/>
+                    <field name="employee_id"/>
+                    <field name="boq_id"/>
+                    <field name="issued_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="shoot_request_form" model="ir.ui.view">
+            <field name="name">shoot.request.form</field>
+            <field name="model">shoot.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="shoot_request_button" type="object" string="Shoot Request" class="oe_highlight" invisible="state in ('shoot_req', 'to_storeperson', 'to_reporter','inventory_out','cancel','closed')"/>
+                        <button name="req_storeperson" type="object" string="Request To Store In Charge" class="oe_highlight" invisible="state in ('draft', 'to_reporter','to_storeperson','inventory_out','cancel','closed')" groups="infinous_user_groups.assigment_team"/>
+                        <button name="product_out" type="object" string="product out" class="oe_highlight" invisible="1"/>
+                        <button name="stock_out" type="object" string="Assign To Reporter" class="oe_highlight" invisible="state in ('shoot_req', 'draft','to_reporter','cancel','closed')" groups="infinous_user_groups.store_in_charge"/>
+                        <button name="stock_in" type="object" string="Inventory in" class="oe_highlight" invisible="state in ('shoot_req', 'draft','cancel','to_storeperson','closed')" groups="infinous_user_groups.store_in_charge"/>
+                        <button name="cancel_button" type="object" string="Cancel" class="oe_highlight" invisible="state in ('draft','to_reporter','cancel','closed')" groups="infinous_user_groups.assigment_team"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="issued_date" readonly="1"/>
+                                <field name="request_date" readonly="1"/>
+                                <field name="comment" string="Comment" invisible="1"/>
+                                <field name="boq_id" groups="infinous_user_groups.store_in_charge"/>
+                                <field name="is_to_store_in_charge" invisible="1"/>
+<!--                                <field name="email_to" options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/>-->
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Component Details" id="component_details" groups="infinous_user_groups.store_in_charge">
+                                <field name="kit_line_ids">
+                                     <tree editable="bottom">
+                                        <field name="component_id"/>
+<!--                                        <field name="product_on_hand_qty"/>-->
+                                        <field name="quantity"/>
+                                        <field name="uom_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_employee_form_inherited_view">
+            <field name="name">hr.employee.form.inherited</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                  <xpath expr="//button[@name='action_open_contract']" position="after">
+                    <button name="smart_shoot_request"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        string="Shoot Requests"/>
+
+                  </xpath>
+                  <xpath expr="//header" position="inside">
+                    <button string="Shoot Request" class="oe_highlight" type="object" name="action_shoot_request"/>
+                  </xpath>
+            </field>
+        </record>
+        <record id="view_company_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.form.inherit.picking</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="picking_type"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="shoot_request_action" model="ir.actions.act_window">
+            <field name="name">Shoot Request</field>
+            <field name="res_model">shoot.request</field>
+        </record>
+        <menuitem
+                id="shoot_request_menu"
+                parent="hr.menu_hr_employee_payroll"
+                sequence="10"
+                name="Shoot Requests"
+                action="shoot_request_action"
+        />
+
+    </data>
+</odoo>
+

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="travel_request_portal_employee" name="travel request"
+              inherit_id="inf_employee_portal.employee_list_template">
+
+            <xpath expr="//div[@id='portal_common_category_employee']" position="inside">
+
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="icon"
+                           t-value="'/infi_portal_travle_request/static/description/travel.png'"/>
+                        <t t-set="title">Travel Request </t>
+                        <t t-set="text">Create your Travel request</t>
+                        <t t-set="url" t-value="'/my/employees/travel_request'"/>
+                        <t t-set="config_card" t-value="True"/>
+                    </t>
+            </xpath>
+
+    </template>
+
+    <template id="travel_request_form" name="Travel Request Template">
+        <t t-call="portal.portal_layout">
+            <div id="travel_request">
+                <form method="post" action="/my/send_mail/travel_request" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="header">
+                        <a href="/my/employees/travel_request/status"><button type="button" class="btn btn-primary" id="check_status" name="check_status">Check Status</button></a>
+                        <button type="button" class="btn btn-primary" id="back" name="back" onclick="goBack()">Back</button>
+                        <div style="text-align:right;">
+                            <div class="btn-group" role="group" aria-label="Stage Buttons" >
+                                <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }} " >Draft</button>
+                                <button type="button" t-attf-class="btn btn-secondary ">Travel Approve Request to Manager</button>
+                                <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">Approved by Manager</button>
+                                <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">Refused by Manager</button>
+
+                             </div>
+                        </div>
+
+                    </div><br/>
+                    <div class="form-group mb-3">
+                        <h3 class="text-center">Travel Request Form</h3>
+                    </div>
+                    <div>
+                        <div class="form-group mb-3">
+                            <label for="description">Description:</label>
+                            <textarea type="text" id="description" name="description" class="form-control" required="1" ></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="travel_details">Travel Details:</label>
+                            <table id="travel_details_table">
+                                <tr>
+                                    <td><input type="text" name="travel_place[]" class="form-control" placeholder="Travel Place" required="1"/></td>
+                                    <td><input type="text" name="place_description[]" class="form-control" placeholder="Place Description" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" id="addRowBtn" class="btn btn-info" onclick="addRow()">Add Row</button>
+
+                        <div class="form-group mb-3">
+                            <label for="request_date">Request Date:</label>
+                            <input type="date" id="request_date" name="request_date" class="form-control"  readonly="1"/>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="employee">Employee:</label>
+                            <input type="text" id="employee" name="employee" class="form-control" t-att-value="request.env.user.name" readonly="readonly"/>
+                        </div>
+                        <div class="form-group mb-3">
+<!--                            <label for="reporting manager">Reporting Manager:</label>-->
+                            <input type="hidden" id="reporting_manager" name="reporting_manager" class="form-control" t-att-value="request.env.user.employee_id.parent_id.work_email" readonly="readonly"/>
+                        </div>
+                        <div class="form-group mb-3">
+<!--                            <label for="email_from">From:</label>-->
+                            <input type="hidden" id="email_from" name="email_from" class="form-control" t-att-value="request.env.user.work_email" readonly="readonly"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-6 mb-3">
+                                <label for="travel_start_date">Travel Start Date:</label>
+                                <input type="date" id="travel_start_date" name="travel_start_date" class="form-control" required="1"/>
+                            </div>
+                            <div class="form-group col-6 mb-3">
+                                <label for="travel_end_date">Travel End Date:</label>
+                                <input type="date" id="travel_end_date" name="travel_end_date" class="form-control" required="1"/>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3" style="text-align:center">
+                            <button type="button" class="btn btn-primary" onclick="goBack()">Discard</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
+
+                        </div>
+                        <br/>
+
+                    </div>
+                    <script><![CDATA[
+                        function addRow() {
+                            var table = document.getElementById("travel_details_table");
+                            var rowCount = table.rows.length;
+                            var row = table.insertRow(rowCount);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+
+                            cell1.innerHTML = '<input type="text" name="travel_place[]" class="form-control" placeholder="Travel Place" required="1"/>';
+                            cell2.innerHTML = '<input type="text" name="place_description[]" class="form-control" placeholder="Place Description" />';
+                            cell3.innerHTML = '<button class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button>';
+                        }
+
+                        function removeRow(btn) {
+                            var row = btn.parentNode.parentNode;
+                            row.parentNode.removeChild(row);
+                        }
+
+                        var currentDate = new Date().toISOString().slice(0, 10);
+
+                        document.getElementById("request_date").value = currentDate;
+
+                        function goBack() {
+                            window.history.back()
+                        }
+                    ]]></script>
+                </form>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="travelrequest_submit_view" name="Travel Request submited View">
+        <t t-call="portal.portal_layout">
+            <div id="travelrequest_submit" >
+                <div class="card text-center">
+                <div class="card-header">
+                    Travel Request
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-success">Your Request Submited Successfully!</h5>
+                    <p class="card-text"></p>
+                    <a href="/my/employees/travel_request/status" class="btn btn-primary">Check Status</a>
+
+                    <a href="/my/employees/travel_request/home" class="btn btn-primary">Back to home</a>
+                </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="travelrequest_table_view_template" name="Travelrequest Table View">
+        <t t-call="portal.portal_layout">
+            <div id="travelrequest_table">
+                <a href="/my/employees/travel_request"><button type="button" id="goback_shoot" name="goback_shoot" class="btn btn-primary">Go Back</button></a>
+
+                <h3 style="text-align:center;">Travel Request Status</h3>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr class="text-center">
+                            <th>Requested Date</th>
+                            <th>Employee</th>
+                            <th>Discription</th>
+                            <th>Travel Start Date</th>
+                            <th>Travel End Date</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <t t-foreach="records" t-as="line">
+                            <tr>
+                                <td><t t-esc="line.request_date"/></td>
+                                <td><t t-esc="line.employee_id.name"/></td>
+                                <td><t t-esc="line.description"/></td>
+                                <td><t t-esc="line.start_date"/></td>
+                                <td><t t-esc="line.end_date"/></td>
+                                <td><t t-esc="state_dict.get(line.state, '')"/></td>
+                            </tr>
+
+
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+
+
+
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <menuitem
+            id="menu_purchase_config_my_custom_menu"
+            name="My Custom Menu"
+            parent="purchase.menu_purchase_config"
+            sequence="50"
+            groups="purchase.group_purchase_manager"/>
+    </data>
+</odoo>

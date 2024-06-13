@@ -8,9 +8,9 @@ USER root
 RUN chown -R odoo:odoo /var/lib/odoo
 RUN chmod -R 777 /var/lib/odoo
 
-#COPY ./addons /mnt/extra-addons
+COPY ./addons /mnt/extra-addons
 COPY ./odoo.conf /etc/odoo/odoo.conf
-# RUN set -e; \
-#     pip install --no-cache-dir -r /mnt/extra-addons/requirements.txt
+RUN set -e; \
+     pip install --no-cache-dir -r /mnt/extra-addons/requirements.txt
 
 USER odoo

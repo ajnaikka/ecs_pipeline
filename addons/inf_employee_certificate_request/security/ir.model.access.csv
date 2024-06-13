@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_certificate_request_wizard,access.hr.employee.certificate.request.wizard,model_hr_employee_certificate_request_wizard,,1,1,1,1
+access_family_member,access.family.member,model_family_member,,1,1,1,1
+access_employee_probation_details,access.employee.probation.details,model_employee_probation_details,,1,1,1,1
+access_salary_details,access.salary.details,model_salary_details,,1,1,1,1
+access_certificate_generations,access.certificate.generations,model_certificate_generations,,1,1,1,1
+access_confirmation_description,access.confirmation.description,model_confirmation_description,,1,1,1,1
+access_hr_employee_announcement,access.hr.employee.announcement,model_hr_employee_announcement,,1,1,1,1
+access_employee_certificate_details,access.employee.certificate.details,model_employee_certificate_details,,1,1,1,1
+access_hr_employee_birthdate_filter_wizard,access.hr.employee.birthdate.filter.wizard,model_hr_employee_birthdate_filter_wizard,,1,1,1,1
+access_hr_employee_general_announcement_wizard,access.hr.employee.general.announcement.wizard,model_hr_employee_general_announcement_wizard,,1,1,1,1

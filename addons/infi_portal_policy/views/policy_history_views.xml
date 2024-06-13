@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_employee_policy_history" model="ir.actions.act_window">
+            <field name="name">Employee Policy History</field>
+            <field name="res_model">employee.policy.history</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new Employee Policy History.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_employee_policy_history" name="Employee Policy History"
+                  parent="hr.menu_human_resources_configuration"
+                  action="action_employee_policy_history" groups="hr.group_hr_manager"/>
+
+        <record id="view_employee_policy_history_tree" model="ir.ui.view">
+            <field name="name">employee.policy.history.tree</field>
+            <field name="model">employee.policy.history</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Policy History">
+                    <field name="date"/>
+                    <field name="status"/>
+                    <field name="employee_id"/>
+                    <field name="department"/>
+                    <field name="employement_id"/>
+                    <field name="reporting_manager"/>
+
+
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

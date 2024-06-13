@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_joining_letter_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <style type="text/css">
+                            .para {
+                            padding-bottom: 20px;
+                            padding-left: 5px;
+                            font-family: Arial, sans-serif;font-size:13pt;
+                            }
+
+                            .num {
+                            padding-bottom: 20px;
+                            font-weight:bold;
+                            font-size:13pt;
+                            }
+                        </style>
+                        <h2>Joining Letter</h2>
+                        <br/>
+                        <br/>
+                        <div style="text-align: justify;font-family: Arial, sans-serif;font-size:13pt;">
+                            <p>
+                                <b>Address</b>
+                            </p>
+                            <p>
+                                <span t-esc="o.env.company.partner_id"
+                                      t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </p>
+                            <p>
+                                <b>Dear</b>
+                                <span style="font-weight:bold;" t-esc="o.employee_id.name"/>,
+                            </p>
+                            <p>We have pleasure to inform you that you have been selected
+                                and provisionally appointed as
+                                <span style="font-weight:bold;" t-field="o.designation"/>
+                                of Infi News Network Pvt Ltd., with effect from
+                                <span style="font-weight:bold;" t-field="o.joining_date"/>
+                                on the following terms and conditions.
+                            </p>
+
+                            <table style="width:95%;margin-left:40px;" class="table table-borderless">
+                                <tr>
+                                    <td class="num">
+                                        <p>1.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>Your headquarters will be at <span style="font-weight:bold;" t-esc="o.employee_id.work_location_id.name"/> You will work under
+                                            the immediate supervision and control of the <span style="font-weight:bold;" t-esc="o.employee_id.parent_id.name"/>, and under the overall
+                                            control
+                                            of the Group VP/Chief Executive Officer.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>2.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>You will be responsible for undertaking responsibilities
+                                            as the Management may assign to you from time to time.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>3.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>You are liable to be transferred from one job to another,
+                                            one department to another or from one unit/Branch to another anywhere in
+                                            India,
+                                            whether existing at present or to be set up in future.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>4.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>You will be on probation for a period of six months from
+                                            <span t-field="o.joining_date"/>. During the probation period, your
+                                            aptitude,
+                                            performance of work, relationship with other employees, attendance,
+                                            punctuality,
+                                            general discipline, loyalty, and overall contribution to our establishment
+                                            will
+                                            be closely observed and evaluated. The period of probation can be extended
+                                            at
+                                            the discretion of the Management and you will continue to be on probation
+                                            till
+                                            an order of confirmation is issued by the Managing Director in writing.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>5.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>The Management reserves the right to terminate your
+                                            employment at any time without assigning any reason during the probation
+                                            period
+                                            or extended periods of probation.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>6.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>Continuation of your employment after the expiry of the
+                                            six months probation period without a written order of confirmation will
+                                            only
+                                            mean that the probation period has been continued without the extended
+                                            period
+                                            being specified. It will not in any circumstance mean that you have been
+                                            confirmed to any permanent post or to any such vacancy that may exist then.
+                                            You
+                                            will be on probation, continued on the same terms and conditions as is laid
+                                            down
+                                            herein and your service is liable to be terminated at any time.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>7.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>During six months' probation, you will be eligible for 6
+                                            days Casual leave and 6 days Medical leave on pro-rata business. Subsequent
+                                            to
+                                            your confirmation in the service of the company, you will be eligible for 12
+                                            days Casual leave, 12 days Medical leave. You are eligible for 12 days
+                                            Annual
+                                            leave on completion of 12 month continuous service. You will be bound by
+                                            leave
+                                            rules and other rules &amp; regulation of the company in force from time to
+                                            time
+                                            as
+                                            are applicable to IndiaFirst Broadcast Network Pvt Ltd employees in force
+                                            from
+                                            time to time.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>8.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>Your monthly CTC is shown in Annexure I herein. Your
+                                            salary is expected to be kept confidential and not to be shared with your
+                                            colleagues.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>9.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>You will be eligible for Provident Fund, ESI and Gratuity
+                                            as per rules.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>10.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>Your age of superannuation upon confirmation in service
+                                            is
+                                            60 years. At the same time, the Management reserves the right to terminate
+                                            your
+                                            services without assigning any reason whatsoever, by giving you one month’s
+                                            notice or payment of basic pay in lieu thereof. Similarly, you will be at
+                                            liberty to resign from the services of the Company upon one month’s notice
+                                            or
+                                            payment of basic pay in lieu thereof, after serving a minimum of three years
+                                            from the date of absorption into the regular service, unless the Management
+                                            decides otherwise.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>11.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>Your services can also be terminated prior to attaining
+                                            the age of 60 years, on account of physical or mental disability or
+                                            infirmity or
+                                            for continued ill-health if so certified by the doctor nominated by the
+                                            Company.
+                                            In such cases the Management has the right to terminate your services, by
+                                            serving you one month’s notice in writing or by payment of basic pay in lieu
+                                            thereof.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>12.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>You shall devote your time &amp; attention for the
+                                            services of
+                                            the company exclusively and shall not engage either directly or indirectly
+                                            in
+                                            any other trade, business, employment, avocation, advisory services etc.
+                                            during
+                                            the currency of this employment.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>13.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>You will strictly observe and adhere to the existing
+                                            rules
+                                            and regulations of the IndiaFirst Broadcast Network Pvt Ltd and those
+                                            hereinafter enforced.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="num">
+                                        <p>14.</p>
+                                    </td>
+                                    <td class="para">
+                                        <p>Please sign the duplicate copy of this appointment order
+                                            in token of your acceptance.
+                                        </p>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <div style="text-align:right;">
+                                <b>MANAGING DIRECTOR</b>
+
+
+                            </div>
+                        </div>
+
+                        <table style="page-break-before:always;width:100%;border:2px solid black;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 20px;" colspan="3" class="text-center">ANNEXURE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 14px;" class="text-left">Name</td>
+                                    <td style="padding: 14px;" colspan="2" class="text-left">
+                                        <span style="font-weight:bold;" t-field="o.employee_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px;" class="text-left">Designation</td>
+                                    <td style="padding: 14px;" colspan="2" class="text-left">
+                                        <span style="font-weight:bold;" t-field="o.designation"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px;" class="text-left">Department</td>
+                                    <td style="padding: 14px;" colspan="2" class="text-left">
+                                        <span style="font-weight:bold;" t-field="o.department"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px;" class="text-left">Current Location</td>
+                                    <td style="padding: 14px;" colspan="2" class="text-left"><b><span t-esc="o.employee_id.work_location_id.name"/></b></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px;font-weight:bold;" rowspan="2" class="text-center">Salary
+                                        Components
+                                    </td>
+                                    <td style="padding: 14px;font-weight:bold;" colspan="2" class="text-center">
+                                        Offered
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px;font-weight:bold;" class="text-center">Per Month</td>
+                                    <td style="padding: 14px;font-weight:bold;" class="text-center">Per Annum</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px;" class="text-left">Basic</td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                </tr>
+                                <tr t-foreach="o.employee_id.salary_details_ids" t-as="l">
+                                    <td style="padding: 14px;" class="text-left">
+                                        <span t-esc="l.type_id.name"/>
+                                    </td>
+                                    <td style="padding: 14px;" class="text-center">
+                                        <span t-esc="l.amount"/>
+                                    </td>
+                                    <td style="padding: 14px;" class="text-center">
+                                        <span t-esc="l.amount_year"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td style="padding: 14px;font-weight:bold;" class="text-left">TOTAL (A)</td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="padding: 14px;font-weight:bold;" class="text-left">GRAND TOTAL (A+B+C)
+                                    </td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="padding: 14px;font-weight:bold;" class="text-left">ANNUAL COST TO COMPANY
+                                        (A+B+C)
+                                    </td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                    <td style="padding: 14px;" class="text-center"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <div style="text-align:right;margin-top:40px;">
+                                <b>MANAGING DIRECTOR</b>
+
+
+                            </div>
+
+                        <div class="container" style="page-break-before:always;">
+
+                            <br/>
+
+                            <div class="text-left" style="font-size:14pt;">
+                                <b>Accepted By</b>
+                                <br/>
+                                <br/>
+                                <b>Name &amp; Signature of the Employee
+                                </b>
+
+                            </div>
+                            <br/>
+
+                            <div class="text-center mt48" style="font-size:16pt;">
+                                <b>INDIAFIRST CONFIDENTIAL</b>
+
+                            </div>
+
+                            <div class="text-center mt48" style="font-size:16pt;">
+                                <b>ANNEXURE A - NON-DISCLOSURE AGREEMENT</b>
+
+                            </div>
+
+                            <div class="text-left mt64" style="font-size:14pt;text-align: justify;">
+                                <p>Agreement Regarding Confidential Information, Intellectual Property, and Other
+                                </p>
+                                <p class="text-center">Matters</p>
+
+                                <br/>
+                                <p style="padding-top:20px;">In consideration of my employment or my continued
+                                    employment by IndiaFirst Broadcast
+                                    Network Pvt Ltd one of its subsidiaries or affiliates (collectively, “IndiaFirst”),
+                                    which I acknowledge is employment at will, and the payment to me of a salary or
+                                    other compensation during my employment, I agree as follows:
+                                </p>
+
+                            </div>
+                        </div>
+
+
+                        <table class="table table-borderless"
+                               style="width: 100%;margin-top:50px;text-align: justify;">
+                            <tr>
+                                <td class="num">1.</td>
+                                <td class="para">
+                                    <p>
+                                        I will not, without IndiaFirst's prior written permission, disclose to anyone
+                                        outside of IndiaFirst or use in other than IndiaFirst's business, either during
+                                        or after my employment, any confidential information or material of IndiaFirst
+                                        or any information or material received by IndiaFirst in confidence from third
+                                        parties, such as suppliers or customers. If I leave the employment of IndiaFirst
+                                        or at the request of IndiaFirst, I will return to IndiaFirst all property in my
+                                        possession belonging to IndiaFirst or received by IndiaFirst from any third
+                                        party, whether or not containing confidential information and whether stored on
+                                        an IndiaFirst owned asset or a personally owned asset, including, but not
+                                        limited to, electronic data, electronic files, diskettes and other storage
+                                        media, drawings, notebooks, reports, and any other hard copy or electronic
+                                        documents or records. No employee is prohibited from reporting possible
+                                        violations of law or regulation to a government agency, as protected by law.
+                                    </p>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">2.</td>
+                                <td class="para">
+                                    <p>Confidential information or material of IndiaFirst is any information or
+                                        material: (a) generated or collected by or utilized in the operations of
+                                        IndiaFirst; received from any third party; obtained from an entity IndiaFirst
+                                        acquired or in which IndiaFirst purchased a controlling interest (including
+                                        information or material received by that entity from a third party); or
+                                        suggested by or resulting from any task assigned to me or work performed by me
+                                        for or on behalf of IndiaFirst; and (b) which has not been made available
+                                        generally to the public, whether or not expressed in a document or other medium
+                                        and whether or not marked "IndiaFirst Confidential" or with any similar legend
+                                        of IndiaFirst or any third party. Confidential information or material may
+                                        include, but is not limited to, information and material related to past,
+                                        present and future development, manufacturing activities, or personnel matters;
+                                        marketing and business plans; pricing information; customer lists; technical
+                                        specifications, drawings, and designs; prototypes; computer programs; and
+                                        databases.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="page-break-after: always;">
+                                <td class="num">3.</td>
+                                <td class="para">
+                                    <p>During my employment with IndiaFirst and for two years following the
+                                        termination of my employment from IndiaFirst for any reason, I will not directly
+                                        or indirectly solicit, or attempt to or participate or assist in any effort to
+                                        solicit, any employee of IndiaFirst to be employed or perform services outside
+                                        of IndiaFirst. For purposes of this Paragraph 3(a), “employee of IndiaFirst”
+                                        shall mean any employee of IndiaFirst who worked at any time in the 12-month
+                                        period immediately preceding any actual or attempted solicitation.
+                                    </p>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">4.</td>
+                                <td class="para">
+                                    <p>I agree that during my employment with IndiaFirst and for one year following
+                                        the
+                                        termination of my employment for any reason, I will not directly or
+                                        indirectly
+                                        solicit for competitive business purposes any customer with which I was
+                                        directly
+                                        or indirectly involved as part of my job responsibilities during the twelve
+                                        (12)
+                                        months prior to the termination of my employment with IndiaFirst. I
+                                        acknowledge
+                                        that IndiaFirst would suffer irreparable harm if I fail to comply with
+                                        Paragraph
+                                        3(a) or (b), and that IndiaFirst would be entitled to any appropriate
+                                        relief,
+                                        including money damages, equitable relief and attorneys’ fees.
+                                    </p>
+                                    <p>
+                                        I will not disclose to IndiaFirst, use in its business, or cause it to use,
+                                        any information or material which is confidential to any third party unless
+                                        authorized by IndiaFirst. In addition, I will not incorporate into any
+                                        product used and/or sold by IndiaFirst, any copyrighted materials or
+                                        patented inventions of any third party, unless authorized by IndiaFirst
+                                        pursuant to Paragraph 5.
+                                    </p>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">5.</td>
+                                <td class="para">
+                                    <p>
+                                        I will comply and do all things necessary for IndiaFirst to comply with the
+                                        laws and regulations of all governments under which IndiaFirst does. The
+                                        provisions of contracts between any such government or its contractors and
+                                        IndiaFirst that relate to intellectual property or to the safeguarding of
+                                        information, and IndiaFirst’s corporate directives, including, without
+                                        limitation, policies and information technology security standards issued
+                                        from time to time as well as the IndiaFirst Business Conduct Guidelines as
+                                        amended from time to time.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">6.</td>
+                                <td class="para">
+                                    <p>I hereby assign to IndiaFirst my entire right, title, and interest in any
+                                        idea, concept, technique, invention, design (whether the design is
+                                        ornamental or otherwise), computer programs and related documentation, other
+                                        works of authorship, mask works, and the like (all hereinafter called
+                                        "Developments"), hereafter made, conceived, written, or otherwise created
+                                        solely or jointly by me, whether or not such Developments are patentable,
+                                        subject to copyright or trademark protection or susceptible to any other
+                                        form of protection which:
+                                        (a) relate to the actual or anticipated business or research or development
+                                        of IndiaFirst or its subsidiaries or
+                                        (b) are suggested by or result from any task assigned to me or work
+                                        performed by me for or on behalf of IndiaFirst or its subsidiaries.
+                                        If, by operation of law such right, title, and interest in Development’s
+                                        vest in IndiaFirst upon creation, I acknowledge that such right, title, and
+                                        interest belong to IndiaFirst. Also, I hereby assign to IndiaFirst my entire
+                                        right, title and interest in any such Developments that were or are
+                                        suggested by or a result of any task assigned to me, or work performed by me
+                                        for or on behalf of any entity that IndiaFirst acquired or in which
+                                        IndiaFirst purchased a controlling interest to the extent that any such
+                                        right, title and interest is not already owned by said entity.
+                                        In the case of any "other works of authorship", such assignment or ownership
+                                        shall be limited to those works of authorship which meet both conditions (a)
+                                        and (b) above.
+                                        The above provisions concerning assignment or ownership of Developments
+                                        apply to Developments created while employed by IndiaFirst in an executive,
+                                        managerial, professional, product or technical planning, technical,
+                                        research, programming, developer or engineering capacity (including
+                                        development, product, manufacturing, systems, applied science, and field
+                                        engineering) or otherwise.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">7.</td>
+                                <td class="para">
+                                    <p>In connection with any of the Developments assigned by Paragraph 6:
+                                        I will promptly disclose them in writing to the IndiaFirst’s CEO; and I
+                                        will, on IndiaFirst 's request, promptly execute a specific assignment of
+                                        title to IndiaFirst or its designee and do anything else reasonably
+                                        necessary to enable IndiaFirst or such designee to secure a patent,
+                                        copyright or other form of protection therefore in the United States and in
+                                        other countries. In addition, I agree to promptly notify the IndiaFirst’s
+                                        CEO in writing of any patent or patent application in which I am an
+                                        inventor, but which is not assigned by Paragraph 6 and which discloses or
+                                        claims any Development made, conceived, or written while I am employed by
+                                        IndiaFirst. I also agree to promptly notify the IndiaFirst’s CEO if, after I
+                                        leave the employment of IndiaFirst, I am contacted by anyone or any entity
+                                        outside of IndiaFirst regarding any transaction, legal or governmental
+                                        proceeding, litigation or other legal dispute concerning or relating to any
+                                        of the Developments assigned by Paragraph 6.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">8.</td>
+                                <td class="para">
+                                    <p>
+                                        IndiaFirst and its licensees, successors, or assigns (direct or indirect)
+                                        are not required to designate me as an author of any Development which is
+                                        subject to Paragraph 6, when it is distributed, publicly or otherwise, or to
+                                        secure my permission to change or otherwise alter its integrity. I hereby
+                                        waive and release, to the extent permitted by law, all rights in and to such
+                                        designation and any rights I may have concerning modifications of such
+                                        Developments. I understand that any rights, waivers, releases, and
+                                        assignments herein granted and made by me are freely assignable by
+                                        IndiaFirst and are for the benefit of IndiaFirst and its subsidiaries,
+                                        licensees, successors, and assigns.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">9.</td>
+                                <td class="para">
+                                    <p>I agree that IndiaFirst, its services providers and other third parties
+                                        authorized by IndiaFirst will collect, use, store, make available to those
+                                        who have a need-to-know, and otherwise process my personal information to
+                                        establish, maintain and terminate my employment relationship with IndiaFirst
+                                        and for other legitimate business purposes, anywhere in the world. Such
+                                        personal information, whether provided to IndiaFirst, its service providers,
+                                        or third parties directly by me or otherwise gathered, includes my name,
+                                        photo, contact information, skills, compensation, performance, usage of
+                                        IndiaFirst assets, background check results, bank account information, and
+                                        disability or medical information.
+                                        I will not use for unauthorized purposes nor share with any unauthorized
+                                        parties, either during or after my employment, any personal information
+                                        about others to which I may have access during my employment at IndiaFirst.
+                                        IndiaFirst provides numerous opportunities for social computing through
+                                        blogs, wikis, social networks, virtual worlds and other social media. I
+                                        agree to comply with all IndiaFirst policies and practices regarding use of
+                                        social computing tools and I understand that I am personally responsible for
+                                        the content I post on any social computing tools (whether on IndiaFirst’s
+                                        internal platforms or on third party sites) and that any information I post,
+                                        including any of my personal information, may be made broadly available to
+                                        others, potentially inside or outside IndiaFirst, who have access to these
+                                        tools.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">10.</td>
+                                <td class="para">
+                                    <p>
+                                        The term “subsidiaries,” as used in this Agreement, includes any entity
+                                        owned or controlled, directly or indirectly, by IndiaFirst Technology LLC.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">11.</td>
+                                <td class="para">
+                                    <p>The term "employment at will," as used in this Agreement, means the
+                                        employment at the mutual consent of both me and IndiaFirst. Accordingly,
+                                        either IndiaFirst or I can terminate the employment relationship at will, at
+                                        any time, with or without cause or advance notice. However, this clause does
+                                        not relieve me of my responsibility to serve the notice period in accordance
+                                        with my terms of employment, in the event of my resignation from the
+                                        services of IndiaFirst
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">12.</td>
+                                <td class="para">
+                                    <p>This Agreement supersedes all previous oral or written communications,
+                                        representations, understandings, undertakings, or agreements relating to the
+                                        subject matter hereof, except as expressly agreed otherwise by IndiaFirst in
+                                        writing upon my hire or transfer of employment to IndiaFirst. Any waiver of a
+                                        term in this Agreement and any amendment to this Agreement may only be made in a
+                                        writing signed by the CEO or Head of Human Resources for IndiaFirst Technology
+                                        LLC and myself.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">13.</td>
+                                <td class="para">
+                                    <p>This Agreement shall be governed by the laws of United Arab Emirates. If any
+                                        provision of this Agreement is unenforceable at law, the remainder shall remain
+                                        in effect. I recognize that any violation of my obligations described herein
+                                        would cause IndiaFirst to suffer irreparable harm and can result in disciplinary
+                                        action, including dismissal from IndiaFirst, and any other appropriate relief
+                                        for IndiaFirst including money damages, equitable relief and attorney’s fees.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="num">14.</td>
+                                <td class="para">
+                                    <p>This Agreement shall constitute a part of my terms of employment with IndiaFirst
+                                        and is executed contemporaneously with my offer of employment/ employment
+                                        contract with IndiaFirst.
+                                    </p>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <div class="text-left mt64" style="font-size:13pt;">
+                            <p>My agreement, and my acknowledgment of receipt of a copy of this Agreement, are indicated
+                                by
+                                my signature below.
+                            </p>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="text-left" style="font-size:13pt;">
+                            <p>Full Name:</p>
+
+                        </div>
+
+                        <div class="text-left" style="font-size:13pt;">
+                            <p>Signature:</p>
+
+                        </div>
+                        <div class="text-left" style="font-size:13pt;">
+                            <p>Date:</p>
+
+                        </div>
+                    </div>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

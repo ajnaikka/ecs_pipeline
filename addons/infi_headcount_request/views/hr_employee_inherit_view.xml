@@ -1,0 +1,108 @@
+<odoo>
+    <record id="view_employee_request_head_count_form" model="ir.ui.view">
+        <field name="name">view.employee.request.head.count.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button string="Recruitment Request" class="oe_highlight" type="object" name="recruitment_request"/>
+            </xpath>
+        </field>
+    </record>
+<!--    <record id="view_employee_hr_setting_page_form" model="ir.ui.view">-->
+<!--        <field name="name">view.employee.hr.setting.page.form</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='registration_number']" position="after">-->
+<!--                <field name="refuse_approve_checking_for_reporting_manager"/>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+    <record id="raise_request_form" model="ir.ui.view">
+        <field name="name">raise.request.form</field>
+        <field name="model">headcount.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="head_count_recruitment_request" type="object" string="Recruitment Request"
+                            class="oe_highlight"
+                            invisible="state not in ('draft')"/>
+
+                    <button name="head_count_recruitment_request_to_hr" type="object" string="Approve"
+                            class="oe_highlight" invisible="state in ('draft','issue_address','issue_addressed')"/>
+
+<!--                    <button name="head_count_recruitment_request_to_hr_to_superior" type="object"-->
+                            string="Issue Addressed"
+                            class="oe_highlight"
+                            invisible="state not in ('issue_address')"/>
+
+<!--                    <button name="action_refusing_dup" type="object" string="Refuse"-->
+                            class="oe_highlight"
+                            invisible="state not in ('issue_address','req_to_superior')"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="request_date"/>
+                            <field name="department_id"/>
+                            <field name="user_id"/>
+
+                            <field name="comment" string="Comment" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="raise_request_tree" model="ir.ui.view">
+        <field name="name">raise.request.tree</field>
+        <field name="model">headcount.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="request_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="raise_request_view_form" model="ir.ui.view">
+        <field name="name">raise.request.view.form</field>
+        <field name="model">headcount.request.wizard</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Recruitment Request Refuse Reason">
+                <group>
+                    <field name="reason"/>
+                    <field name="employee_id" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="action_send_message" string="Send" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="recruitement_request_action" model="ir.actions.act_window">
+        <field name="name">Recruitment Request</field>
+        <field name="res_model">headcount.request</field>
+    </record>
+    <menuitem
+            id="recruitment_request_menu"
+            parent="hr.menu_hr_employee_payroll"
+            sequence="10"
+            name="Recruitement Requests"
+            action="recruitement_request_action"
+    />
+</odoo>

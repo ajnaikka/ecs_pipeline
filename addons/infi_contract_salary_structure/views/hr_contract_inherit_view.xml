@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+        <field name="name">view.hr.contract.form.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="replace">
+                <field name="date_start" string="Employment Start Date" invisible="ise_invisible == True"/>
+                <field name="date_start" string="Contract Start Date" invisible="ise_invisible == False"/>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="replace">
+                <field name="date_end" string="Employment End Date"
+                       groups="infinous_user_groups.assigment_hr" invisible="ise_invisible == True"/>
+                <field name="date_end" string="Contract End Date"
+                       groups="infinous_user_groups.assigment_hr" invisible="ise_invisible == False"/>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="after">
+                <field name="ise_invisible" string="Invisible" invisible="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

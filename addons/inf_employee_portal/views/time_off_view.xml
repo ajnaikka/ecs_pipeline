@@ -1,0 +1,1449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_timeoff_form" name="Employee Time Off Template">
+        <t t-call="portal.portal_layout">
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <div class="o_portal_docs row g-2">
+                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+                    <p class="o_portal_no_doc_message d-none">No Documents to display</p>
+                    <div class="o_portal_category row g-2" id="portal_common_category">
+                        <form method="post" action="/employee/timeoff/submit" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group mb-3">
+                                <div style="text-align:left;">
+                                    <t t-if="leave">
+                                        <t t-if="leave.state in  ['confirm','refuse']">
+                                            <a t-attf-href="/employee/timeoff/revoke_leave_request?leave_id={{leave.id}}"
+                                               class="btn btn-primary">
+                                                Revoking Leave Request
+                                            </a>
+                                        </t>
+                                        <t t-if="leave.state == 'draft'">
+                                            <a t-attf-href="/employee/timeoff/confirm?leave_id={{leave.id}}"
+                                               class="btn btn-primary">
+                                                Confirm
+                                            </a>
+                                        </t>
+
+                                        <t t-if="leave.state == 'validate'">
+                                            <a t-attf-href="/employee/timeoff/enter_details?leave_id={{leave.id}}"
+                                               class="btn btn-primary">
+                                                Request To Revoke Approved Leave
+                                            </a>
+
+                                        </t>
+
+                                    </t>
+
+                                </div>
+
+                                <div style="text-align:right;">
+
+                                    <div class="btn-group" role="group" aria-label="Stage Buttons">
+                                        <t t-if="leave">
+
+                                            <t t-if="leave.state == 'draft'">
+
+                                                <button type="button"
+                                                        t-if="leave"
+                                                        t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'draft' else 'disabled' }}"
+                                                >
+                                                    To Submit
+                                                </button>
+                                            </t>
+                                        </t>
+
+                                        <t t-if="leave">
+
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'confirm' else 'disabled' }}"
+                                            >
+                                                To Approve
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'validate' else 'disabled' }}"
+
+                                            >
+                                                Approved
+                                            </button>
+                                        </t>
+
+                                        <t t-else="">
+
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' }}"
+                                            >
+                                                To Approve
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary"
+
+                                            >
+                                                Approved
+                                            </button>
+                                        </t>
+
+                                        <t t-if="leave">
+
+
+                                            <t t-if="leave.state == 'refuse'">
+
+
+                                                <button type="button"
+                                                        t-if="leave"
+                                                        t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'refuse' else 'disabled' }}"
+                                                >
+                                                    Refused
+                                                </button>
+                                            </t>
+                                        </t>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="time_off_type">Time Off Type:</label>
+
+                                <select id="time_off_type" name="time_off_type" class="form-control"
+                                >
+                                    <!--                                <select id="time_off_type" name="time_off_type" class="form-control"-->
+                                    <!--                                        onchange="showCheckboxes()">-->
+                                    <t t-if="leave">
+                                        <t t-set="selected_leave_id" t-value="leave.holiday_status_id.id"/>
+                                    </t>
+                                    <t t-foreach="leave_types" t-as="type">
+                                        <option t-att-value="type.id" t-att-selected="type.id == selected_leave_id">
+                                            <t t-esc="type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+
+                            </div>
+                            <script type="text/javascript">
+
+                                function calculateDurationhour() {
+
+                                var hourFrom = parseFloat(document.getElementById("hourFrom").value);
+                                var hourTo = parseFloat(document.getElementById("hourTo").value);
+                                var durationField = document.getElementById("duration");
+
+                                if (hourFrom &lt; hourTo) {
+                                var duration = hourTo - hourFrom;
+                                durationField.value = duration.toString();
+                                } else {
+
+                                var duration = (24 - hourFrom) + hourTo;
+                                durationField.value = duration.toString();
+                                }
+
+                                }
+                            </script>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                document.getElementById("time_off_type").addEventListener("change", function() {
+                                showCheckboxes();
+                                });
+                                });
+                                document.addEventListener("DOMContentLoaded", function() {
+                                document.getElementById("halfDay").addEventListener("change", function() {
+
+
+                                var holidayStatus = document.getElementById("time_off_type").value;
+                                var checkboxDiv = document.getElementById("checkboxDiv");
+                                var halfDayCheckbox = document.getElementById("halfDay");
+                                var Days = document.getElementById("days");
+                                var Duration = document.getElementById("duration");
+                                var fullDayCheckbox = document.getElementById("fullDay");
+                                var dateToDiv = document.getElementById('date_to');
+                                var datefromDiv = document.getElementById('date_from');
+                                var halfDaySelections = document.getElementById("halfDaySelections");
+                                var hourFrom = document.getElementById('hourFromSelection');
+                                var hourTo = document.getElementById('hourToSelection');
+                                var attachment = document.getElementById('attachment');
+
+                                console.log("holidayStatus:", holidayStatus);
+                                console.log("checkboxDiv:", checkboxDiv);
+                                console.log("halfDayCheckbox:", halfDayCheckbox);
+                                console.log("Days:", Days);
+                                console.log("Duration:", Duration);
+                                console.log("fullDayCheckbox:", fullDayCheckbox);
+                                console.log("dateToDiv:", dateToDiv);
+                                console.log("datefromDiv:", datefromDiv);
+                                console.log("halfDaySelections:", halfDaySelections);
+                                console.log("hourFrom:", hourFrom);
+                                console.log("hourTo:", hourTo);
+                                console.log("attachment:", attachment);
+
+
+                                if (this.checked) {
+
+                                fullDayCheckbox.checked = false;
+                                dateToDiv.style.display = "none";
+                                dateToDiv.value = datefromDiv.value;
+                                hourFrom.style.display = "none";
+                                hourFrom.value = "none";
+                                hourTo.value = "none";
+                                hourTo.style.display = "none";
+                                halfDaySelections.style.display = "block";
+                                Duration.value = '4';
+                                Days.innerText = 'Hours';
+                                }
+
+                                else {
+                                dateToDiv.style.display = "block";
+                                Duration.value = '1';
+                                halfDaySelections.style.display = "none";
+                                Days.innerText = 'Days';
+                                dateToDiv.value = datefromDiv.value;
+                                }
+                                });
+                                });
+
+                                document.addEventListener("DOMContentLoaded", function() {
+                                document.getElementById("fullDay").addEventListener("change", function() {
+
+                                var holidayStatus = document.getElementById("time_off_type").value;
+                                var checkboxDiv = document.getElementById("checkboxDiv");
+                                var halfDayCheckbox = document.getElementById("halfDay");
+                                var Days = document.getElementById("days");
+                                var Duration = document.getElementById("duration");
+                                var fullDayCheckbox = document.getElementById("fullDay");
+                                var dateToDiv = document.getElementById('date_to');
+                                var datefromDiv = document.getElementById('date_from');
+                                var halfDaySelections = document.getElementById("halfDaySelections");
+                                var hourFrom = document.getElementById('hourFromSelection');
+                                var hourTo = document.getElementById('hourToSelection');
+                                var attachment = document.getElementById('attachment');
+
+                                console.log('sssssssssssssssss',hourFrom)
+                                console.log('sssssssssssssssss',hourTo)
+
+                                if (this.checked) {
+                                halfDayCheckbox.checked = false;
+                                dateToDiv.style.display = "none";
+                                dateToDiv.value = datefromDiv.value;
+                                Days.innerText = 'Hours';
+                                Duration.value = '0';
+                                hourTo.style.display = "block";
+                                hourFrom.style.display = "block";
+                                halfDaySelections.style.display = "none";
+                                }
+
+                                else {
+                                dateToDiv.style.display = "block";
+                                hourTo.style.display = "none";
+                                Duration.value = '1';
+                                Days.innerText = 'Days';
+                                dateToDiv.value = datefromDiv.value;
+                                hourFrom.style.display = "none";
+                                }
+                                });
+                                });
+
+                                function showCheckboxes() {
+
+                                var holidayStatus = document.getElementById("time_off_type").value;
+                                var checkboxDiv = document.getElementById("checkboxDiv");
+                                var halfDayCheckbox = document.getElementById("halfDay");
+                                var Days = document.getElementById("days");
+                                var Duration = document.getElementById("duration");
+                                var fullDayCheckbox = document.getElementById("fullDay");
+                                var dateToDiv = document.getElementById('date_to');
+                                var datefromDiv = document.getElementById('date_from');
+                                var halfDaySelections = document.getElementById("halfDaySelections");
+                                var hourFrom = document.getElementById('hourFromSelection');
+                                var hourTo = document.getElementById('hourToSelection');
+                                var attachment = document.getElementById('attachment');
+
+                                if (Duration.value >= 3 &amp; holidayStatus === "2" &amp; attachment !== null) {
+                                attachment.required = true;
+                                }
+
+                                else {
+                                if (attachment !== null) {
+                                attachment.required = false;
+                                }
+                                }
+
+                                if (holidayStatus === "4") {
+                                checkboxDiv.style.display = "block";
+                                } else {
+                                checkboxDiv.style.display = "none";
+                                halfDaySelections.style.display = "none";
+                                dateToDiv.style.display = "block";
+                                halfDayCheckbox.checked = false;
+                                fullDayCheckbox.checked = false;
+                                dateToDiv.value = datefromDiv.value;
+                                }
+                                }
+                            </script>
+
+                            <script type="text/javascript">
+                                function calculateDuration() {
+                                var dateFrom = new Date(document.getElementById('date_from').value);
+                                var dateTo = new Date(document.getElementById('date_to').value);
+                                var attachment = document.getElementById('attachment');
+                                var duration = document.getElementById('duration');
+                                var holidayStatus = document.getElementById("time_off_type").value;
+
+                                if (dateFrom &amp; dateTo) {
+                                var timeDiff = Math.abs(dateTo.getTime() - dateFrom.getTime());
+                                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
+
+                                if (duration.value >= 3 &amp; holidayStatus === "2" &amp; attachment !== null) {
+                                attachment.required = true;
+                                }
+
+                                else {
+                                if (attachment !== null) {
+                                attachment.required = false;
+                                }
+                                }
+
+                                duration.value = diffDays;
+                                }
+                                }
+                            </script>
+
+
+                            <div class="form-group row mb-3">
+                                <label for="date_from" class="col-sm-1 col-form-label">
+                                    <b>Dates :</b>
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="date" required="1" id="date_from" name="date_from" class="form-control"
+                                           t-if="leave" t-att-value="leave.request_date_from"/>
+
+
+                                    <input type="date" required="1" id="date_from" name="date_from" class="form-control"
+                                           t-if="not leave" t-att-value="datetime.datetime.now().strftime('%Y-%m-%d')"
+                                           onchange="calculateDuration()"/>
+
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="date" id="date_to" name="date_to" class="form-control"
+                                           t-if="leave" t-att-value="leave.request_date_to"
+                                    />
+                                    <input type="date" id="date_to" name="date_to" class="form-control"
+                                           t-if="not leave" t-att-value="datetime.datetime.now().strftime('%Y-%m-%d')"
+                                           onchange="calculateDuration()"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3" id="checkboxDiv"
+                                 t-if="leave and leave.request_unit_half or leave and leave.request_unit_hours"
+                                 style="display:block;">
+                                <label for="halfDay">Half Day:</label>
+                                <input type="checkbox" style="margin-left:5px;" id="halfDay" name="halfDay"
+
+                                       class="form-check-input" t-att-checked="leave.request_unit_half"/>
+
+                                <label for="fullDay" style="margin-left:30px;">Custom Hours</label>
+                                <input type="checkbox" id="fullDay" name="fullDay" class="form-check-input"
+
+                                       style="margin-left: 5px;" t-att-checked="leave.request_unit_hours"/>
+
+                            </div>
+                            <div class="form-group mb-3" id="checkboxDiv" style="display:none;" t-if="not leave">
+                                <label for="halfDay">Half Days:</label>
+
+                                <input type="checkbox" style="margin-left:5px;" id="halfDay" name="halfDay"
+                                       class="form-check-input"/>
+
+                                <label for="fullDay" style="margin-left:30px;">Custom Hours</label>
+
+                                <input type="checkbox" id="fullDay" name="fullDay" class="form-check-input"
+                                       style="margin-left: 5px;"/>
+                            </div>
+
+                            <div class="form-group mb-3 col-sm-3" id="halfDaySelections"
+                                 t-if="leave and leave.request_unit_half">
+
+                                <select class="form-control" id="request_date_from_period"
+                                        name="request_date_from_period" t-if="leave and leave.request_unit_half">
+                                    <option t-att-selected="leave.request_date_from_period == 'am'" value="am">Morning
+                                    </option>
+                                    <option t-att-selected="leave.request_date_from_period == 'pm'" value="pm">
+                                        Afternoon
+                                    </option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group mb-3 col-sm-3" id="halfDaySelections" style="display:none;">
+                                <select class="form-control" id="request_date_from_period"
+                                        name="request_date_from_period">
+                                    <option value="am">Morning
+                                    </option>
+                                    <option value="pm">Afternoon
+                                    </option>
+                                </select>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="form-group mb-3 col-sm-3" id="hourFromSelection"
+                                     t-if="leave and request_unit_hours">
+                                    <label for="hourFrom">Hour From:</label>
+                                    <select id="hourFrom" name="hourFrom" class="form-control"
+                                            onchange="calculateDurationhour()">
+
+                                        <option t-att-selected="leave and leave_hour_from == '0'" value="0">12:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '0.5'" value="0.5">12:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '1'" value="1">1:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '1.5'" value="1.5">1:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '2'" value="2">2:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '2.5'" value="2.5">2:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '3'" value="3">3:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '3.5'" value="3.5">3:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '4'" value="4">4:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '4.5'" value="4.5">4:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '5'" value="5">5:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '5.5'" value="5.5">5:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '6'" value="6">6:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '6.5'" value="6.5">6:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '7'" value="7">7:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '7.5'" value="7.5">7:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '8'" value="8">8:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '8.5'" value="8.5">8:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '9'" value="9">9:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '9.5'" value="9.5">9:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '10'" value="10">10:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '10.5'" value="10.5">10:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '11'" value="11">11:00 AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '11.5'" value="11.5">11:30
+                                            AM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '12'" value="12">12:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '12.5'" value="12.5">12:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '13'" value="13">1:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '13.5'" value="13.5">1:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '14'" value="14">2:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '14.5'" value="14.5">2:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '15'" value="15">3:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '15.5'" value="15.5">3:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '16'" value="16">4:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '16.5'" value="16.5">4:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '17'" value="17">5:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '17.5'" value="17.5">5:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '18'" value="18">6:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '18.5'" value="18.5">6:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '19'" value="19">7:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '19.5'" value="19.5">7:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '20'" value="20">8:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '20.5'" value="20.5">8:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '21'" value="21">9:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '21.5'" value="21.5">9:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '22'" value="22">10:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '22.5'" value="22.5">10:30
+                                            PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '23'" value="23">11:00 PM
+                                        </option>
+                                        <option t-att-selected="leave and leave_hour_from == '23.5'" value="23.5">11:30
+                                            PM
+                                        </option>
+
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 col-sm-3" id="hourToSelection"
+                                 t-if="leave and leave.request_unit_hours">
+                                <label for="hourTo">Hour To:</label>
+                                <select id="hourTo" name="hourTo" class="form-control"
+                                        onchange="calculateDurationhour()">
+                                    <option t-att-selected="leave and leave.request_hour_to == '0'" value="0">12:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '0.5'" value="0.5">
+                                        12:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '1'" value="1">1:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '1.5'" value="1.5">
+                                        1:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '2'" value="2">2:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '2.5'" value="2.5">
+                                        2:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '3'" value="3">3:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '3.5'" value="3.5">
+                                        3:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '4'" value="4">4:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '4.5'" value="4.5">
+                                        4:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '5'" value="5">5:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '5.5'" value="5.5">
+                                        5:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '6'" value="6">6:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '6.5'" value="6.5">
+                                        6:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '7'" value="7">7:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '7.5'" value="7.5">
+                                        7:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '8'" value="8">8:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '8.5'" value="8.5">
+                                        8:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '9'" value="9">9:00
+                                        AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '9.5'" value="9.5">
+                                        9:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '10'" value="10">
+                                        10:00 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '10.5'" value="10.5">
+                                        10:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '11'" value="11">
+                                        11:00 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '11.5'" value="11.5">
+                                        11:30 AM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '12'" value="12">
+                                        12:00 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '12.5'" value="12.5">
+                                        12:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '13'" value="13">1:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '13.5'" value="13.5">
+                                        1:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '14'" value="14">2:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '14.5'" value="14.5">
+                                        2:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '15'" value="15">3:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '15.5'" value="15.5">
+                                        3:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '16'" value="16">4:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '16.5'" value="16.5">
+                                        4:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '17'" value="17">5:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '17.5'" value="17.5">
+                                        5:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '18'" value="18">6:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '18.5'" value="18.5">
+                                        6:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '19'" value="19">7:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '19.5'" value="19.5">
+                                        7:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '20'" value="20">8:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '20.5'" value="20.5">
+                                        8:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '21'" value="21">9:00
+                                        PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '21.5'" value="21.5">
+                                        9:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '22'" value="22">
+                                        10:00 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '22.5'" value="22.5">
+                                        10:30 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '23'" value="23">
+                                        11:00 PM
+                                    </option>
+                                    <option t-att-selected="leave and leave.request_hour_to == '23.5'" value="23.5">
+                                        11:30 PM
+                                    </option>
+
+
+                                </select>
+                            </div>
+                            <div class="row">
+
+
+                                <div class="form-group mb-3 col-sm-3" id="hourFromSelection" style="display:none;">
+                                    <label for="hourFrom">Hour From:</label>
+                                    <select id="hourFrom" name="hourFrom" class="form-control"
+                                            onchange="calculateDurationhour()">
+
+                                        <option value="0">12:00 AM</option>
+                                        <option value="0.5">12:30 AM</option>
+                                        <option value="1">1:00 AM</option>
+                                        <option value="1.5">1:30 AM</option>
+                                        <option value="2">2:00 AM</option>
+                                        <option value="2.5">2:30 AM</option>
+                                        <option value="3">3:00 AM</option>
+                                        <option value="3.5">3:30 AM</option>
+                                        <option value="4">4:00 AM</option>
+                                        <option value="4.5">4:30 AM</option>
+                                        <option value="5">5:00 AM</option>
+                                        <option value="5.5">5:30 AM</option>
+                                        <option value="6">6:00 AM</option>
+                                        <option value="6.5">6:30 AM</option>
+                                        <option value="7">7:00 AM</option>
+                                        <option value="7.5">7:30 AM</option>
+                                        <option value="8">8:00 AM</option>
+                                        <option value="8.5">8:30 AM</option>
+                                        <option value="9">9:00 AM</option>
+                                        <option value="9.5">9:30 AM</option>
+                                        <option value="10">10:00 AM</option>
+                                        <option value="10.5">10:30 AM</option>
+                                        <option value="11">11:00 AM</option>
+                                        <option value="11.5">11:30 AM</option>
+                                        <option value="12">12:00 PM</option>
+                                        <option value="12.5">12:30 PM</option>
+                                        <option value="13">1:00 PM</option>
+                                        <option value="13.5">1:30 PM</option>
+                                        <option value="14">2:00 PM</option>
+                                        <option value="14.5">2:30 PM</option>
+                                        <option value="15">3:00 PM</option>
+                                        <option value="15.5">3:30 PM</option>
+                                        <option value="16">4:00 PM</option>
+                                        <option value="16.5">4:30 PM</option>
+                                        <option value="17">5:00 PM</option>
+                                        <option value="17.5">5:30 PM</option>
+                                        <option value="18">6:00 PM</option>
+                                        <option value="18.5">6:30 PM</option>
+                                        <option value="19">7:00 PM</option>
+                                        <option value="19.5">7:30 PM</option>
+                                        <option value="20">8:00 PM</option>
+                                        <option value="20.5">8:30 PM</option>
+                                        <option value="21">9:00 PM</option>
+                                        <option value="21.5">9:30 PM</option>
+                                        <option value="22">10:00 PM</option>
+                                        <option value="22.5">10:30 PM</option>
+                                        <option value="23">11:00 PM</option>
+                                        <option value="23.5">11:30 PM</option>
+
+
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group mb-3 col-sm-3" id="hourToSelection" style="display:none;">
+                                    <label for="hourTo">Hour To:</label>
+                                    <select id="hourTo" name="hourTo" class="form-control"
+                                            onchange="calculateDurationhour()">
+
+                                        <option value="0">12:00 AM</option>
+                                        <option value="0.5">12:30 AM</option>
+                                        <option value="1">1:00 AM</option>
+                                        <option value="1.5">1:30 AM</option>
+                                        <option value="2">2:00 AM</option>
+                                        <option value="2.5">2:30 AM</option>
+                                        <option value="3">3:00 AM</option>
+                                        <option value="3.5">3:30 AM</option>
+                                        <option value="4">4:00 AM</option>
+                                        <option value="4.5">4:30 AM</option>
+                                        <option value="5">5:00 AM</option>
+                                        <option value="5.5">5:30 AM</option>
+                                        <option value="6">6:00 AM</option>
+                                        <option value="6.5">6:30 AM</option>
+                                        <option value="7">7:00 AM</option>
+                                        <option value="7.5">7:30 AM</option>
+                                        <option value="8">8:00 AM</option>
+                                        <option value="8.5">8:30 AM</option>
+                                        <option value="9">9:00 AM</option>
+                                        <option value="9.5">9:30 AM</option>
+                                        <option value="10">10:00 AM</option>
+                                        <option value="10.5">10:30 AM</option>
+                                        <option value="11">11:00 AM</option>
+                                        <option value="11.5">11:30 AM</option>
+                                        <option value="12">12:00 PM</option>
+                                        <option value="12.5">12:30 PM</option>
+                                        <option value="13">1:00 PM</option>
+                                        <option value="13.5">1:30 PM</option>
+                                        <option value="14">2:00 PM</option>
+                                        <option value="14.5">2:30 PM</option>
+                                        <option value="15">3:00 PM</option>
+                                        <option value="15.5">3:30 PM</option>
+                                        <option value="16">4:00 PM</option>
+                                        <option value="16.5">4:30 PM</option>
+                                        <option value="17">5:00 PM</option>
+                                        <option value="17.5">5:30 PM</option>
+                                        <option value="18">6:00 PM</option>
+                                        <option value="18.5">6:30 PM</option>
+                                        <option value="19">7:00 PM</option>
+                                        <option value="19.5">7:30 PM</option>
+                                        <option value="20">8:00 PM</option>
+                                        <option value="20.5">8:30 PM</option>
+                                        <option value="21">9:00 PM</option>
+                                        <option value="21.5">9:30 PM</option>
+                                        <option value="22">10:00 PM</option>
+                                        <option value="22.5">10:30 PM</option>
+                                        <option value="23">11:00 PM</option>
+                                        <option value="23.5">11:30 PM</option>
+
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row mb-3">
+                                <label for="duration" class="col-sm-1 col-form-label">
+                                    <b>Duration :</b>
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="text" id="duration" name="duration" class="form-control"
+                                           readonly="readonly"
+                                           t-att-value="leave and leave.number_of_hours"/>
+                                    <!--                                    <input type="text" id="duration" name="duration" class="form-control"-->
+                                    <!--                                           readonly="readonly" t-if="not leave" t-att-value="1"/>-->
+                                </div>
+                                <div t-if="leave and (leave.request_unit_half or leave.request_unit_hours)"
+                                     class="col-sm-1">
+                                    <label for="days" class="col-1 col-form-label">
+                                        <span id="days">Hours</span>
+                                    </label>
+                                </div>
+
+                                <div t-if="leave and not (leave.request_unit_half or leave.request_unit_hours)"
+                                     class="col-sm-1">
+                                    <label for="day" class="col-1 col-form-label">
+                                        <span id="days">Days</span>
+                                    </label>
+                                </div>
+
+                                <div t-if="not leave"
+                                     class="col-sm-1">
+                                    <label for="days" class="col-1 col-form-label">
+                                        <span id="days">Days</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          t-if="leave">
+                                    <t t-esc="leave.name"/>
+                                </textarea>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          t-if="not leave"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="attachment">Attachment:</label>
+                                <input type="file" id="attachment" name="attachment" class="form-control-file"
+                                       t-if="not leave"/>
+
+                                <t t-if="leave and leave.supported_attachment_ids">
+                                    <ul>
+                                        <t t-foreach="leave.supported_attachment_ids"
+                                           t-as="leave_attachment">
+                                            <li>
+                                                <a t-att-href="'data:application/octet-stream;base64,' + leave_attachment.datas.decode('utf-8')">
+                                                    Download Attachment
+                                                </a>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </t>
+                                <!--                                <input type="file" id="attachment" name="attachment" class="form-control-file"/>-->
+                            </div>
+
+
+                            <a t-attf-href="/my/employee_list" class="btn btn-primary">Cancel</a>
+                            <t t-if="not leave">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                            </t>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="time_off_tree_view" name="Birthday Notification">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">General Notifications</t>
+
+            </t>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="mb32">
+                        <a t-if="True" t-attf-href="/employee/timeoff_form" class="btn btn-primary">Create new</a>
+                        <a t-if="True" t-attf-href="/my/employee_list" class="btn btn-primary">Back to home</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="mb32">
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex flex-wrap">
+                                <t t-set="leave_remain" t-value="0"/>
+                                <t t-foreach="leave_type" t-as="lt">
+                                    <t t-if="lt.virtual_remaining_leaves">
+                                        <div class="mr64 text-center">
+                                            <strong>
+                                                <span style="font-size:16pt;" t-esc="lt.name"/>
+                                            </strong>
+                                            <br/>
+                                            <span style="font-size:13pt;">Days Available:</span>
+                                            <span>
+                                                <strong style="font-size:13pt;" t-esc="lt.virtual_remaining_leaves"/>
+                                                <t t-set="leave_remain" t-value="lt.virtual_remaining_leaves"/>
+                                            </span>
+                                        </div>
+                                    </t>
+                                </t>
+                                <t t-if="not leave_remain">
+                                    <div class="mr64 text-center">
+
+                                        <span style="font-size:20pt;">
+                                            <b>There is no allocations</b>
+                                        </span>
+                                    </div>
+
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Time Off Type</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-if="leave_types">
+
+                    <t t-foreach="leave_types" t-as="leave">
+                        <tr>
+                            <td>
+                                <span t-esc="leave.holiday_status_id.name"/>
+                            </td>
+
+                            <td>
+                                <span t-field="leave.name"/>
+                            </td>
+
+                            <td>
+                                <span t-field="leave.request_date_from"/>
+                            </td>
+
+                            <td>
+                                <span t-field="leave.request_date_to"/>
+                            </td>
+                            <td>
+                                <span t-field="leave.number_of_days_display"/>
+                            </td>
+                            <td>
+                                <span t-field="leave.state"/>
+                            </td>
+                            <td>
+                                <a t-attf-href="/employee/timeoff_form?leave_id={{leave.id}}"
+                                   class="btn btn-primary">
+
+                                    Edit
+                                </a>
+
+
+                            </td>
+
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+
+        </t>
+    </template>
+
+    <template id="enter_details_template" name="Enter Details Template">
+        <t t-call="portal.portal_layout">
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <div class="o_portal_docs row g-2">
+                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+
+                    <div class="o_portal_category row g-2" id="portal_common_category">
+                        <form method="post" action="/revoke_request" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group mb-3">
+                                <label for="employee_list">Send To:</label>
+                                <select id="revoke_hr_manager" name="revoke_hr_manager" class="form-control">
+                                    <option t-att-value="revoke_manager.id">
+                                        <t t-esc="revoke_manager.name"/>
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="start_date" class="col-sm-1 col-form-label">Start Date:</label>
+                                <div class="col-sm-2">
+                                    <input type="date" id="start_date" name="start_date" class="form-control"
+                                           required="1" t-att-value="leave.request_date_from"/>
+                                </div>
+                                <label for="end_date" class="col-sm-1 col-form-label">End Date:</label>
+                                <div class="col-sm-2">
+                                    <input type="date" id="end_date" name="end_date" class="form-control"
+                                           t-att-value="leave.request_date_to" required="1"/>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="subject">Subject:</label>
+                                <input type="text" id="subject" name="subject" class="form-control"
+                                       t-att-value="'Request For Revoking Leave From ' + leave.request_date_from.strftime('%d-%m-%Y') + ' to ' + leave.request_date_to.strftime('%d-%m-%Y')"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          placeholder="Enter your message here ......."
+                                />
+                            </div>
+
+                            <div class="form-group mb-3" data-type="binary">
+                                <label for="attachments">Attachments:</label>
+                                <input type="file" id="attachments" name="attachments"
+                                       class="form-control s_website_form_input"/>
+                            </div>
+
+                            <a t-attf-href="/employee/timeoff_form?leave_id={{leave.id}}" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+
+</odoo>
+
+
+
+
+
+
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_timeoff_form" name="Employee Time Off Template">
+        <t t-call="portal.portal_layout">
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <div class="o_portal_docs row g-2">
+                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+                    <p class="o_portal_no_doc_message d-none">No Documents to display</p>
+                    <div class="o_portal_category row g-2" id="portal_common_category">
+                        <form method="post" action="/employee/timeoff/submit" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group mb-3">
+                                <div style="text-align:left;">
+                                    <t t-if="leave">
+                                        <t t-if="leave.state in  ['confirm','refuse']">
+                                            <a t-attf-href="/employee/timeoff/revoke_leave_request?leave_id={{leave.id}}"
+                                               class="btn btn-primary">
+                                                Revoking Leave Request
+                                            </a>
+                                        </t>
+                                        <t t-if="leave.state == 'draft'">
+                                            <a t-attf-href="/employee/timeoff/confirm?leave_id={{leave.id}}"
+                                               class="btn btn-primary">
+                                                Confirm
+                                            </a>
+                                        </t>
+
+                                        <t t-if="leave.state == 'validate'">
+                                            <a t-attf-href="/employee/timeoff/enter_details?leave_id={{leave.id}}"
+                                               class="btn btn-primary">
+                                                Request To Revoke Approved Leave
+                                            </a>
+
+                                        </t>
+
+                                    </t>
+
+                                </div>
+
+                                <div style="text-align:right;">
+
+                                    <div class="btn-group" role="group" aria-label="Stage Buttons">
+                                        <t t-if="leave">
+
+                                            <t t-if="leave.state == 'draft'">
+
+                                                <button type="button"
+                                                        t-if="leave"
+                                                        t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'draft' else 'disabled' }}"
+                                                >
+                                                    To Submit
+                                                </button>
+                                            </t>
+                                        </t>
+
+                                        <t t-if="leave">
+
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'confirm' else 'disabled' }}"
+                                            >
+                                                To Approve
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'validate' else 'disabled' }}"
+
+                                            >
+                                                Approved
+                                            </button>
+                                        </t>
+
+                                        <t t-else="">
+
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' }}"
+                                            >
+                                                To Approve
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary"
+
+                                            >
+                                                Approved
+                                            </button>
+                                        </t>
+
+                                        <t t-if="leave">
+
+
+                                            <t t-if="leave.state == 'refuse'">
+
+
+                                                <button type="button"
+                                                        t-if="leave"
+                                                        t-attf-class="btn btn-secondary {{ 'active' if leave.state == 'refuse' else 'disabled' }}"
+                                                >
+                                                    Refused
+                                                </button>
+                                            </t>
+                                        </t>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="time_off_type">Time Off Type:</label>
+
+                                <select id="time_off_type" name="time_off_type" class="form-control">
+                                    <t t-if="leave">
+                                        <t t-set="selected_leave_id" t-value="leave.holiday_status_id.id"/>
+                                    </t>
+                                    <t t-foreach="leave_types" t-as="type">
+                                        <option t-att-value="type.id" t-att-selected="type.id == selected_leave_id">
+                                            <t t-esc="type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+
+                            </div>
+                            <script type="text/javascript">
+
+                                function calculateDuration() {
+                                var dateFrom = new Date(document.getElementById('date_from').value);
+                                var dateTo = new Date(document.getElementById('date_to').value);
+
+                                if (dateTo.getTime() &lt; dateFrom.getTime()) {
+                                alert("Date To cannot be before Date From");
+                                return;
+                                }
+
+                                var timeDiff = Math.abs(dateTo.getTime() - dateFrom.getTime());
+                                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                                if (diffDays === 0) {
+                                if (dateFrom.getTime() === dateTo.getTime()) {
+                                diffDays = 1;
+                                }
+                                }
+
+                                document.getElementById('duration').value = diffDays;
+                                }
+                            </script>
+
+
+                            <div class="form-group row mb-3">
+                                <label for="date_from" class="col-sm-1 col-form-label">
+                                    <b>Dates :</b>
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="date" required="1" id="date_from" name="date_from" class="form-control"
+                                           t-if="leave" t-att-value="leave.request_date_from"/>
+                                    <input type="date" required="1" id="date_from" name="date_from" class="form-control"
+                                           t-if="not leave"/>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="date" required="1" id="date_to" name="date_to" class="form-control"
+                                           t-if="leave" t-att-value="leave.request_date_to"
+                                           onchange="calculateDuration()"/>
+                                    <input type="date" required="1" id="date_to" name="date_to" class="form-control"
+                                           t-if="not leave" onchange="calculateDuration()"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="duration" class="col-sm-1 col-form-label">
+                                    <b>Duration :</b>
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="text" id="duration" name="duration" class="form-control"
+                                           readonly="readonly" t-if="leave" t-att-value="leave.number_of_days"/>
+                                    <input type="text" id="duration" name="duration" class="form-control"
+                                           readonly="readonly" t-if="not leave"/>
+                                </div>
+                                <div class="col-sm-1">
+                                    <label for="days" class="col-sm-1 col-form-label">
+                                        <b>Days</b>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          t-if="leave">
+                                    <t t-esc="leave.name"/>
+                                </textarea>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          t-if="not leave"/>
+                            </div>
+
+
+                            <a t-attf-href="/my/employee_list" class="btn btn-primary">Cancel</a>
+                            <t t-if="not leave">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                            </t>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="time_off_tree_view" name="Birthday Notification">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">General Notifications</t>
+
+            </t>
+             <div class="row">
+                <div class="col-md-3">
+                    <div class="mb32">
+                        <a t-if="True" t-attf-href="/employee/timeoff_form" class="btn btn-primary">Create new</a>
+                        <a t-if="True" t-attf-href="/my/employee_list" class="btn btn-primary">Back to home</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="mb32">
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex flex-wrap">
+                                <t t-set="leave_remain" t-value="0"/>
+                                <t t-foreach="leave_type" t-as="lt">
+                                    <t t-if="lt.virtual_remaining_leaves">
+                                        <div class="mr64 text-center">
+                                            <strong>
+                                                <span style="font-size:16pt;" t-esc="lt.name"/>
+                                            </strong>
+                                            <br/>
+                                            <span style="font-size:13pt;">Days Available:</span>
+                                            <span>
+                                                <strong style="font-size:13pt;" t-esc="lt.virtual_remaining_leaves"/>
+                                                <t t-set="leave_remain" t-value="lt.virtual_remaining_leaves"/>
+                                            </span>
+                                        </div>
+                                    </t>
+                                </t>
+                                <t t-if="not leave_remain">
+                                    <div class="mr64 text-center">
+
+                                        <span style="font-size:20pt;">
+                                            <b>There is no allocations</b>
+                                        </span>
+                                    </div>
+
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Time Off Type</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-if="leave_types">
+
+                    <t t-foreach="leave_types" t-as="leave">
+                        <tr>
+                            <td>
+                                <span t-esc="leave.holiday_status_id.name"/>
+                            </td>
+
+                            <td>
+                                <span t-field="leave.name"/>
+                            </td>
+
+                            <td>
+                                <span t-field="leave.request_date_from"/>
+                            </td>
+
+                            <td>
+                                <span t-field="leave.request_date_to"/>
+                            </td>
+                            <td>
+                                <span t-field="leave.number_of_days_display"/>
+                            </td>
+                            <td>
+                                <span t-field="leave.state"/>
+                            </td>
+                            <td>
+                                <a t-attf-href="/employee/timeoff_form?leave_id={{leave.id}}"
+                                   class="btn btn-primary">
+
+                                    Edit
+                                </a>
+
+
+                            </td>
+
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+
+        </t>
+    </template>
+
+    <template id="enter_details_template" name="Enter Details Template">
+        <t t-call="portal.portal_layout">
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <div class="o_portal_docs row g-2">
+                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+
+                    <div class="o_portal_category row g-2" id="portal_common_category">
+                        <form method="post" action="/revoke_request" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group mb-3">
+                                <label for="employee_list">Send To:</label>
+                                <select id="revoke_hr_manager" name="revoke_hr_manager" class="form-control">
+                                    <option t-att-value="revoke_manager.id">
+                                        <t t-esc="revoke_manager.name"/>
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="start_date" class="col-sm-1 col-form-label">Start Date:</label>
+                                <div class="col-sm-2">
+                                    <input type="date" id="start_date" name="start_date" class="form-control"
+                                           required="1" t-att-value="leave.request_date_from"/>
+                                </div>
+                                <label for="end_date" class="col-sm-1 col-form-label">End Date:</label>
+                                <div class="col-sm-2">
+                                    <input type="date" id="end_date" name="end_date" class="form-control"
+                                           t-att-value="leave.request_date_to" required="1"/>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="subject">Subject:</label>
+                                <input type="text" id="subject" name="subject" class="form-control"
+                                       t-att-value="'Request For Revoking Leave From ' + leave.request_date_from.strftime('%d-%m-%Y') + ' to ' + leave.request_date_to.strftime('%d-%m-%Y')"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          placeholder="Enter your message here ......."
+                                />
+                            </div>
+
+                            <div class="form-group mb-3" data-type="binary">
+                                <label for="attachments">Attachments:</label>
+                                <input type="file" id="attachments" name="attachments"
+                                       class="form-control s_website_form_input"/>
+                            </div>
+
+                            <a t-attf-href="/employee/timeoff_form?leave_id={{leave.id}}" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+
+</odoo>
+
+
+
+
+
+ -->

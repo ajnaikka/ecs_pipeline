@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_request_revoke_leave_wizard,access.request.revoke.leave.wizard,model_request_revoke_leave_wizard,base.group_user,1,1,1,1
+access_refuse_leave_request,access.refuse.leave.request,model_refuse_leave_request,base.group_user,1,1,1,1

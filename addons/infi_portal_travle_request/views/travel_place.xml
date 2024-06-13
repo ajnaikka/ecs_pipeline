@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.model" id="model_travel_place">
+        <field name="name">Travel Place</field>
+        <field name="model">travel.place</field>
+    </record>
+</odoo>

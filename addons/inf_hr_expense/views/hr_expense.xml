@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_expense_product_form_inherit" model="ir.ui.view">
+            <field name="name">hr_expense.product_product_expense_form_view_inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="hr_expense.product_product_expense_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="after">
+                    <field name="expense_limit" force_save="1"/>
+                    <field name="profile_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_expense_form_inherit" model="ir.ui.view">
+            <field name="name">hr.expense.form.inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group/div" position="after">
+
+                    <field name="profile_id"/>
+                    <field name="expense_limit"/>
+                    <field name="emp_profile_id" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_mode']" position="after">
+                    <field name="attachment_ids" widget="many2many_binary"/>
+                </xpath>
+
+                <xpath expr="//field[@name='product_id']" position="attributes">
+
+                    <attribute name="domain">[('can_be_expensed', '=', True),('profile_id', '=', emp_profile_id)]</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

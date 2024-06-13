@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="kit_component_tree_view" model="ir.ui.view">
+        <field name="name">BoQ Component Tree View</field>
+        <field name="model">kit.component</field>
+        <field name="arch" type="xml">
+            <tree string="Component BoQ Form">
+                <field name="product_id" />
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="component_kit_form_view" model="ir.ui.view">
+        <field name="name">Component BoQ Form View</field>
+        <field name="model">kit.component</field>
+        <field name="arch" type="xml">
+            <form string="Component BoQ Form">
+                <header>
+                    <button type="object" class="btn-primary" name="action_validate" string="Confirm"
+                            invisible="state !='draft'"/>
+                    <button type="object" class="btn-primary" name="action_reset" string="Reset to Draft"
+                            invisible="state !='confirmed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="product_id" class="oe_edit_only"/>
+                        <h1>
+                            <field name="product_id" class="oe_inline" required="1"
+                                   readonly=" state == 'confirmed'" domain="[('detailed_type', '=', 'service')]"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="quantity"/>
+                            <field name="uom_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="assign_products" string="Assigned Products">
+                            <field name="product_line_ids" readonly=" state == 'confirmed'">
+                                <tree editable="bottom">
+                                    <field name="slno" style="width: 2%; text-align: center;"/>
+                                    <field name="product_id" required="1" domain="[('detailed_type', '=', 'product')]"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kit_component" model="ir.actions.act_window">
+        <field name="name">BoQ Component</field>
+        <field name="res_model">kit.component</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_component_boq"
+              name="Camera Unit"
+              parent="stock.menu_stock_inventory_control"
+              action="action_kit_component"
+              sequence="50"/>
+
+</odoo>

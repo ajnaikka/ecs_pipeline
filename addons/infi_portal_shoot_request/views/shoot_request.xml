@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_shoot_request_menu_template" name="shoot request menu" inherit_id="inf_employee_portal.employee_list_template">
+<!--        <t t-call="portal.portal_layout">-->
+<!--            <t t-set="my_details" t-value="True"/>-->
+            <xpath expr="//div[@id='portal_common_category_employee']" position="inside">
+<!--                <div class="o_portal_category row g-2 mt-3" id="portal_shoot_request" >-->
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="icon" t-value="'/infi_portal_shoot_request/static/description/shoot.png'"/>
+                        <t t-set="title">Shoot Request</t>
+                        <t t-set="text">Create your Shoot request</t>
+                        <t t-set="url" t-value="'/my/employees/shoot'"/>
+                        <t t-set="config_card" t-value="True"/>
+                    </t>
+<!--                </div>-->
+            </xpath>
+<!--        </t>-->
+    </template>
+
+    <template id="employee_shoot_request_form" name="Shoot Request Form">
+        <t t-call="portal.portal_layout">
+            <div id="portal_shoot">
+                <form method="post" action="/my/send_mail/shooting_request" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    
+                    <div class="form-group mb-3">
+                        <a href="/my/shootrequest/table" ><button type="button"  id="checkStatus" name="checkStatus" class="btn btn-primary">Check Status</button></a>
+                        <a href="/my/employee_list/attendance_correction" ><button type="button" id="goback_shoot" name="goback_shoot" class="btn btn-primary">Go Back</button></a>
+
+                        <div style="text-align:right;">
+
+                                <div class="btn-group" role="group" aria-label="Stage Buttons" >
+                                    <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }} " >Draft</button>
+                                    <button type="button" t-attf-class="btn btn-secondary ">Shoot Request</button>
+                                    <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">Request To store Person</button>
+                                    <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">Assign To Reporter</button>
+                                    <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">Canceled</button>
+                                    <button type="button" t-attf-class="btn btn-secondary {{ 'disabled' if stage != '' else '' }}">Closed</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h3 class="text-center">Shooting Request Form</h3>
+                    </div>
+                    <!-- <div class="form-group mb-3">
+                        <label for="email_send">Send To:</label>
+                        <input type="text" id="email_send" name="email_send" class="form-control" t-att-value="request.env.user.employee_id.parent_id.work_email" readonly="readonly"/>
+                    </div> -->
+                    <div class="form-group mb-3">
+                        <!-- <label for="email_send">Send To:</label> -->
+                        <input type="hidden" id="email_send" name="email_send" t-att-value="email" class="form-control"  readonly="readonly"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="name_email_send">Send To:</label>
+                        <input type="text" id="name_email_send" name="name_email_send" t-att-value="name" class="form-control"  readonly="readonly"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email_from">From:</label>
+                        <input type="email" id="email_from" name="email_from" class="form-control" t-att-value="request.env.user.work_email" readonly="readonly"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="shoot_subject">Subject:</label>
+                        <input type="text" id="shoot_subject" name="shoot_subject" class="form-control" t-att-value="'Camera Unit Request from ' + request.env.user.name" />
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="shoot_description">Description:</label>
+                        <textarea id="shoot_description" name="shoot_description" class="form-control" rows="4"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="shoot_attachments">Attachments:</label>
+                        <input type="file" id="shoot_attachments" name="shoot_attachments" class="form-control"/>
+                    </div>
+                    <div class="" style="text-align:center">
+                        <a t-attf-href="/my/send_mail/shooting_request" class="btn btn-primary">Discard</a>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="shootrequest_submited_view" name="Shoot Request submited View">
+        <t t-call="portal.portal_layout">
+            <div id="shootrequest_submit" >
+                <div class="card text-center">
+                <div class="card-header">
+                    Shoot Request
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-success">Your Form Submited Successfully!</h5>
+                    <p class="card-text"></p>
+                    <a href="/my/shootrequest/table" class="btn btn-primary">Check Status</a>
+                    
+                    <a href="/my/employee_list/shoot_request_menu" class="btn btn-primary">Back to home</a>
+                </div>
+                
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="shootrequest_table_view_template" name="Shootrequest Table View">
+        <t t-call="portal.portal_layout">
+            <div id="shootrequest_table">
+                <a href="/my/employees/shoot"><button type="button" id="goback_shoot" name="goback_shoot" class="btn btn-primary">Go Back</button></a>
+
+                <h3 style="text-align:center;">Shoot Request Status</h3>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr class="text-center">
+                            <th>Requested Date</th>
+                            <th>Employee</th>
+                            <th>Camera Unit</th>
+                            <th>Issued Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <t t-foreach="records" t-as="requ">
+                            <tr>
+                                <td><t t-esc="requ.request_date"/></td>
+                                <td><t t-esc="requ.employee_id.name"/></td>
+                                <td><t t-esc="requ.boq_id.product_id.name"/></td>
+                                <td><t t-esc="requ.issued_date"/></td>
+                                <td><t t-esc="state_dict.get(requ.state, '')"/></td>
+                            </tr>
+                            
+                            
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+    
+
+</odoo>

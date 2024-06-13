@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_attendance_request,access.employee.attendance.request,model_employee_attendance_request,base.group_user,1,1,1,1
+access_employee_attendance_correction.wizard,access.employee.attendance.correction.wizard,model_employee_attendance_correction_wizard,,1,1,1,1
+

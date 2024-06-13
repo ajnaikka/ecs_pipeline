@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_quotation_approval,access.quotation.approval,model_quotation_approval,base.group_user,1,1,1,1
+access_quotation_higher,access.quotation.higher,model_quotation_higher,base.group_user,1,1,1,1
+

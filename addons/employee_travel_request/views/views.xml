@@ -1,0 +1,85 @@
+<odoo>
+    <data>
+        <record id="generate_travel_request_tree" model="ir.ui.view">
+            <field name="name">travel.request.tree</field>
+            <field name="model">travel.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="request_date"/>
+                    <field name="employee_id"/>
+                    <field name="description"/>
+
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="refuse_reason"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="generate_it_request_form" model="ir.ui.view">
+            <field name="name">travel.request.form</field>
+            <field name="model">travel.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="generate_travel_request_button" type="object" string="Generate Travel Request"
+                                class="oe_highlight"
+                                invisible="state in ('travel_req', 'refuse_manager','approve_manager')"/>
+                        <button name="approve_travel_request_button" type="object" string="Approve by Manager"
+                                class="oe_highlight" invisible="state in ('draft', 'refuse_manager','approve_manager')"
+                                groups="infinous_user_groups.reporting_manager"/>
+                        <button name="refuse_travel_request_button" type="object" string="Refuse by Manager"
+                                class="oe_highlight" invisible="state in ('draft', 'refuse_manager','approve_manager')"
+                                groups="infinous_user_groups.reporting_manager"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="description"/>
+                                <field name="travel_place_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="place_name"/>
+                                        <field name="place_id" column_invisible="1"/>
+                                    </tree>
+                                </field>
+
+                                <field name="request_date"/>
+                                <field name="employee_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <!--                                  <field name="approve_reason" invisible="state in ('draft','refuse_reason')" groups="infinous_user_groups.reporting_manager"/>-->
+                                <field name="refuse_reason" invisible="state  in ('draft','approve_reason')"
+                                       groups="infinous_user_groups.reporting_manager"/>
+                                <field name="state"/>
+                                <field name="comment" string="Comment" invisible="1"/>
+                                <!--                                <field name="email_to" options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/>-->
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="generate_travel_request_action" model="ir.actions.act_window">
+            <field name="name">Travel Request</field>
+            <field name="res_model">travel.request</field>
+        </record>
+        <menuitem
+                id="generate_travel_request_menu"
+                parent="hr_expense.menu_hr_expense_my_expenses"
+                sequence="3"
+                name="Generate Travel Requests"
+                action="generate_travel_request_action"
+        />
+
+    </data>
+</odoo>

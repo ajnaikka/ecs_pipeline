@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_shift_template" name="timeoff"
+              inherit_id="inf_employee_portal.employee_list_template">
+                <xpath expr="//div[@id='portal_common_category_employee']" position="inside">
+
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/infi_employee_shift/static/description/shift.png'"/>
+                <t t-set="title">Shift Details</t>
+                <t t-set="text" >View your Shifts</t>
+                <t t-set="url" t-value="'/employee/shift'"/>
+                <t t-set="config_card" t-value="True"/>
+
+
+
+            </t>
+        </xpath>
+ </template>
+
+    <template id="shift_application_submited_views" name="Shift Request submit view">
+        <t t-call="portal.portal_layout">
+            <div id="shift_request">
+                <div class="card text-center">
+
+                    <t t-if="subject">
+                        <div class="card-header">
+                            Shift correction Request
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Shift correction Request Request Submitted
+                                Successfully!
+                            </h5>
+                            <p class="card-text"></p>
+                            <a href="/employee/shift" class="btn btn-primary">Go Back</a>
+                        </div>
+                    </t>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="shift_tree_view" name="Birthday Notification">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">General Notifications</t>
+
+            </t>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="mb32">
+                        <a t-if="True" t-attf-href="/my/employee_list" class="btn btn-primary">Back to home</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Employee</th>
+                        <th>Shift</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <t t-if="shift_list">
+
+                    <t t-foreach="shift_list" t-as="shift">
+                        <tr>
+                            <td>
+                                <span t-esc="shift.employee_id.name"/>
+                            </td>
+
+                            <td>
+                                <span t-esc="shift.shift_id.name"/>
+                            </td>
+                            <td>
+                                <span t-field="shift.start_time"/>
+                            </td>
+                            <td>
+                                <span t-field="shift.end_time"/>
+                            </td>
+
+                            <td>
+                                <span t-if="shift.shift_from" t-esc="shift.shift_from.strftime('%d-%m-%Y')"/>
+                            </td>
+
+                            <td>
+                                <span t-if="shift.shift_to" t-esc="shift.shift_to.strftime('%d-%m-%Y')"/>
+                            </td>
+                            <td>
+                                <span t-esc="shift.state"/>
+                            </td>
+
+                            <td>
+                                <a role="button" class="btn btn-primary"
+                                   data-bs-toggle="modal"
+                                   id='attModal' data-bs-target="#shift_request" href="#"
+                                   onclick="populateSubject(this)"
+                                >Shift Correction Request
+                                </a>
+
+                            </td>
+                            <td style="display: none;">
+                                <span id="shift_id" t-esc="shift.id"/>
+                            </td>
+
+                            <script type="text/javascript">
+                                function populateSubject(button) {
+
+                                console.log('dssssssss',button)
+                                var shiftId = button.closest('tr').querySelector('#shift_id');
+                                if (shiftId) {
+                                var shiftIds = document.getElementById('shiftId');
+                                if (shiftIds) {
+                                shiftIds.value = shiftId.textContent;
+                                } else {
+                                console.log('Hidden input field for shift ID not found');
+                                }
+                                } else {
+                                console.log('Shift ID element not found in the table row');
+                                }
+                                }
+                            </script>
+
+                            <div class="row">
+                                <div class="modal fade" id="shift_request" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title">Shift Correction Request
+                                                </h3>
+                                            </div>
+                                            <form action="/send_shift_request" method="post">
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="description">Send to:</label>
+                                                        <select class="form-control" name="send_to"
+                                                                required="1">
+                                                            <option t-att-value="employee_manager.id">
+                                                                <t t-esc="employee_manager.name"/>
+                                                            </option>
+                                                        </select>
+                                                        <br/>
+                                                        <label for="description">Subject:</label>
+                                                        <input type="text" class="form-control"
+                                                               name="subjects"
+                                                               id="subjects"
+                                                               placeholder="Enter subject" required="1"
+                                                        />
+                                                        <input type="hidden" id="shiftId" name="shift_id"/>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary"
+                                                            id="submitBtn"
+                                                            role="button">
+                                                        Submit
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+
+        </t>
+    </template>
+
+
+</odoo>
+
+
+
+
+

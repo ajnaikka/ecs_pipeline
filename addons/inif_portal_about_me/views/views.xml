@@ -1,0 +1,20 @@
+<odoo>
+  <data>
+   <template id="employee_list_template_about_me" name="about me" inherit_id="inf_employee_portal.employee_list_template">
+        <t t-call="portal.portal_layout">
+            <t t-set="my_details" t-value="True"/>
+            <xpath expr="//div[@id='portal_common_category']" position="after">
+                <div class="o_portal_category row g-2 mt-3" id="portal_attendance_category">
+                            <t t-call="portal.portal_docs_entry">
+                                <t t-set="icon" t-value=""/>
+                                <t t-set="title">About Me</t>
+                                <t t-set="text">Verify you about me details</t>
+                                <t t-set="url" t-value="'/my/employees/about_me'"/>
+                                <t t-set="config_card" t-value="True"/>
+                            </t>
+                </div>
+            </xpath>
+        </t>
+    </template>
+  </data>
+</odoo>

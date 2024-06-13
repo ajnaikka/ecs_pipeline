@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_request,travel_request,model_travel_request,,1,1,1,1
+access_travel_place,travel_place,model_travel_place,,1,1,1,1

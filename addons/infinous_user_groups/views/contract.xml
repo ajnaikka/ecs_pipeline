@@ -1,0 +1,133 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_contract_form_view">
+        <field name="name">hr.contract.form.inherited</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="user_group_bool" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//div[@id='resource_calendar_warning']/field[@name='resource_calendar_id'][1]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//div[@id='resource_calendar_warning']/field[@name='resource_calendar_id'][2]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='structure_type_id'][1]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='structure_type_id'][2]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='department_id'][1]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='department_id'][2]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='job_id'][1]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='job_id'][2]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='contract_type_id'][1]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//group[@name='top_info']/group[@name='top_info_right']/field[@name='contract_type_id'][2]"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//page[@name='information']/group[@name='salary_info']/group[@name='salary']/div[@name='wage']/field[@name='wage']"
+                   position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <!--              <xpath expr="//label[@for='wage']/field[@name='wage_type']" position="attributes">-->
+            <!--                   <attribute name="readonly">user_group_bool == True</attribute>-->
+            <!--                </xpath>-->
+
+            <!--                <xpath expr="//page[@name='information']/group[@name='salary_info']/group[@name='salary']/div[@name='wage']/field[@name='wage_type']"-->
+            <!--                       position="attributes">-->
+            <!--                    <attribute name="readonly">user_group_bool == True</attribute>-->
+            <!--                </xpath>-->
+
+
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_contract_form_inherit">
+        <field name="name">hr.contract.form.inherited</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='wage_type']" position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='schedule_pay']" position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_contract_view_form_inherit_work_entry">
+        <field name="name">hr.contract.form.inherited1</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='work_entry_source']" position="attributes">
+                <attribute name="readonly">user_group_bool == True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_payslipinherited_form_view">
+        <field name="name">hr.payslip.form.inherited</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_salary_slip" type="object" string="Payslip" class="btn-primary"/>
+            </xpath>
+            <xpath expr="//button[@name='action_print_payslip']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='contract_id']" position="after">
+                <field name="date_difference" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_salary_slip_template" model="ir.actions.report">
+        <field name="name">Payslip</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">infinous_user_groups.infi_payroll_template</field>
+        <field name="report_file">infinous_user_groups.infi_payroll_template</field>
+        <field name="print_report_name">'Payslip - %s' % (object.employee_id.name)</field>
+        <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+        <field name="binding_type">report</field>
+        <!-- Erase fields to avoid double PDF posting -->
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False"/>
+    </record>
+
+
+</odoo>

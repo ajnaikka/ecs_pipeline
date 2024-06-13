@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <template id="employee_list_template_attendance_details" name="attendance details"
+              inherit_id="inf_employee_portal.employee_list_template">
+        <xpath expr="//div[@id='portal_common_category_employee']" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon"
+                       t-value="'/infi_portal_attendance_details/static/description/attendance_correction.png'"/>
+                    <t t-set="title">Attendances</t>
+                    <t t-set="text">Create your Attendance Correction request</t>
+                    <t t-set="url" t-value="'/my/employees/attendance_details'"/>
+                    <t t-set="config_card" t-value="True"/>
+                </t>
+
+        </xpath>
+    </template>
+
+    <template id="employee_attendance_tree_view" name="Attendance Table View">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_details">
+                <a href="/my/employee_list">
+                    <button type="button" id="goback_attendance" name="goback_attendance" class="btn btn-primary">Go
+                        Back
+                    </button>
+                </a>
+                <a role="button" class="btn btn-primary"
+                   data-bs-toggle="modal"
+                   id='atModal' data-bs-target="#attendance_popup" href="#">Employee Attendance
+                    Correction Manual
+                </a>
+
+                <div class="filter-section form-group row mb-3 mt16">
+                    <div class="col-sm-3">
+                        <label for="filter_month" class="col-form-label">Filter by Month:</label>
+
+                        <select class="form-control" id="filter_month">
+                            <option value="">All</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="filter_day" class="col-form-label">Filter by Day:</label>
+                        <select class="form-control" id="filter_day">
+                            <option value="">Select Day</option>
+                            <t t-foreach="range(1, 32)" t-as="day">
+                                <option t-att-value="'{:02d}'.format(day)">
+                                    <t t-esc="'{:02d}'.format(day)"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+
+                    <div class="col-sm-3">
+                        <label for="filter_year" class="col-form-label">Filter by Year:</label>
+                        <select class="form-control" id="filter_year">
+                            <option value="">All</option>
+                            <t t-foreach="range(2000, 2100)" t-as="year">
+                                <option t-att-value="year">
+                                    <t t-esc="year"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <script type="text/javascript">
+                        document.addEventListener('click', function(event) {
+                        if (event.target.id === 'applyFiltersBtn') {
+                        applyFilters();
+                        }
+                        });
+
+                        function applyFilters() {
+                        var filterMonth = document.getElementById('filter_month').value;
+                        var filterDay = document.getElementById('filter_day').value;
+                        var filterYear = document.getElementById('filter_year').value;
+                        var tableRows = document.querySelectorAll('#table-row');
+
+                        tableRows.forEach(function(row) {
+                        var checkinDate = row.querySelector('#checkin').innerText.trim();
+                        var checkinDateParts = checkinDate.split(' ')[0].split('/'); // Split date part by '/'
+
+                        if (checkinDateParts.length === 3) {
+                        var rowMonth = checkinDateParts[0];
+                        var rowDay = checkinDateParts[1];
+                        var rowYear = checkinDateParts[2];
+
+                        console.log('filterMonth:', filterMonth);
+                        console.log('filterDay:', filterDay);
+                        console.log('filterYear:', filterYear);
+                        console.log('rowMonth:', rowMonth);
+                        console.log('rowDay:', rowDay);
+                        console.log('rowYear:', rowYear);
+
+                        if ((filterMonth === '' || filterMonth === rowMonth) &amp;&amp;
+                        (filterDay === '' || filterDay === rowDay) &amp;&amp;
+                        (filterYear === '' || filterYear === rowYear)) {
+                        row.style.display = 'table-row';
+                        } else {
+                        row.style.display = 'none';
+                        }
+                        } else {
+                        console.log('Invalid date format: ' + checkinDate);
+                        }
+                        });
+                        }
+                    </script>
+
+
+                    <button type="button" id="applyFiltersBtn" class="btn btn-primary">Apply Filters</button>
+                </div>
+
+
+                <div class="row">
+                    <div class="modal fade" id="attendance_popup" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Employee Attendance Correction Request
+                                    </h3>
+                                </div>
+                                <form action="/send_attendance_correction" method="post">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+
+                                    <div class="modal-body">
+                                        <script type="text/javascript">
+                                            document.addEventListener('input', function(event) {
+                                            if (event.target.id === 'checkin') {
+                                            var checkinDate = event.target.value;
+                                            var dateObj = new Date(checkinDate);
+                                            var day = dateObj.getDate().toString().padStart(2, '0');
+                                            var month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+                                            var year = dateObj.getFullYear();
+
+                                            var formattedCheckinDate = day + '-' + month + '-' + year;
+
+                                            var subjectInput = document.getElementById('subject');
+                                            subjectInput.value = 'Kindly approve my attendance correction request for '
+                                            + formattedCheckinDate;
+                                            }
+                                            });
+
+
+                                        </script>
+                                        <div class="form-group">
+
+                                            <label for="checkin">Correction Date:</label>
+                                            <input type="date" class="form-control" name="checkin" id="checkin"
+                                                   required="1"/>
+
+
+                                            <br/>
+                                            <label for="send_to">Send to:</label>
+                                            <select class="form-control" name="send_to" required="1">
+                                                <option t-att-value="employee.hr_manager_id.id">
+                                                    <t t-esc="employee.hr_manager_id.name"/>
+                                                </option>
+                                            </select>
+                                            <br/>
+                                            <label for="subject">Subject:</label>
+                                            <input type="text" class="form-control" name="subject" id="subject"
+                                                   placeholder="Enter subject" required="1"/>
+
+
+                                            <input type="hidden" name="employee_email"
+                                                   t-att-value="employee.hr_manager_id.work_email"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" id="submitBtn" role="button">
+                                            Submit
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h3 style="text-align:center;">Attendances</h3>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr class="text-center">
+                            <th>Employee Name</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Worked Hours</th>
+                            <th>Compensatory Hours</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <t t-foreach="employees" t-as="emp">
+                            <t t-if="emp.employee_id.id">
+                                <tr id="table-row">
+                                    <td>
+                                        <span t-esc="emp.employee_id.name"/>
+                                    </td>
+
+                                    <td>
+                                        <span id="checkin" t-field="emp.check_in"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="emp.check_out"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="str(emp.worked_hours).split('.')[0] + '.' + str(emp.worked_hours).split('.')[1][:2]"/>
+                                    </td>
+
+
+                                    <td>
+                                        <span t-esc="'{:.2f}'.format(emp.componsatory_hours)"/>
+                                    </td>
+                                    <td>
+                                        <a role="button" class="btn btn-primary"
+                                           data-bs-toggle="modal"
+                                           id='attModal' data-bs-target="#attendance_correction" href="#"
+                                           onclick="populateSubject(this)">Employee
+                                            Attendance
+                                            Correction
+                                        </a>
+
+
+                                    </td>
+                                    <div class="row">
+                                        <div class="modal fade" id="attendance_correction" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title">Employee Attendance Correction
+                                                            Request
+                                                        </h3>
+                                                    </div>
+                                                    <form action="/send_attendance_correction" method="post">
+                                                        <input type="hidden" name="csrf_token"
+                                                               t-att-value="request.csrf_token()"/>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="description">Send to:</label>
+                                                                <select class="form-control" name="send_to"
+                                                                        required="1">
+                                                                    <option t-att-value="employee.hr_manager_id.id">
+                                                                        <t t-esc="employee.hr_manager_id.name"/>
+                                                                    </option>
+                                                                </select>
+                                                                <br/>
+                                                                <label for="description">Subject:</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="subjects"
+                                                                       id="subjects"
+                                                                       placeholder="Enter subject" required="1"
+                                                                />
+                                                                <input type="hidden" name="employee_email"
+                                                                       t-att-value="employee.hr_manager_id.work_email"/>
+
+                                                                <input type="hidden" name="checkin_date"
+                                                                       id="checkin_date"/>
+
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                    id="submitBtn"
+                                                                    role="button">
+                                                                Submit
+                                                            </button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <script type="text/javascript">
+                                        function populateSubject(button) {
+                                        var checkinDateElement = button.closest('tr').querySelector('#checkin');
+                                        if (checkinDateElement) {
+                                        var checkinDateTime = checkinDateElement.innerText.trim();
+
+                                        var checkinDate = checkinDateTime.split(' ')[0];
+
+                                        var dateParts = checkinDate.split('/');
+                                        var day = dateParts[1];
+                                        var month = dateParts[0];
+                                        var year = dateParts[2];
+
+                                        var formattedCheckinDate = day + '-' + month + '-' + year;
+
+                                        var subjectInput = document.getElementById('subjects');
+                                        var checkin_date = document.getElementById('checkin_date');
+                                        if (checkin_date) {
+                                        checkin_date.value = checkinDate;
+                                        }if (subjectInput) {
+                                        subjectInput.value = 'Kindly approve my attendance correction request for ' +
+                                        formattedCheckinDate;
+                                        } else {
+                                        console.log('Subject input element not found');
+                                        }
+                                        } else {
+                                        console.log('Check-in date element not found');
+                                        }
+                                        }
+                                    </script>
+
+
+                                </tr>
+
+                            </t>
+
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="attendance_correction_submited_view" name="Attendance Correction submit view">
+        <t t-call="portal.portal_layout">
+            <div id="attendance_correction">
+                <div class="card text-center">
+
+                    <t t-if="subject">
+                        <div class="card-header">
+                            Attendance Correction Request
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Submitted Successfully!</h5>
+                            <p class="card-text"></p>
+                            <a href="/my/employees/attendance_details" class="btn btn-primary">Back to home</a>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="attendance_header" inherit_id="website.header_call_to_action" name="Custom Header Call to Action"
+              active="True">
+        <xpath expr="//a[@href='/contactus']" position="after">
+            <script type="text/javascript">
+                function checkinAction() {
+                // Display the modal
+                $('#exampleModalToggle').modal('show');
+
+                // Event listener for when the modal is closed
+                $('#exampleModalToggle').on('hidden.bs.modal', function () {
+                // Perform other actions after modal is closed
+                window.location.href = '/create_attendance?action=checkin';
+                localStorage.setItem('lastAction', 'checkin');
+
+                // Hide the "Check-in" button
+                document.getElementById('checkin_button').style.display = 'none';
+                document.getElementById('checkout_button').style.display = 'inline-block';
+                });
+                }
+
+
+                function captureImage() {
+                var video = document.getElementById('cameraFeed');
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+
+                // Request access to the camera
+                navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                video.srcObject = stream;
+                video.play();
+                video.style.display = 'block'; // Display the video element
+
+                // Capture image when "Take Snap" button is clicked
+                document.querySelector('.modal-footer button').addEventListener('click', function () {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                var imageData = canvas.toDataURL('image/jpeg');
+                console.log("capturedImagePreview",imageData);
+                // Display captured image
+                var preview = document.getElementById('capturedImagePreview');
+                preview.src = imageData;
+                preview.style.display = 'block';
+
+                var formData = new FormData();
+                formData.append('image_data', imageData);
+                formData.append('csrf_token', odoo.csrf_token);
+                $.ajax({
+                url: '/hr_attendance/upload_imaged',
+                type: 'POST',
+                data: formData,
+
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                console.log('Image uploaded successfully.');
+
+                },
+                error: function(xhr, status, error) {
+                console.error('Failed to upload image:', error);
+                }
+                });
+
+                // Stop video stream
+                stream.getTracks().forEach(track => track.stop());
+                });
+                })
+                .catch(function (err) {
+                console.error('Error accessing camera:', err);
+                });
+                }
+
+
+                function checkoutAction() {
+                $('#checkoutModal').modal('show');
+
+                $('#checkoutModal').on('hidden.bs.modal', function () {
+
+                window.location.href = '/create_attendance?action=checkout';
+                localStorage.setItem('lastAction', 'checkout');
+                document.getElementById('checkin_button').style.display = 'inline-block';
+                document.getElementById('checkout_button').style.display = 'none';
+                });
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                var lastAction = localStorage.getItem('lastAction');
+                if (lastAction === 'checkin') {
+                document.getElementById('checkin_button').style.display = 'none';
+                document.getElementById('checkout_button').style.display = 'inline-block';
+                } else if (lastAction === 'checkout') {
+                document.getElementById('checkin_button').style.display = 'inline-block';
+                document.getElementById('checkout_button').style.display = 'none';
+                }
+                });
+            </script>
+
+
+            <t t-if="request.env.user.employee_id.id">
+                <a class="oe_unremovable btn btn-primary btn_cta" id="checkin_button" data-bs-toggle="modal"
+                   href="#exampleModalToggle"
+                   onclick="checkinAction()">
+                    Check-in
+                </a>
+                <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                     aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel">Check In</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Video element to display camera feed -->
+                                <video id="cameraFeed" style="display: none;"></video>
+                                <!-- Image element to display captured image -->
+                                <img id="capturedImagePreview" style="display: none;"/>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Button to trigger image capture -->
+                                <button class="btn btn-primary" onclick="captureImage()">Check-in</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Check-in test</a>-->
+
+                <script type="text/javascript">
+                    function captureImageCheckOut() {
+                    var video = document.getElementById('checkoutCameraFeed');
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+
+                    // Request access to the camera
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                    video.style.display = 'block'; // Display the video element
+                    console.log("it is working here");
+
+                    // Capture image when "Take Snap" button is clicked
+                    document.querySelector('#checkoutModal .modal-footer button').addEventListener('click', function ()
+                    {
+                    console.log("it enters in ");
+
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    var outimageData = canvas.toDataURL('image/jpeg');
+                    console.log("checkoutCapturedImagePreview", outimageData);
+
+                    // Display captured image
+                    var preview = document.getElementById('checkoutCapturedImagePreview');
+                    preview.src = outimageData;
+                    preview.style.display = 'block'; // Ensure the image is displayed
+
+                    var formData = new FormData();
+                    formData.append('outimageData', outimageData);
+                    formData.append('csrf_token', odoo.csrf_token);
+                    $.ajax({
+                    url: '/hr_attendance/upload_imaged_out',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                    console.log('Image uploaded successfully for check-out.');
+                    },
+                    error: function(xhr, status, error) {
+                    console.error('Failed to upload image for check-out:', error);
+                    }
+                    });
+
+                    // Stop video stream
+                    stream.getTracks().forEach(track => track.stop());
+                    });
+                    })
+                    .catch(function (err) {
+                    console.error('Error accessing camera for check-out:', err);
+                    });
+                    }
+
+                </script>
+                <!-- Check-out Modal -->
+                <div class="modal fade" id="checkoutModal" aria-hidden="true" aria-labelledby="checkoutModalLabel"
+                     tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="checkoutModalLabel">Check Out</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Video element to display camera feed -->
+                                <video id="checkoutCameraFeed" style="display: none;"></video>
+                                <!-- Image element to display captured image -->
+                                <img id="checkoutCapturedImagePreview" style="display: none;"/>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Button to trigger image capture -->
+                                <button class="btn btn-primary" onclick="captureImageCheckOut()">Check-out</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button to trigger check-out modal -->
+                <!--                <a class="btn btn-primary" data-bs-toggle="modal" href="#checkoutModal" role="button">Check-out test</a>-->
+
+
+                <a class="oe_unremovable btn btn-primary btn_cta" id="checkout_button" style="display: none;"
+                   data-bs-toggle="modal" href="#checkoutModal"
+                   onclick="checkoutAction()">Check-out
+                </a>
+
+
+            </t>
+
+        </xpath>
+    </template>
+
+
+</odoo>

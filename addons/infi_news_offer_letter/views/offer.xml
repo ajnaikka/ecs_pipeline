@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_applicant_form_inherit1" model="ir.ui.view">
+        <field name="name">hr.applicant.form.inherit1</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_makeMeeting']" position="before">
+                    <button name="smart_offer_letter"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        string="Offer Letter"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="is_amend" invisible="1"/>
+                <button string="Create Offer Letter" class="oe_highlight" type="object" name="action_offer_letter"/>
+                <button string="Send Offer Letter" class="oe_highlight" type="object" name="send_amend" invisible="1"/>
+                <button string="Amend and Resend" class="oe_highlight" type="object" name="resend_amend" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="candidate_offer_letter_template" model="mail.template">
+            <field name="name">Offer Letter Email Template</field>
+            <field name="model_id" ref="infi_news_offer_letter.model_offer_letter"/>
+            <field name="subject">Offer Letter of {{object.name}}</field>
+            <field name="email_to">{{object.email}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+            <field name="report_template_ids"
+                   eval="[(4, ref('infi_news_offer_letter.action_offer_letter_templates'))]"/>
+    </record>
+    <record id="offer_letter_tree_view" model="ir.ui.view">
+        <field name="name">offer.letter.tree</field>
+        <field name="model">offer.letter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="position"/>
+                <field name="date_joining"/>
+                <field name="department"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+    <record id="offer_letter_form_view" model="ir.ui.view">
+        <field name="name">offer.letter.form</field>
+        <field name="model">offer.letter</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                     <button string="Send Offer Letter" class="oe_highlight" type="object" name="send_offer"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="position"/>
+                            <field name="date_joining"/>
+                        </group>
+                        <group>
+                            <field name="department"/>
+                            <field name="location"/>
+                            <field name="date" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Salary Details" id="exit_details">
+                           <group string="Salary Details">
+                               <group>
+                                   <div>
+                                    <p>Basic:
+                                        <field name="basic"/>
+                                    </p>
+                                    <p>DRA:
+                                        <field name="dra"/>
+                                    </p>
+                                    <p>HRA:
+                                        <field name="hra"/>
+                                    </p>
+                                       <p>Conveyance:
+                                        <field name="conveyance"/>
+                                    </p>
+                                </div>
+
+                               </group>
+
+                               <group>
+                                   <div>
+                                        <p>Other Allowance:
+                                            <field name="other_allownance"/>
+                                        </p>
+                                        <p>LPF
+                                            <field name="lpf"/>
+                                        </p>
+                                        <p>LWF
+                                            <field name="lwf"/>
+                                        </p>
+                                        <p>ESI
+                                            <field name="esi"/>
+                                        </p>
+
+                                   </div>
+                               </group>
+
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="offer_letter_form_action" model="ir.actions.act_window">
+            <field name="name">Offer Letter Form</field>
+            <field name="res_model">offer.letter</field>
+    </record>
+
+
+</odoo>

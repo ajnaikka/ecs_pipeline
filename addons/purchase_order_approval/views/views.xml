@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <record id="purchase_order_approval_form" model="ir.ui.view">
+            <field name="name">purchase.order.approval.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+<!--                <button name="button_cancel" invisible="state not in ('draft', 'to approve', 'sent', 'purchase','waiting_for_manager_approval','cancel','waiting_for_director_approval','waiting_for_purchase_director_approval','waiting_for_financial_approval')" />-->
+<!--                <xpath expr="//button[@name='button_confirm']" position="replace">-->
+                <xpath expr="//button[@id='draft_confirm']" position="replace">
+
+                    <button name="button_confirm" type="object" invisible="state != 'waiting_for_financial_approval'" context="{'validate_analytic': True}" string="Confirm Order" id="draft_confirm" data-hotkey="q"   groups="purchase_order_approval.group_finance_manager"/>
+
+                </xpath>
+                    <xpath expr="//button[@id='bid_confirm']" position="replace">
+
+                    <button name="button_confirm" type="object" invisible="state != 'waiting_for_financial_approval'" string="Confirm Order" context="{'validate_analytic': True}" class="oe_highlight" id="bid_confirm" data-hotkey="q" groups="purchase_order_approval.group_finance_manager"/>
+
+                </xpath>
+<!--                <xpath expr="//button[@name='action_rfq_send']" position="replace">-->
+
+<!--                    <button name="action_rfq_send" invisible="state != 'purchase'" string="Send PO by Email" type="object" context="{'send_rfq':False}" data-hotkey="g" groups="purchase_order_approval.group_finance_manager"/>-->
+
+<!--                </xpath>-->
+
+
+                 <xpath expr="//field[@name='partner_id']" position="after">
+
+                    <field name="partner_ids" widget="many2many_tags"/>
+
+
+                </xpath>
+
+
+
+                <button name="button_confirm" position="after">
+                    <button name="button_manager_approval" type="object" invisible="state not in ('draft','sent')"
+                            groups="purchase_order_approval.group_lower_purchase_director"
+                            string="Lower Authority Approval"
+                            class="oe_highlight"/>
+                    <button name="button_senior_manager_approval" type="object" invisible="state not in ('draft','sent')"
+                            groups="purchase_order_approval.group_purchase_director"
+                            string="Higher Authority Approval"
+                            class="oe_highlight"/>
+                    <button name="button_medium_authority_approval" type="object" invisible="state not in ('draft','sent')"
+                            groups="purchase_order_approval.group_medium_level_authority"
+                            string="Medium Authority Approval"
+                            class="oe_highlight"/>
+                    <button name="button_finance_manager_approval" type="object" invisible="state not in ('waiting_for_higher_manager_approval','waiting_for_manager_approval','waiting_for_medium_level_approval')"
+                            groups="purchase_order_approval.group_finance_manager"
+                            string="Finance Manager Approval"
+                            class="oe_highlight"/>
+                    <button name="button_refuse" type="object" invisible="state != 'waiting_for_financial_approval'"
+
+                            string="Refuse"/>
+                </button>
+                                   <field name="state" invisible="1"/>
+
+            </field>
+        </record>
+
+
+        <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+            <field name="domain">[('state','in',('waiting_for_manager_approval','waiting_for_higher_manager_approval',
+           'waiting_for_financial_approval', 'refused', 'to approved','purchase', 'done'))]
+            </field>
+        </record>
+
+        <record id="po_approval_res_company_form" model="ir.ui.view">
+            <field name="name">PO.approval.res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="after">
+                    <field name="po_approval"/>
+                    <field name="lower_amount" invisible="1"/>
+                    <field name="higher_amount" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

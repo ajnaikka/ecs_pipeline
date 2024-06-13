@@ -1,0 +1,333 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_attendance_form_inherited_view">
+        <field name="name">hr.attendance.form.inherited</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='overtime_hours']" position="after">
+                <field name="componsatory_hours"/>
+                <field name="is_holiday" invisible="0"/>
+                <field name="status" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_attendance_tree1" model="ir.ui.view">
+        <field name="name">hr.attendance.tree1</field>
+        <field name="model">hr.attendance</field>
+        <field name="arch" type="xml">
+            <tree string="Compensatory Leaves">
+                <field name="employee_id" options="{'no_create': True}"/>
+                <field name="check_in" options="{'no_create': True}"/>
+                <field name="check_out" options="{'no_create': True}"/>
+                <field name="componsatory_hours"/>
+                <field name="status"/>
+                <button name="action_status"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        string="Taken" invisible="status in ('draft','taken')"
+                        groups="infinous_user_groups.assigment_hr"/>
+                <field name="is_holiday" column_invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="compensatory_request_tree" model="ir.ui.view">
+        <field name="name">compensatory.request.tree</field>
+        <field name="model">compensatory.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="request_date"/>
+                <field name="employee_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="compensatory_request_form" model="ir.ui.view">
+        <field name="name">compensatory.request.form</field>
+        <field name="model">compensatory.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compensatory_request_button" type="object" string="Compensatory Request"
+                            class="oe_highlight" invisible="state in ('to_reporter', 'to_hr', 'approved','cancel')"/>
+                    <button name="req_hr" type="object" string="To HR" class="oe_highlight"
+                            invisible="state in ('draft', 'to_hr', 'approved','cancel')"
+                            groups="infinous_user_groups.reporting_manager"/>
+                    <button name="req_approve" type="object" string="Approve" class="oe_highlight"
+                            invisible="state in ('draft', 'to_reporter', 'approved','cancel')"
+                            groups="infinous_user_groups.assigment_hr"/>
+                    <button name="req_cancel" type="object" string="Reject" class="oe_highlight"
+                            invisible="state in ('draft','approved','cancel')"
+                            groups="infinous_user_groups.assigment_hr"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="request_date"/>
+                            <field name="employee_id"/>
+                            <field name="leave_count" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="attendance_id"/>
+                            <field name="date_from" invisible="1"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shift_master_tree" model="ir.ui.view">
+        <field name="name">shift.master.tree</field>
+        <field name="model">shift.master</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+            </tree>
+        </field>
+    </record>
+    <record id="shift_master_form" model="ir.ui.view">
+        <field name="name">shift.master.form</field>
+        <field name="model">shift.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="shift_type"/>
+                            <field name="start_time"/>
+                        </group>
+                        <group>
+                            <field name="end_time"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shift_reuest_tree" model="ir.ui.view">
+        <field name="name">shift.request.tree</field>
+        <field name="model">shift.request</field>
+        <field name="arch" type="xml">
+            <tree default_order="create_date desc">
+                <field name="employee_id"/>
+                <field name="shift_id"/>
+                <field name="start_time" widget="float_time"/>
+                <field name="end_time" widget="float_time"/>
+                <field name="shift_from"/>
+                <field name="shift_to"/>
+            </tree>
+        </field>
+    </record>
+    <record id="shift_request_form" model="ir.ui.view">
+        <field name="name">shift.request.form</field>
+        <field name="model">shift.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_reject" string="Reject" type="object"
+                            class="btn btn-secondary"
+                            invisible="state != 'request'"
+                    />
+
+
+                    <button name="action_confirm" string="Confirm" type="object"
+                            class="oe_highlight"
+                            invisible="state != 'request'"
+                    />
+                    <field name="state" widget="statusbar"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="shift_id"/>
+                            <button name="send_shift_request"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Compensatory Benefit Requests" invisible="1"/>
+                            <button name="send_shift_compensatory"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    string="Compensatory Benefit Requests" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="shift_from" invisible="0"/>
+                            <field name="shift_to"/>
+                            <field name="shifts_count_in_week" invisible="0"/>
+                            <field name="color" widget='color'/>
+                            <field name="start_time" widget="float_time"/>
+                            <field name="end_time" widget="float_time"/>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shift_request_calendar_view" model="ir.ui.view">
+        <field name="name">Shift Request Calendar</field>
+        <field name="model">shift.request</field>
+        <field name="arch" type="xml">
+            <calendar string="Shift Requests" date_start="shift_from" date_stop="shift_from">
+                <field name="shift_id"/>
+                <field name="employee_id"/>
+                <field name="name" invisible="1"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="view_shift_request_gantt" model="ir.ui.view">
+        <field name="name">shift.request.gantt</field>
+        <field name="model">shift.request</field>
+        <field name="arch" type="xml">
+            <gantt date_start="shift_from" date_stop="shift_to"
+                   default_group_by="employee_id" color="shift_id" scales="day,week,month,year"
+                   precision="{'day': 'hour:full', 'week': 'day:full', 'month': 'day:full', 'year': 'day:full'}"
+                   thumbnails="{'employee_id': 'image_128'}" total_row="shift_id"
+                   display_unavailability="1">
+                <field name="name"/>
+
+            </gantt>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_employee_form1_inherited_view">
+        <field name="name">hr.employee.form1.inherited</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_contract']" position="before">
+                <button name="smart_compensatory_request"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        string="Compensatory Benefits"/>
+                <button name="smart_compensatory_benefit_req"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        string="Compensatory Benefit Requests" invisible="1"/>
+
+                <button name="shift_team_action"
+                        class="oe_stat_button"
+                        icon="fa-group"
+                        type="object"
+                        string="My team Benefits"/>
+
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button string="Compensatory Request" class="oe_highlight" type="object"
+                        name="action_compensatory_request"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="team_shift_tree_view" model="ir.ui.view">
+        <field name="name">shift.request.tree</field>
+        <field name="model">shift.request</field>
+        <field name="arch" type="xml">
+            <tree default_order="create_date desc">
+                <field name="employee_id"/>
+                <field name="project_manager_id"/>
+                <field name="shift_id"/>
+                <field name="shift_from"/>
+                <field name="shift_to"/>
+
+            </tree>
+        </field>
+
+    </record>
+
+
+    <record id="team_shift_search_view" model="ir.ui.view">
+        <field name="name">shift.request.search</field>
+        <field name="model">shift.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="project_manager_id"/>
+                <field name="shift_id"/>
+                <field name="shift_from"/>
+                <field name="shift_to"/>
+                <field name="current_user_name"/>
+                <filter string="Archived" name="active" domain="[('project_manager_id', '=',False)]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Project Manager" name="groupby_user" domain="[]"
+                            context="{'group_by':'project_manager_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_my_team_benefits" model="ir.actions.act_window">
+        <field name="name">My Team Benefits</field>
+        <field name="res_model">shift.request</field>
+        <field name="view_mode">tree,form,gantt</field>
+        <!-- <field name="view_ids" eval="[(0, 0, {'view_id': ref('team_shift_tree_view'), 'view_mode': 'tree'}), (0, 0, {'view_id': ref('form_view_id'), 'view_mode': 'form'})]"/> -->
+        <field name="search_view_id" ref="team_shift_search_view"/>
+    </record>
+
+
+    <record id="hr_attendance1_action" model="ir.actions.act_window">
+        <field name="name">Componsatory</field>
+        <field name="res_model">hr.attendance</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_hr_attendance_tree1"/>
+        <field name="domain">[('is_holiday', '=', True)]</field>
+    </record>
+    <record id="compensatory_request_action" model="ir.actions.act_window">
+        <field name="name">Compensatory Request</field>
+        <field name="res_model">compensatory.request</field>
+        <field name="domain">[('state', '!=', 'draft')]</field>
+    </record>
+    <record id="shift_master_action" model="ir.actions.act_window">
+        <field name="name">shift master</field>
+        <field name="res_model">shift.master</field>
+    </record>
+    <record id="shift_request_action" model="ir.actions.act_window">
+        <field name="name">Shift Request</field>
+        <field name="res_model">shift.request</field>
+        <field name="view_mode">tree,form,calendar,gantt</field>
+    </record>
+
+
+    <menuitem
+            id="compensatory_menu" groups="infinous_user_groups.assigment_hr"
+            parent="hr.menu_hr_employee_payroll"
+            sequence="15"
+            name="Compensatory Benefits"
+            action="hr_attendance1_action"/>
+    <menuitem
+            id="compensatory_req_menu" groups="infinous_user_groups.assigment_hr"
+            parent="hr.menu_hr_employee_payroll"
+            sequence="16"
+            name="Compensatory Benefit Request"
+            action="compensatory_request_action"/>
+    <menuitem
+            id="shift_master_menu"
+            parent="hr.menu_hr_employee_payroll"
+            sequence="18"
+            name="Shift Master"
+            action="shift_master_action"/>
+    <menuitem
+            id="shift_request_menu"
+            parent="hr.menu_hr_employee_payroll"
+            sequence="19"
+            name="Shift Request"
+            action="shift_request_action"/>
+</odoo>
+
+

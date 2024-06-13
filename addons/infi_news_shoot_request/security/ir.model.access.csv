@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shoot_request,shoot_request,model_shoot_request,,1,1,1,1
+access_kit_line,kit_line,model_kit_line,,1,1,1,1
+access_kit_component,kit_component,model_kit_component,,1,1,1,1
+access_kit_component_line,kit_component_line,model_kit_component_line,,1,1,1,1

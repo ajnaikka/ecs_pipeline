@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_recruitment_wizard,access.employee.recruitment.wizard,model_employee_recruitment_wizard,base.group_user,1,1,1,1
+access_sending_approval_wizard,access.sending.approval.wizard,model_sending_approval_wizard,base.group_user,1,1,1,1

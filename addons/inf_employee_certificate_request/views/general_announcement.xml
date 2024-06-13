@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_employee_announcement_tree" model="ir.ui.view">
+            <field name="name">hr.employee.announcement.tree</field>
+            <field name="model">hr.employee.announcement</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Announcements" default_order="date desc">
+                    <field name="date"/>
+                    <field name="subject"/>
+                    <field name="user_id" column_invisible="1"/>
+                    <field name="company_id" column_invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_hr_employee_announcement_tree" model="ir.actions.act_window">
+            <field name="name">Employee Announcements</field>
+            <field name="res_model">hr.employee.announcement</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_hr_employee_announcement_tree"/>
+        </record>
+
+        <menuitem id="menu_hr_employee_announcement_details" name="Employee Announcements"
+                  action="action_hr_employee_announcement_tree" parent="hr.menu_hr_employee_payroll"
+                  groups="infinous_user_groups.assigment_hr" sequence="5"/>
+
+
+
+
+
+    </data>
+</odoo>

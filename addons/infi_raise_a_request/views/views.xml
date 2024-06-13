@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+   <record id="view_hr_employee_raise_request_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.raise.request.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+              <xpath expr="//field[@name='coach_id']" position="after">
+                <field name="hr_manager_id"/>
+            </xpath>
+              <xpath expr="//button[@name='action_open_contract']" position="after">
+                    <button name="smart_raise_request"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        string="Raise Requests"/>
+
+                  </xpath>
+            <xpath expr="//header" position="inside">
+                    <button string="Raise a Request" class="oe_highlight" type="object" name="action_raise_request"/>
+                  </xpath>
+        </field>
+   </record>
+       <record id="raise_request_tree" model="ir.ui.view">
+            <field name="name">raise.request.tree</field>
+            <field name="model">raise.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="request_date"/>
+                    <field name="employee_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="raise_request_form" model="ir.ui.view">
+            <field name="name">raise.request.form</field>
+            <field name="model">raise.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="raise_request_button" type="object" string="Raise Request" class="oe_highlight" invisible="state in ('raise_req', 'issue_address','to_reporting_manager','corrected','cancel','closed')"/>
+                        <button name="action_issue_address" type="object" string="Issue Address" class="oe_highlight" invisible="state in ('draft', 'issue_address','to_reporting_manager','corrected','cancel','closed')" groups="infinous_user_groups.assigment_hr"/>
+                        <button name="action_assign_reporting_manager" type="object" string="Assign To Reporting Manager" class="oe_highlight" invisible="state in ('draft', 'raise_req','to_reporting_manager','corrected','cancel','closed')" groups="infinous_user_groups.assigment_hr"/>
+                        <button name="action_accepted_corrected" type="object" string="Accept and Correct" class="oe_highlight" invisible="state in ('raise_req', 'draft','cancel','issue_address','closed','corrected')" groups="infinous_user_groups.reporting_manager"/>
+                        <button name="action_rejected" type="object" string="Reject" class="oe_highlight" invisible="state in ('raise_req', 'draft','cancel','issue_address','closed','corrected')"  groups="infinous_user_groups.reporting_manager"/>
+                        <button name="close_button" type="object" string="Close" class="oe_highlight" invisible="state in ('draft','raise_req','cancel','closed','to_reporting_manager')" groups="infinous_user_groups.assigment_hr"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="request_date" readonly="1"/>
+                                <field name="comment" string="Comment" invisible="1"/>
+<!--                                <field name="email_to" options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/>-->
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="raise_request_action" model="ir.actions.act_window">
+            <field name="name">Raise Request</field>
+            <field name="res_model">raise.request</field>
+        </record>
+        <menuitem
+                id="raise_request_menu"
+                parent="hr.menu_hr_employee_payroll"
+                sequence="11"
+                name="Raise Requests"
+                action="raise_request_action"
+        />
+
+  </data>
+</odoo>

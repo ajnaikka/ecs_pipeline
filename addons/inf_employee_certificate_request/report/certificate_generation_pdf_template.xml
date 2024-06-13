@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="print_generate_certificate">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+
+                        <div align="right" style="font-size:15pt;">
+                            <b>Date:</b>
+                            <span t-field="o.date"/>
+                        </div>
+
+                        <div class="text-center" style="margin-top:50px;font-family:arial;">
+                            <span style="font-size:18pt;font-weight:bold;">TO WHOMSOEVER IT MAY
+                                CONCERN
+                            </span>
+                        </div>
+
+                        <div style="margin-top:50px;margin-left:30px;margin-right:30px;text-align:justify;font-size:15pt;font-family:Lucica Grande;">
+                            <p>This is to certify that Sri.
+                                <span t-esc="o.employee_id.name"/>
+                                (Emp.No<span t-esc="o.employee_id.registration_number"/>),
+                                residing at address
+                            </p>
+                            <p>
+                                <span t-if="o.employee_id.private_street" t-esc="o.employee_id.private_street"/>
+                                <span t-if="o.employee_id.private_street2"
+                                      t-esc="',' + ' ' + o.employee_id.private_street"/>
+                                <span t-if="o.employee_id.private_city" t-esc="',' + ' ' + o.employee_id.private_city"/>
+                                <span t-if="o.employee_id.private_country_id.name"
+                                      t-esc="',' + ' ' + o.employee_id.private_country_id.name "/>
+                                <span t-if="o.employee_id.private_state_id.name"
+                                      t-esc="',' + ' ' + o.employee_id.private_state_id.name"/>
+                                <span t-if="o.employee_id.private_zip" t-esc="',' + ' ' + o.employee_id.private_zip"/>
+                                <span t-if="o.employee_id.private_country_id.name"
+                                      t-esc="',' + ' ' + o.employee_id.private_country_id.name"/>
+                                </p>
+                            <p>
+
+                                is working as <span t-esc="o.employee_id.job_title"/> in the INFI NEWS NETWORK PVT LTD Office,
+                            </p>
+                            <p>
+                                33 / 2832 A, Payaningal paroppady, Merikunnu P.O Kozhikode, Kerala (IN) 32, India.
+                            </p>
+                            <p>
+
+                                This certificate is being issued to him on request, to submit before
+                                <span t-field="o.purpos"/>.
+                            </p>
+
+
+                        </div>
+
+
+
+                        <div style="margin-top:60px;font-size:15pt;margin-left:30px;margin-right:30px;font-family:arial;">
+
+                            <b><span t-field="o.hr_manager_id.name"/></b><br/>
+                            <p>
+                                <img t-att-src="'data:image/png;base64,%s' % (o.hr_manager_signature and o.hr_manager_signature.decode('utf-8'))" style="margin-left:-7%;max-width: 200px; max-height: 200px;"/>
+
+                            </p><br/>
+<!--                            <b><span t-field="o.hr_manager_id"/></b><br/>-->
+                            <b>HR Department</b>
+                            <br/>
+
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

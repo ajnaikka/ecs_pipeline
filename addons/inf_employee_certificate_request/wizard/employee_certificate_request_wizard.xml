@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_employee_certificate_request" model="ir.ui.view">
+        <field name="name">hr.employee.certificate.request</field>
+        <field name="model">hr.employee.certificate.request.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Certificate Request">
+
+                <group class="o_label_nowrap">
+                    <field name="send_to"/>
+                    <field name="certificate_bool" invisible="1"/>
+                    <field name="current_employee_user" invisible="1"/>
+                    <field name="company_id" invisible="0"/>
+                    <field name="mail_to" widget="radio" options="{'horizontal': True}"/>
+                    <field name="mail_displayed" invisible="not mail_displayed" string=""/>
+                </group>
+                <group class="o_label_nowrap" string="Mail Options">
+                    <field name="subject" placeholder="Signature Request"/>
+                </group>
+                <field name="message" placeholder="Optional Message..." widget="html"/>
+                <field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
+                <footer>
+                    <button name="validate_certificate_request" string="Send" type="object" class="oe_highlight"
+                            data-hotkey="q"/>
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_probation_request" model="ir.ui.view">
+        <field name="name">hr.employee.probation.request</field>
+        <field name="model">hr.employee.certificate.request.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Probation Request">
+
+                <group class="o_label_nowrap">
+                    <field name="current_date"/>
+                    <field name="send_to"/>
+                    <field name="employee_id" required="1"/>
+<!--                    <field name="hr_managers" invisible="1"/>-->
+                    <field name="current_employee_user" invisible="1"/>
+                    <field name="company_id" invisible="0"/>
+                    <field name="mail_to" widget="radio" options="{'horizontal': True}"/>
+                    <field name="mail_displayed" invisible="not mail_displayed" string=""/>
+                </group>
+                <group class="o_label_nowrap" string="Mail Options">
+                    <field name="prob_sub"/>
+                </group>
+                <field name="message" placeholder="Optional Message..." widget="html"/>
+                <field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
+                <footer>
+                    <button name="validate_certificate_request" string="Send" type="object" class="oe_highlight"
+                            data-hotkey="q"/>
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_hr_employee_certificate_request" model="ir.actions.act_window">
+        <field name="name">Certificate Request</field>
+        <field name="res_model">hr.employee.certificate.request.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_certificate_bool': True}</field>
+    </record>
+
+    <record id="action_hr_employee_probation_request" model="ir.actions.act_window">
+        <field name="name">Probation Request</field>
+        <field name="res_model">hr.employee.certificate.request.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_hr_employee_probation_request"/>
+    </record>
+</odoo>

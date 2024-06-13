@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_mail_compose_resi_form_inherit" model="ir.ui.view">
+            <field name="name">mail.compose.message.resi.form.inherit</field>
+            <field name="model">mail.compose.message</field>
+            <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='subject']" position="before">
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Corrected and improved templates -->
+        <record id="employee_resignation_email" model="mail.template">
+            <field name="name"> Camera Unit Request Email Template</field>
+            <field name="model_id" ref="infi_news_shoot_request.model_shoot_request"/>
+            <field name="subject">Camera Unit Request from {{object.employee_id.name}}</field>
+            <field name="email_from">{{object.employee_id.user_id.partner_id.email}}</field>
+            <field name="email_to">{{', '.join(user.employee_id.work_email for user in object.assignment_team_emails)}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+        </record>
+
+        <record id="camera_unit_confirmation_email" model="mail.template">
+            <field name="name">Camera Unit Confirmation Email Template</field>
+            <field name="model_id" ref="infi_news_shoot_request.model_shoot_request"/>
+            <field name="subject">Confirmation Regarding Camera Unit from {{object.employee_id.name}}</field>
+            <field name="email_from">{{user.partner_id.email}}</field>
+            <field name="email_to">{{object.employee_id.parent_id.user_id.partner_id.email}}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Dear Reporter,</p>
+                    <p>Camera unit is successfully assigned.</p>
+                    <p>Thank you</p>
+                ]]>
+            </field>
+        </record>
+
+        <record id="camera_unit_store_person_email" model="mail.template">
+            <field name="name">Camera Unit Store Person Email Template</field>
+            <field name="model_id" ref="infi_news_shoot_request.model_shoot_request"/>
+            <field name="subject">Request for Camera Unit from {{object.employee_id.name}}</field>
+            <field name="email_from">{{user.partner_id.email}}</field>
+            <field name="email_to">{{', '.join(user.employee_id.work_email for user in object.store_incharge_emails)}}</field>
+            <field name="body_html">
+                <![CDATA[
+                ]]>
+            </field>
+        </record>
+        <record id="camera_unit_assign_email" model="mail.template">
+            <field name="name">Camera Unit  Email Template</field>
+            <field name="model_id" ref="infi_news_shoot_request.model_shoot_request"/>
+            <field name="subject">Confirmation Regarding Camera Unit from store person</field>
+            <field name="email_from">{{user.partner_id.email}}</field>
+            <field name="email_to">{{object.employee_id.parent_id.user_id.partner_id.email}}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Dear Reporter,</p>
+                    <p>Camera unit request is forwarded to store in charge.</p>
+                    <p>Thank you</p>
+                ]]>
+            </field>
+        </record>
+        <record id="camera_unit_cancel_email" model="mail.template">
+            <field name="name">Mail Regarding to Cancelation of Camera Request</field>
+            <field name="model_id" ref="infi_news_shoot_request.model_shoot_request"/>
+            <field name="subject">Request for Camera Unit from {{object.employee_id.name}}</field>
+            <field name="email_from">{{user.partner_id.email}}</field>
+            <field name="email_to">{{object.employee_id.parent_id.user_id.partner_id.email}}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Dear Reporter,</p>
+                    <p>Camera unit request has been canceled, Please apply again</p>
+                    <p>Thank you</p>
+                ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

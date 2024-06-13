@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+ <record id="employee_attendance_correction_request_email" model="mail.template">
+            <field name="name"> Attendance Correction Request Email Template</field>
+            <field name="model_id" ref="infi_attendance_correction.model_attendance_correction"/>
+            <field name="subject">Attendance Correction Request from {{object.employee_id.name}}</field>
+            <field name="email_from">{{object.employee_id.work_email}}</field>
+            <field name="email_to">{{object.employee_id.parent_id.work_email}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+        </record>
+
+             <record id="employee_attendance_accepted_corrected_email" model="mail.template">
+            <field name="name">Attendance Correction Accepted and Corrected Email Template</field>
+            <field name="model_id" ref="infi_attendance_correction.model_attendance_correction"/>
+            <field name="subject">Checked and Corrected the Attendance Correction request of employee {{object.employee_id.name}}</field>
+            <field name="email_from">{{object.employee_id.parent_id.work_email}}</field>
+            <field name="email_to">{{object.employee_id.work_email}}</field>
+            <field name="email_cc">{{object.employee_id.hr_manager_id.work_email}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+        </record>
+             <record id="employee_att_cor_rejected_email" model="mail.template">
+            <field name="name"> Attendance Correction Rejected Email Template</field>
+            <field name="model_id" ref="infi_attendance_correction.model_attendance_correction"/>
+            <field name="subject">Rejected the Attendance Correction request of employee {{object.employee_id.name}}</field>
+            <field name="email_from">{{object.employee_id.parent_id.work_email}}</field>
+            <field name="email_to">{{object.employee_id.work_email}}</field>
+            <field name="email_cc">{{object.employee_id.hr_manager_id.work_email}}</field>
+            <field name="body_html">
+                <![CDATA[
+
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

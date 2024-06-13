@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    <t t-name="infi_checkinout.attendance_test" inherit_id="hr_attendance.attendance_menu" t-inherit-mode="primary">
+         <xpath expr="//button[contains(@class, 'flex-basis-100')]" position="after">
+                <!-- Add your <span> element here -->
+                  <button t-on-click="() => { this.onClickSignInOut(); captureImage(); }" class="flex-basis-100 mt-3" t-attf-class="btn btn-{{ this.state.checkedIn ? 'warning' : 'success' }}">
+                                <span t-if="!this.state.checkedIn">Checkaaa in</span>
+                                <span t-else="">Checkaa out</span>
+                                <i t-attf-class="fa fa-sign-{{ this.state.checkedIn ? 'out' : 'in' }} ms-1"/>
+                            </button>
+            </xpath>
+
+
+    </t>
+    </data>
+</odoo>

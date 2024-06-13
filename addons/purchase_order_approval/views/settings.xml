@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+<record id="res_config_settings_view_form_purchase_custom" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.purchase.custom</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+                  <xpath expr="//app[@name='purchase']" position="inside">
+                     <block title="Approvals for RFQ to PO " name="purchase_setting_container_custom">
+                           <span class="o_form_label">Lower Purchase Amount</span>
+                            <field name="lower_amount" string="Lower Purchase Amount"/>
+                            <span class="o_form_label">Higher Purchase Amount</span>
+                         <field name="higher_amount" string="Higher Purchase Amount"/>
+
+                        </block>
+                </xpath>
+        </field>
+</record>
+
+    </data>
+</odoo>

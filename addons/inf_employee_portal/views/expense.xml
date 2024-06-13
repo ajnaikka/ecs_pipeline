@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_expenses_form" name="Employee Expense Template">
+        <t t-call="portal.portal_layout">
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <div class="o_portal_docs row g-2">
+                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+                    <p class="o_portal_no_doc_message d-none">No Documents to display</p>
+                    <div class="o_portal_category row g-2" id="portal_common_category">
+                        <form method="post" action="/employee/expense/submit" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group mb-3">
+                                <div style="text-align:right;">
+
+                                    <div class="btn-group" role="group" aria-label="Stage Buttons">
+                                        <t t-if="expense">
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if expense.state == 'draft' else 'disabled' }}">
+                                                To Report
+                                            </button>
+
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if expense.state == 'submitted' else 'disabled' }}">
+                                                Submitted
+
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if expense.state == 'approved' else 'disabled' }}">
+                                                Approved
+
+                                            </button>
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if expense.state == 'done' else 'disabled' }}">
+                                                Done
+
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary {{ 'active' if expense.state == 'refused' else 'disabled' }}">
+                                                Refused
+
+                                            </button>
+
+                                        </t>
+                                        <t t-else="">
+                                            <button type="button" t-attf-class="btn btn-secondary {{ 'active' }}">
+                                                To Report
+                                            </button>
+
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary">
+                                                Submitted
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary">
+                                                Approved
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary">
+                                                Done
+                                            </button>
+                                            <button type="button"
+                                                    t-attf-class="btn btn-secondary">
+                                                Refused
+                                            </button>
+                                        </t>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row mb-3">
+                                <div class="col-xl-6">
+                                    <label class="col-sm-1 col-form-label" for="cat_type">Category:</label>
+                                    <select id="cat_type" name="cat_type" class="form-control" required="1">
+                                        <option value="">Select Category</option>
+                                        <t t-if="expense">
+                                            <t t-set="selected_exp_id" t-value="expense.product_id.id"/>
+                                        </t>
+                                        <t t-foreach="exp_product" t-as="exp_cat">
+                                            <option t-att-value="exp_cat.id"
+                                                    t-att-data-expense-limit="exp_cat.expense_limit"
+                                                    t-att-selected="exp_cat.id == selected_exp_id">
+                                                <t t-esc="exp_cat.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row mb-3">
+                                <div class="col-xl-4">
+                                    <label class="col-sm-5 col-form-label" for="cat_type">Operational Level :</label>
+                                    <select id="operation" name="operation" class="form-control">
+                                        <t t-if="expense">
+                                            <t t-set="select_operation_id" t-value="expense.profile_id.id"/>
+                                        </t>
+                                        <option t-att-value="exp_cat.id"
+                                                t-att-data-expense-limit="exp_cat.expense_limit"
+                                                t-att-selected="exp_cat.id == selected_exp_id">
+                                            <t t-esc="emp_operation.name"/>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2">
+                                    <label for="date_from" class="col-sm-9 col-form-label">Expense Date :</label>
+                                    <input type="date" readonly="1" id="expense_date" name="expense_date"
+                                           class="form-control"
+                                           t-if="expense" t-att-value="expense.date"/>
+                                    <input type="date" readonly="1" id="expense_date" name="expense_date"
+                                           class="form-control" t-if="not expense"
+                                           t-att-value="date_today"/>
+                                </div>
+                            </div>
+
+                            <script type="text/javascript">
+                                document.getElementById('cat_type').addEventListener('change', function() {
+                                var selectedCatId = this.value;
+                                var expProducts = document.querySelectorAll('#cat_type option');
+
+                                expProducts.forEach(function(expCat) {
+                                if (expCat.value == selectedCatId) {
+                                var expenseLimit = expCat.getAttribute('data-expense-limit');
+                                document.getElementById('expense_limit').value = expenseLimit;
+                                }
+                                });
+                                });
+
+
+                            </script>
+
+                            <script type="text/javascript">
+                                document.addEventListener('DOMContentLoaded', function() {
+                                document.getElementById('total').addEventListener('change', function() {
+                                var selectedCatId = this.value;
+                                var expenseLimit = parseFloat(document.getElementById('expense_limit').value);
+                                if (expenseLimit &lt; selectedCatId) {
+                                alert("Expense limit is less than total amount!");
+                                document.getElementById('total').value = '';
+                                }
+                                });
+                                });
+
+                            </script>
+
+
+                            <div class="form-group row mb-3">
+                                <div class="col-xl-6">
+                                    <label for="expense_limit" class="col-sm-3 col-form-label">
+                                        <b>Expense Limit:</b>
+                                    </label>
+                                    <input type="number" step="0.01" id="expense_limit" name="expense_limit"
+                                           class="form-control" readonly="readonly" t-if="expense"
+                                           t-att-value="expense.expense_limit"/>
+
+                                    <input type="number" step="0.01" id="expense_limit" name="expense_limit"
+                                           class="form-control" readonly="readonly" t-if="not expense"/>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row mb-3">
+
+
+                                <div class="col-xl-6">
+                                    <label for="total" class="col-sm-3 col-form-label">
+                                        <b>Total :</b>
+                                    </label>
+                                    <input type="number" step="0.01" id="total" name="total" class="form-control"
+                                           t-if="expense" readonly="readonly" t-att-value="expense.total_amount"/>
+                                    <input type="number" step="0.01" id="total" name="total" class="form-control"
+                                           t-if="not expense" required="1"/>
+                                </div>
+
+                                <div class="col-xl-1">
+                                    <label for="currency" class="col-sm-1 col-form-label">
+                                        <b>Currency</b>
+                                    </label>
+                                    <t t-if="expense">
+                                        <t t-set="select_currency" t-value="expense.currency_id.id"/>
+                                    </t>
+                                    <select id="currency" name="currency" class="form-control">
+                                        <option t-att-value="currency.id" t-att-selected="select_currency">
+                                            <t t-esc="currency.name"/>
+                                        </option>
+                                        currenc
+                                    </select>
+                                </div>
+                            </div>
+                            <!--                            <div class="form-group mb-3">-->
+                            <!--                                <select id="advance" name="advance" class="form-control">-->
+                            <!--                                    <option t-att-value="currency.id" t-att-selected="select_currency">-->
+                            <!--                                        <t t-esc="currency.name"/>-->
+                            <!--                                    </option>-->
+                            <!--                                </select>-->
+                            <!--                            </div>-->
+
+                            <div class="form-group mb-3">
+                                <label for="expense_type" class="col-sm-1 col-form-label">
+                                    <b>Expense Type</b>
+                                </label>
+                                <select id="expense_type" name="expense_type" class="form-control">
+                                    <option value="">Select Expense Type</option>
+                                    <option value="normal">Normal Expense</option>
+                                    <option value="advance">Advance Expense</option>
+                                </select>
+                            </div>
+
+                            <!--                            <div class="form-group row mb-3">-->
+                            <!--                                <div class="col-xl-6">-->
+                            <!--                                    <label class="col-sm-1 col-form-label" for="taxes">Taxes:</label>-->
+                            <!--                                    <t t-if="expense">-->
+                            <!--                                        <t t-set="select_tax" t-value="expense.tax_ids.ids"/>-->
+                            <!--                                    </t>-->
+                            <!--                                    <select id="taxes" name="taxes" class="form-control">-->
+                            <!--                                        <t t-foreach="taxes" t-as="tax">-->
+                            <!--                                            <t t-if="tax">-->
+                            <!--                                                <option t-att-value="tax.id">-->
+                            <!--                                                    <t t-esc="tax.name"/>-->
+                            <!--                                                </option>-->
+
+                            <!--                                            </t>-->
+
+                            <!--                                            <t t-else="">-->
+                            <!--                                                <option t-att-value="tax.id" t-att-selected="tax.id in select_tax">-->
+                            <!--                                                    <t t-esc="tax.name"/>-->
+                            <!--                                                </option>-->
+
+                            <!--                                            </t>-->
+
+                            <!--                                        </t>-->
+                            <!--                                    </select>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+
+
+                            <!--                            <div class="form-group mb-3">-->
+                            <!--                                <div class="col-xl-2">-->
+                            <!--                                    <label class="col-sm-1 col-form-label" for="amount">Amount:</label>-->
+                            <!--                                    <input type="text" id="amount" name="amount" class="form-control"-->
+                            <!--                                           readonly="readonly" t-if="expense" t-att-value="expense.tax_amount"/>-->
+
+                            <!--                                    <input type="text" id="amount" name="amount" class="form-control"-->
+                            <!--                                           readonly="readonly" t-if="not expense"/>-->
+                            <!--                                </div>-->
+
+                            <!--                            </div>-->
+
+
+                            <div class="form-group mb-3" data-type="binary">
+                                <label for="attachments">Attachments:</label>
+                                <input type="file" id="attachments" name="attachments"
+                                       class="form-control s_website_form_input" t-if="not expense"/>
+
+                                <t t-if="expense and expense.attachment_ids">
+                                    <ul>
+                                        <t t-foreach="expense.attachment_ids"
+                                           t-as="expense_attachment">
+                                            <li>
+                                                <a t-att-href="'data:application/octet-stream;base64,' + expense_attachment.datas.decode('utf-8')">
+                                                    Download Attachment
+                                                </a>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </t>
+
+
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" class="form-control" rows="4"
+                                          t-if="expense" readonly="readonly">
+                                    <t t-esc="expense.description"/>
+                                </textarea>
+                                <textarea id="description" name="description" class="form-control text" rows="4"
+                                          t-if="not expense"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+
+
+                                <a t-attf-href="/employee/expenses" class="btn btn-primary">Cancel</a>
+                                <t t-if="not expense">
+                                    <button type="submit" class="btn btn-primary">
+                                        Create Report
+                                    </button>
+
+
+                                </t>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="expense_tree_view" name="Expense View">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">General Notifications</t>
+
+            </t>
+            <div class="mb32">
+                <a t-if="True" t-attf-href="/employee/expense_form" class="btn btn-primary">Create new</a>
+                <a t-if="True" t-attf-href="/my/employee_list" class="btn btn-primary">Back to home</a>
+            </div>
+
+
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Expense Date</th>
+                        <th>Description</th>
+                        <th>Expense Type</th>
+                        <th>Paid By</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-if="expenses">
+
+                    <t t-foreach="expenses" t-as="expense">
+                        <tr>
+                            <td>
+                                <span t-esc="expense.date"/>
+                            </td>
+
+                            <td>
+                                <span t-field="expense.description"/>
+                            </td>
+
+                            <td>
+                                <span t-field="expense.type"/>
+                            </td>
+
+                            <td>
+                                <span t-field="expense.payment_mode"/>
+                            </td>
+
+                            <td>
+                                <span t-field="expense.total_amount"/>
+                            </td>
+
+                            <td>
+                                <span t-field="expense.state"/>
+                            </td>
+                            <td>
+                                <a t-attf-href="/employee/expense_form?expense_id={{expense.id}}"
+                                   class="btn btn-primary">
+
+                                    View Report
+                                </a>
+
+
+                            </td>
+
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+
+        </t>
+    </template>
+
+    <record model="ir.ui.view" id="view_hr_expense_form_inherit">
+        <field name="name">hr.expense.form.inherit</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tax_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='tax_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[field[@name='tax_ids']]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    <template id="enter_details_template" name="Enter Details Template">-->
+    <!--        <t t-call="portal.portal_layout">-->
+    <!--            <div class="o_portal_my_home">-->
+    <!--                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>-->
+    <!--                <div class="o_portal_docs row g-2">-->
+    <!--                    <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>-->
+
+    <!--                    <div class="o_portal_category row g-2" id="portal_common_category">-->
+    <!--                        <form method="post" action="/revoke_request" enctype="multipart/form-data">-->
+    <!--                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+    <!--                            <div class="form-group mb-3">-->
+    <!--                                <label for="employee_list">Send To:</label>-->
+    <!--                                <select id="revoke_hr_manager" name="revoke_hr_manager" class="form-control">-->
+    <!--                                    <option t-att-value="revoke_manager.id">-->
+    <!--                                        <t t-esc="revoke_manager.name"/>-->
+    <!--                                    </option>-->
+    <!--                                </select>-->
+    <!--                            </div>-->
+
+    <!--                            <div class="form-group row mb-3">-->
+    <!--                                <label for="start_date" class="col-sm-1 col-form-label">Start Date:</label>-->
+    <!--                                <div class="col-sm-2">-->
+    <!--                                    <input type="date" id="start_date" name="start_date" class="form-control"-->
+    <!--                                           required="1" t-att-value="leave.request_date_from"/>-->
+    <!--                                </div>-->
+    <!--                                <label for="end_date" class="col-sm-1 col-form-label">End Date:</label>-->
+    <!--                                <div class="col-sm-2">-->
+    <!--                                    <input type="date" id="end_date" name="end_date" class="form-control"-->
+    <!--                                           t-att-value="leave.request_date_to" required="1"/>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+
+
+    <!--                            <div class="form-group mb-3">-->
+    <!--                                <label for="subject">Subject:</label>-->
+    <!--                                <input type="text" id="subject" name="subject" class="form-control"-->
+    <!--                                       t-att-value="'Request For Revoking Leave From ' + leave.request_date_from.strftime('%d-%m-%Y') + ' to ' + leave.request_date_to.strftime('%d-%m-%Y')"/>-->
+    <!--                            </div>-->
+
+    <!--                            <div class="form-group mb-3">-->
+    <!--                                <label for="description">Description:</label>-->
+    <!--                                <textarea id="description" name="description" class="form-control" rows="4"-->
+    <!--                                          placeholder="Enter your message here ......."-->
+    <!--                                />-->
+    <!--                            </div>-->
+
+    <!--                            <div class="form-group mb-3" data-type="binary">-->
+    <!--                                <label for="attachments">Attachments:</label>-->
+    <!--                                <input type="file" id="attachments" name="attachments"-->
+    <!--                                       class="form-control s_website_form_input"/>-->
+    <!--                            </div>-->
+
+    <!--                            <a t-attf-href="/employee/timeoff_form?leave_id={{leave.id}}" class="btn btn-primary">-->
+    <!--                                Cancel-->
+    <!--                            </a>-->
+    <!--                            <button type="submit" class="btn btn-primary">Submit</button>-->
+    <!--                        </form>-->
+    <!--                    </div>-->
+
+
+    <!--                </div>-->
+
+    <!--            </div>-->
+    <!--        </t>-->
+    <!--    </template>-->
+
+
+</odoo>
+
+
+
+
+

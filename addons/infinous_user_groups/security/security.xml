@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record model="ir.module.category" id="reporter_category">
+            <field name="name">Reporter</field>
+            <field name="description">Reporter</field>
+            <field name="sequence">20</field>
+        </record>
+         <record id="assigment_team" model="res.groups">
+            <field name="name">Assignment Team</field>
+            <field name="comment">Assignment Team Approval</field>
+        </record>
+
+        <record id="store_in_charge" model="res.groups">
+            <field name="name">Approval Store In Charge</field>
+            <field name="comment">Store In Charge Approval Permission Group.</field>
+        </record>
+
+           <record id="reporting_manager" model="res.groups">
+            <field name="name">Reporting Manager</field>
+            <field name="comment">Reporting Manager</field>
+        </record>
+        <record id="assigment_hr" model="res.groups">
+            <field name="name">Hr</field>
+            <field name="comment">hr</field>
+        </record>
+         <record id="it_department" model="res.groups">
+            <field name="name">IT Department</field>
+            <field name="comment">IT Department</field>
+        </record>
+          <record id="own_department_status" model="res.groups">
+            <field name="name">View Own Department Job Status Only</field>
+            <field name="comment">View Own Department Job Status Only</field>
+        </record>
+    </data>
+</odoo>

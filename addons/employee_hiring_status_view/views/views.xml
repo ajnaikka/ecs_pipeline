@@ -1,0 +1,55 @@
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']/group[1]" position="after">
+                <group string="Department">
+                    <field name="department_id" />
+
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_for_own_department_jobs" model="ir.rule">
+            <field name="name">View Own Department Jobs</field>
+            <field name="model_id" ref="model_hr_job"/>
+                <field name="groups" eval="[(4, ref('infinous_user_groups.own_department_status'))]"/>
+
+              <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[('department_id', '=',user.department_id.id)]</field>
+        </record>
+
+
+     <record id="view_for_own_department_jobs_application" model="ir.rule">
+            <field name="name">View Own Department Jobs Application</field>
+            <field name="model_id" ref="model_hr_applicant"/>
+                <field name="groups" eval="[(4, ref('infinous_user_groups.own_department_status'))]"/>
+
+              <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force"></field>
+        </record>
+
+    <record id="view_all_jobs" model="ir.rule">
+        <field name="name">View All Jobs</field>
+        <field name="model_id" ref="model_hr_job"/>
+        <field name="groups" eval="[(4, ref('infinous_user_groups.assigment_hr'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+       <field name="perm_create" eval="True"/>
+       <field name="perm_unlink" eval="True"/>
+          <field name="domain_force"></field>
+</record>
+
+
+
+
+</odoo>
